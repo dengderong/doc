@@ -1,12 +1,8 @@
-### 第1章、语言的概述
+###### null和undefined的区别
 
-###### 1.1语言的核心
+null表示一个对象的空值 ，是一个关键字
 
-​	javascript是面向 Web的编程语言，现代对大部分的网站都使用javascript语言来编程，并且现在所有现代化浏览器都有javascript解释引擎，使得我们不得不学习javascript这门语言.
+undefined表示对象没有初始化，对象和数组的取值返回undefined的话表示一个对象不存在，是一个window全局对象下的一个属性
 
-###### 1.2客户端javascript
 
-​	javascript语言可以直接运行在客户端上
-
-第2章、
 
