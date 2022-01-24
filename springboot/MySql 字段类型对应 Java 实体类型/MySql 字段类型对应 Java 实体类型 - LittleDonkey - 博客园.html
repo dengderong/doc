@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/loveer/p/11604423.html -->
+<html lang="zh-cn" nighteye="disabled" class="cye-disabled cye-nm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin-when-crossorigin">
+    <meta name="description" content="前言 Java基础类型与包装类型 ResultSet.getObject() 对 MySql 类型和 Java 类型转换表 MySql 类型名 | GetColumnClassName 返回值 | 返">
+    <meta property="og:description" content="前言 Java基础类型与包装类型 ResultSet.getObject() 对 MySql 类型和 Java 类型转换表 MySql 类型名 | GetColumnClassName 返回值 | 返">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.svg" type="image/svg+xml">
+    
+    <link rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/bundle-custom.min.css">
+    <link type="text/css" rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/cnblogs.css">
+    <link type="text/css" rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/custom.css">
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/bundle-custom-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/loveer/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/loveer/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/loveer/wlwmanifest.xml">
+    <script src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/osd.js.下载"></script><script async="" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/analytics.js.下载"></script><script>
+        var currentBlogId = 528850;
+        var currentBlogApp = 'loveer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'Custom';
+        var visitorUserId = '';
+    </script><style id="nightModeStyle">
+html.cye-enabled.cye-nm:not(*:-webkit-full-screen) body,
+ html.cye-enabled.cye-nm:not(*:-webkit-full-screen) #cye-workaround-body {-webkit-filter:contrast(91%) brightness(84%) invert(1);}</style><style id="cyebody">html.cye-enabled.cye-lm body{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyediv">html.cye-enabled.cye-lm div{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetable">html.cye-enabled.cye-lm th{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm td{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetextInput">html.cye-enabled.cye-lm input[type=text]{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm textarea{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeselect">html.cye-enabled.cye-lm select{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeul">html.cye-enabled.cye-lm ul{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeChangeByClick">html.cye-enabled.cye-lm .cye-lm-tag,html.cye-enabled.cye-lm.cye-lm-tag{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style>
+        <script>
+            var currentPostDateAdded = '2019-09-28 07:10';
+        </script>
+    <script src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/blog-common.min.js.下载"></script><style type="text/css">.medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}</style>
+    
+    
+    
+<meta http-equiv="origin-trial" content="A88otRz1Fd3Nt567e2IYshC18LL3KGVXpVJW9oTCId4RYaygt23pbb4JqrbdIO/bwZPWEmRjBIRBu/bZbDR7Pg4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="A0gCLbXCcL0R1Oc8tFPDs0G4Elz17w3zHp+Zst66+D17veE2o7fUcPsA114QtSTRqfVJLMeTSdeWOom0CcyCsgYAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A9RQ+LxFazAousxUwSCzaihJjHLO1UyjQp0teZKHl7WdbVjPDfHSKMd6D/ZI5MTjqClFycbl70EFd7cBJWXqKQEAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A6WKeWsdn1Ct+ZPqS9NCxxaiBoQ7wdTkK2/gE69Yu0gfBKJfo1gOvgkGmf5/xaIajT/RUb9AbnF1FsSZ47cCcQcAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A04ZCu7yjrHgwQJK5ISHhH1DSg0qqowEay3n70KO6wV3D2Mj+OX3Kw20aSMitzgdG1xfrN7sOJV/dZIk+RvCzA4AAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A3HucHUo1oW9s+9kIKz8mLkbcmdaj5lxt3eiIMp1Nh49dkkBlg1Fhg4Fd/r0vL69mRRA36YutI9P/lJUfL8csQoAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A0OysezhLoCRYomumeYlubLurZTCmsjTb087OvtCy95jNM65cfEsbajrJnhaGwiTxhz38ZZbm+UhUwQuXfVPTg0AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxoOxdZQmIoA1WeAPDixRAeWDdgs7ZtVFfH2y19ziTgD1iaHE5ZGz2UdSjubkWvob9C5PrjUfkWi4ZSLgWk3Xg8AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AwfG8hAcHnPa/kJ1Co0EvG/K0F9l1s2JZGiDLt2mhC3QI5Fh4qmsmSwrWObZFbRC9ieDaSLU6lHRxhGUF/i9sgoAAACBeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AwQ7dCmHkvR6FuOFxAuNnktYSQrGbL4dF+eBkrwNLALc69Wr//PnO1yzns3pjUoCaYbKHtVcnng2hU+8OUm0PAYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AysVDPGQTLD/Scn78x4mLwB1tMfje5jwUpAAzGRpWsr1NzoN7MTFhT3ClmImi2svDZA7V6nWGIV8YTPsSRTe0wYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><script src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/pubads_impl_2021071401.js.下载" async=""></script><link rel="preload" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/f(5).txt" as="script"><script type="text/javascript" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/f(5).txt"></script><link rel="shortcut icon" href="https://files-cdn.cnblogs.com/files/loveer/three_fastener(min).gif" type="image/x-icon"><link rel="stylesheet" href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/lightbox.min.css"></head><div id="cyeBlackMaskLayer" style="background-color: rgb(19, 19, 19); position: fixed; width: 1980px; height: 1080px; z-index: -2147483648;"></div>
+<body class="skin-custom no-navbar" style=""><div class="esa-mobile-menu"></div>
+    <a name="top"></a>
+        <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://exec-ed-online.haas-berkeley.ushi.cn/data-science/?utm_source=BKY&amp;utm_medium=CPS&amp;utm_campaign=C-BDS-21-10_BKY_CPS_W_M2_1" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;ushi-blog-bannerbar-mobile&#39;)">
+                <img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/35695-20210723071009647-749279525.jpg" alt="">
+            </a>
+        </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/logo.svg" alt="博客园Logo"></a></li>
+                <li><a href="https://www.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-sitehome&#39;)">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-news&#39;)">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-q&#39;)">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-brands&#39;)">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-ing&#39;)">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-edu&#39;)">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3">
+                        <button type="submit" id="zzk_search_button">
+                            <img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/search.svg" alt="搜索">
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔" style="display: none;">
+                        <img id="new_post_icon" class="navbar-icon" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/newpost.svg" alt="写随笔">
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客" style="display: none;">
+                        <img id="myblog_icon" class="navbar-icon" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/myblog.svg" alt="我的博客">
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息" style="display: none;">
+                        <img id="msg_icon" class="navbar-icon" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/message.svg" alt="短消息">
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown" style="display: none;">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/avatar-default.svg" alt="用户头像">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/lite-mode-check.svg" class="hide"><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/" style="display: inline;">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()" style="display: inline;">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header" style="display: none;">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/loveer/"><img id="blogLogo" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/loveer/">遇事不决，可问神奇海螺</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+<i></i></li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/loveer/">
+首页</a>
+<i></i></li><li><a id="blog_nav_tags" class="menu" href="https://www.cnblogs.com/loveer/tag">标签</a><i></i></li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+<i></i></li>
+<li>
+<i></i></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--><i></i></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+<i></i></li>
+</ul>
+
+
+		<div class="blogStats">
+			<span id="stats_post_count">随笔 - 265&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 15&nbsp; </span>
+<span id="stats-total-view-count">阅读 - 
+<span title="总阅读数: 155972">
+15万</span></span>
+
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/loveer/p/11604423.html">
+    <span>MySql 字段类型对应 Java 实体类型</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h3 id="1003383400">前言<a href="https://www.cnblogs.com/loveer/p/11604423.html#1003383400" class="esa-anchor">#</a></h3>
+<pre><div data-tips="复制代码" class="esa-clipboard-button" data-clipboard-target="#copy_target_0">Copy</div><code class="hljs markdown" id="copy_target_0">MySQL Connector/J 对于 MySql 数据类型和 Java 数据类型之间的转换是很灵活的：
+
+<span class="hljs-code">    一般来讲，任何 MySql 数据类型都可以被转换为一个 java.lang.String。
+</span>
+<span class="hljs-code">    任何 MySql 数字类型都可以被转换为任何一种 Java 数字类型。
+    (当然这样也可能出一些四舍五入，溢出，精度丢失之类的问题)。 
+</span>
+</code></pre>
+<h3 id="1059716100">Java基础类型与包装类型<a href="https://www.cnblogs.com/loveer/p/11604423.html#1059716100" class="esa-anchor" style="opacity: 0;">#</a></h3>
+<pre><div data-tips="复制代码" class="esa-clipboard-button" data-clipboard-target="#copy_target_1">Copy</div><code class="hljs php" id="copy_target_1">a）
+　　如果数据库字段是允许为空的，使用包装类。
+
+　　如果不允许为空，使用包装的时候，如果你往数据库插入<span class="hljs-literal">null</span>值，此时就会抛出异常。
+　　然后你就可以对异常进行捕获并处理。
+
+ 
+b）
+　　使用基本数据类型的时候，如果字段是<span class="hljs-literal">NULL</span>，那么JDBC会返回<span class="hljs-number">0</span>，但是这里会有一个问题。
+　　有可能<span class="hljs-number">0</span>在你的业务逻辑代表着特定含义，这时候就可能出现一些意想不到的后果。
+
+  
+总结：在项目中去使用包装类型而不是基本数据类型，这样可以使你编写代码更简单
+</code></pre>
+<h3 id="1443357148">ResultSet.getObject() 对 MySql 类型和 Java 类型转换表<a href="https://www.cnblogs.com/loveer/p/11604423.html#1443357148" class="esa-anchor" style="opacity: 0;">#</a></h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align: center">MySql 类型名</th>
+<th style="text-align: center">GetColumnClassName 返回值</th>
+<th style="text-align: center">返回的 Java 类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">bit(1) (MySQL-5.0)</td>
+<td style="text-align: center">BIT</td>
+<td style="text-align: center">java.lang.Boolean</td>
+</tr>
+<tr>
+<td style="text-align: center">bit(大于1) (MySQL-5.0)</td>
+<td style="text-align: center">BIT</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">tinyint</td>
+<td style="text-align: center">TINYINT</td>
+<td style="text-align: center">如果 tinyInt1isBit 配置设置为 true(默认为 true)，是java.lang.Boolean，存储空间为 1；否则是为 java.lang.Integer</td>
+</tr>
+<tr>
+<td style="text-align: center">bool boolean</td>
+<td style="text-align: center">TINYINT</td>
+<td style="text-align: center">参见 TINYINT。这些是 TINYINT(1) 另一种写法</td>
+</tr>
+<tr>
+<td style="text-align: center">smallint(M) [unsigned]</td>
+<td style="text-align: center">SMALLINT [UNSIGNED]</td>
+<td style="text-align: center">java.lang.Integer(不管是否无符)</td>
+</tr>
+<tr>
+<td style="text-align: center">mediumint(M) [unsigned]</td>
+<td style="text-align: center">MEDIUMINT [UNSIGNED]</td>
+<td style="text-align: center">java.lang.Integer</td>
+</tr>
+<tr>
+<td style="text-align: center">int integer(M) [unsigned]</td>
+<td style="text-align: center">INTEGER [UNSIGNED]</td>
+<td style="text-align: center">java.lang.Integer；无符的话是 java.lang.Long</td>
+</tr>
+<tr>
+<td style="text-align: center">bigint(M) [unsigned]</td>
+<td style="text-align: center">BIGINT [UNSIGNED]</td>
+<td style="text-align: center">java.lang.Long；无符的话是 java.math.BigInteger</td>
+</tr>
+<tr>
+<td style="text-align: center">float(M,D)</td>
+<td style="text-align: center">FLOAT</td>
+<td style="text-align: center">java.lang.Float</td>
+</tr>
+<tr>
+<td style="text-align: center">double(M,B)</td>
+<td style="text-align: center">DOUBLE</td>
+<td style="text-align: center">java.lang.Double</td>
+</tr>
+<tr>
+<td style="text-align: center">decimal(M,D)</td>
+<td style="text-align: center">DECIMAL</td>
+<td style="text-align: center">java.math.BigDecimal</td>
+</tr>
+<tr>
+<td style="text-align: center">date</td>
+<td style="text-align: center">DATE</td>
+<td style="text-align: center">java.sql.Date</td>
+</tr>
+<tr>
+<td style="text-align: center">datetime</td>
+<td style="text-align: center">DATETIME</td>
+<td style="text-align: center">java.sql.Timestamp</td>
+</tr>
+<tr>
+<td style="text-align: center">timestamp(M)</td>
+<td style="text-align: center">TIMESTAMP</td>
+<td style="text-align: center">java.sql.Timestamp</td>
+</tr>
+<tr>
+<td style="text-align: center">time</td>
+<td style="text-align: center">TIME</td>
+<td style="text-align: center">java.sql.Time</td>
+</tr>
+<tr>
+<td style="text-align: center">year(2/4)</td>
+<td style="text-align: center">YEAR</td>
+<td style="text-align: center">如果 yearIsDateType 配置设置为 false，返回的对象类型为 java.sql.Short；如果设置为 true(默认为 true)，返回的对象类型是 java.sql.Date，其具体时间是为一月一日零时零分</td>
+</tr>
+<tr>
+<td style="text-align: center">char(M)</td>
+<td style="text-align: center">CHAR</td>
+<td style="text-align: center">java.lang.String(除非该列字符集设置为 BINARY，那样返回 byte[])</td>
+</tr>
+<tr>
+<td style="text-align: center">varchar(M) [binary]</td>
+<td style="text-align: center">VARCHAR</td>
+<td style="text-align: center">java.lang.String(除非该列字符集设置为 BINARY，那样返回 byte[])</td>
+</tr>
+<tr>
+<td style="text-align: center">binary(M)</td>
+<td style="text-align: center">BINARY</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">varbinary(M)</td>
+<td style="text-align: center">VARBINARY</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">tinyblob</td>
+<td style="text-align: center">TINYBLOB</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">tinytext</td>
+<td style="text-align: center">VARCHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+<tr>
+<td style="text-align: center">blob</td>
+<td style="text-align: center">BLOB</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">text</td>
+<td style="text-align: center">VARCHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+<tr>
+<td style="text-align: center">mediumblob</td>
+<td style="text-align: center">MEDIUMBLOB</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">mediumtext</td>
+<td style="text-align: center">VARCHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+<tr>
+<td style="text-align: center">longblob</td>
+<td style="text-align: center">LONGBLOB</td>
+<td style="text-align: center">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: center">longtext</td>
+<td style="text-align: center">VARCHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+<tr>
+<td style="text-align: center">enum('value1','value2',...)</td>
+<td style="text-align: center">CHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+<tr>
+<td style="text-align: center">set('value1','value2',...)</td>
+<td style="text-align: center">CHAR</td>
+<td style="text-align: center">java.lang.String</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2573318544">Mysql字段类型<a href="https://www.cnblogs.com/loveer/p/11604423.html#2573318544" class="esa-anchor" style="opacity: 0;">#</a></h3>
+<pre><div data-tips="复制代码" class="esa-clipboard-button" data-clipboard-target="#copy_target_2">Copy</div><code class="hljs scss" id="copy_target_2">decimal(8,2)：
+    有2位小数的定点数，定点数支持很大的数（甚至是超过int,bigint存储范围的数）
+
+decimal不会损失精度，存储空间会随数据的增大而增大。double占用固定空间，较大数的存储会损失精度。
+
+
+字符串型：
+    定长与变长的区别，CHAR类型占用空间比较大，但是处理速度比VARCHAR快。
+    如果长度变化不大，最好选择CHAR类型。对于长度不确定的，最好选择VARCHAR。
+</code></pre>
+<p><a href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191005966-1351590994.png" data-title="" data-alt="" data-lightbox="roadtrip"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191005966-1351590994.png" alt="" loading="lazy" class="medium-zoom-image"></a></p>
+<p><a href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191012476-2028024768.png" data-title="" data-alt="" data-lightbox="roadtrip"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191012476-2028024768.png" alt="" loading="lazy" class="medium-zoom-image"></a></p>
+<p><a href="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191022296-367652503.png" data-title="" data-alt="" data-lightbox="roadtrip"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/1748170-20190928191022296-367652503.png" alt="" loading="lazy" class="medium-zoom-image"></a></p>
+
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/loveer/category/1515479.html" target="_blank">Mysql</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(11604423,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;e91ec2be-7801-4c32-8ea4-08d70d12f13e&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/loveer/" target="_blank"><img src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/20190721135436.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/loveer/">LittleDonkey</a><br>
+            <a href="https://home.cnblogs.com/u/loveer/followees/">关注 - 0</a><br>
+            <a href="https://home.cnblogs.com/u/loveer/followers/">粉丝 - 33</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;e91ec2be-7801-4c32-8ea4-08d70d12f13e&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(11604423,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">4</span>
+    </div>
+    <div class="buryit" onclick="votePost(11604423,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/loveer/p/11603447.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/loveer/p/11603447.html" title="发布于 2019-09-28 16:01">Mysql 基础语法</a>
+    <br>
+    <a href="https://www.cnblogs.com/loveer/p/11615185.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/loveer/p/11615185.html" title="发布于 2019-10-01 12:40">Mysql 优化</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-09-28 19:10</span>&nbsp;
+<a href="https://www.cnblogs.com/loveer/">LittleDonkey</a>&nbsp;
+阅读(<span id="post_view_count">9456</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11604423" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11604423);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: &#39;&#39;, targetType: &#39;blogPost&#39;, targetId: &#39;11604423&#39;, targetLink: &#39;https://www.cnblogs.com/loveer/p/11604423.html&#39;, title: &#39;MySql 字段类型对应 Java 实体类型&#39; })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+
+<script type="text/javascript">
+    var codeHighlightEngine = 1
+</script>
+<script src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/highlight.min.js.下载" async="" onload="markdown_highlight()"></script>
+<script>
+    var allowComments = true, cb_blogId = 528850, cb_blogApp = 'loveer', cb_blogUserGuid = 'e91ec2be-7801-4c32-8ea4-08d70d12f13e';
+    var cb_entryId = 11604423, cb_entryCreatedDate = '2019-09-28 19:10', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/loveer/p/11604423.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/loveer/p/11604423.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    登录后才能查看或发表评论，立即 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return account.login(&#39;!comments&#39;);">登录</a> 或者
+    <a href="https://www.cnblogs.com/">逛逛</a> 博客园首页
+</div>
+</div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="https://cloud.baidu.com/campaign/bccdiscount/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21bcczhuanchangerqi-neiyewenzilian|pu:21bcczhuanchangerqi-neiyewenzilian|ci:21bcc|kw:10279150" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-百度云&#39;)">【推荐】百度智能云特惠：新用户首购云服务器低至0.7折，个人企业同享</a><br><a href="http://www.uccpsoft.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】大型组态、工控、仿真、CAD\GIS 50万行VC++源码免费下载!</a><br><a href="https://www.aliyun.com/activity/ambassador/share-gift/goods?taskCode=xfyh2107&amp;recordId=789157&amp;userCode=swh7dvlt" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云-cps&#39;)">【推荐】阿里云云大使特惠：新用户购ECS服务器1核2G最低价87元/年</a><br><a href="https://tmipartner.com/boot-camp/?welcome=2189" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-躬行投资&#39;)">【推荐】投资训练营：一杯咖啡的价格，教你学会投资，增加被动收入</a><br><a href="https://exec-ed-online.haas-berkeley.ushi.cn/data-science/?utm_source=BKY&amp;utm_medium=CPS&amp;utm_campaign=C-BDS-21-10_BKY_CPS_PC_CH_1" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-优士研习社-数据科学课程&#39;)">【推荐】加州大学伯克利分校高管教育：大数据与数学科学-在线课程</a><br><a href="https://brands.cnblogs.com/huawei" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-华为专区&#39;)">【推荐】和开发者在一起：华为开发者社区，入驻博客园科技品牌专区</a><br></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id="div-gpt-ad-1592365906576-0" style="width: 300px; height: 250px;" data-google-query-id="CP-crNGi_fECFUuE6QUdHTwFHg"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none; display: inline-block; width: 300px; height: 250px;"><iframe frameborder="0" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/container.html" id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" data-google-container-id="1" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div>
+    </div>
+    <div id="under_post_card1"><div class="under-post-card">
+<b>编辑推荐：</b>
+<br>
+
+· <a href="https://www.cnblogs.com/coco1s/p/15033565.html" target="_blank">CSS 世界中的方位与顺序</a>
+    <br>
+· <a href="https://www.cnblogs.com/myshowtime/p/15043961.html" target="_blank">在 .NET 中创建对象的几种方式的对比</a>
+    <br>
+· <a href="https://www.cnblogs.com/jackyfei/p/15040146.html" target="_blank">10倍程序员的思考模型</a>
+    <br>
+· <a href="https://www.cnblogs.com/whuanle/p/15037013.html" target="_blank">学习 CLR 源码：连续内存块数据操作的性能优化</a>
+    <br>
+· <a href="https://www.cnblogs.com/tuyang1129/p/15028363.html" target="_blank">记一次大数据量后台服务的性能优化</a>
+    <br>
+</div></div>
+    <div id="cnblogs_c2" class="under-post-card"><a href="https://exec-ed-online.haas-berkeley.ushi.cn/data-science/?utm_source=BKY&amp;utm_medium=CPS&amp;utm_campaign=C-BDS-21-10_BKY_CPS_PC_C2_1" target="_blank"><img width="468" height="60" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/35695-20210712130018116-1657914728.jpg" alt="大数据与数据科学实战-468x60-2" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C2-优士研习社&#39;);"></a></div>
+    <div id="under_post_card2"><div class="itnews under-post-card">
+    <b>最新新闻</b>：
+    <br>
+ ·          <a href="https://news.cnblogs.com/n/698880/" target="_blank">马斯克：若能降低进口关税 特斯拉很可能在印度建厂</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/698879/" target="_blank">车企爆发“抢人大战”！有职位月薪开到11万元</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/698878/" target="_blank">全球首个塑料ARM芯片登上Nature：成本仅同类硅芯片1/10</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/698877/" target="_blank">美国法院受理特斯拉Autopilot“虚假宣传”案</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/698876/" target="_blank">几天时间亏3000！我们同事也被割了韭菜</a>
+        <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    <script type="text/javascript">window['__document_write_ajax_callbacks__']['4']();</script><script type="text/javascript">window['__document_write_ajax_callbacks__']['5']();</script><script>window['__document_write_ajax_callbacks__']['1']();</script>
+
+<script type="text/javascript">window['__document_write_ajax_callbacks__']['6']();</script><script type="text/javascript">window['__document_write_ajax_callbacks__']['2']();</script>
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/loveer/">
+            LittleDonkey
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/loveer/" title="入园时间：2019-07-21">
+            2年
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/loveer/followers/">
+            33
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/loveer/followees/">
+            0
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;e91ec2be-7801-4c32-8ea4-08d70d12f13e&#39;)">+加关注</a></div>
+        <script type="text/javascript">window['__document_write_ajax_callbacks__']['7']();</script><script>window['__document_write_ajax_callbacks__']['3']();</script>
+    </div>
+</div>
+
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    
+</div>
+
+<!-- 常用链接 -->
+
+
+<!-- 最新随笔 -->
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block"></div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+
+    <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+        <h3 class="catListTitle">
+            
+随笔分类
+<span style="font-size:11px;font-weight:normal">(265)</span>
+
+
+        </h3>
+
+        <ul>
+
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1525233.html" rel="" target="">
+    Error(3)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1520504.html" rel="" target="">
+    JavaWeb(7)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1519654.html" rel="" target="">
+    Java基础(38)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1508529.html" rel="" target="">
+    Java设计模式(24)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1524107.html" rel="" target="">
+    JS JQ(12)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1559001.html" rel="" target="">
+    Linux(14)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1515479.html" rel="" target="">
+    Mysql(7)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1521305.html" rel="" target="">
+    Redis(6)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1536316.html" rel="" target="">
+    Security(3)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1520491.html" rel="" target="">
+    Spring(51)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1537156.html" rel="" target="">
+    Spring Cloud(7)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1519772.html" rel="" target="">
+    Spring Data(6)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1517788.html" rel="" target="">
+    多线程(30)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1588579.html" rel="" target="">
+    环境搭建(1)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1540633.html" rel="" target="">
+    计算机必修课(14)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="false" style="display: none">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1588566.html" rel="" target="">
+    前端(17)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="false" style="display: none">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1514548.html" rel="" target="">
+    算法(15)
+</a>
+ 
+
+                </li>                
+                <li data-category-list-item-visible="false" style="display: none">
+                    
+<a href="https://www.cnblogs.com/loveer/category/1533604.html" rel="" target="">
+    消息中间件(10)
+</a>
+ 
+
+                </li>                
+            <li>
+                <a href="javascript:void(0)" onclick="sideColumnManager.loadMore(this)">更多</a>
+            </li>
+        </ul>
+
+
+    </div>    
+</div>
+
+<!-- 最新评论 -->
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block"><div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/loveer/p/11303608.html">
+                            1. 分页工具一Pageable与Page(18661)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/loveer/p/11479249.html">
+                            2. 彻底理解同步 异步 阻塞 非阻塞(17283)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/loveer/p/11332066.html">
+                            3. 配置文件一applicationContext.xml(14925)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/loveer/p/11604423.html">
+                            4. MySql 字段类型对应 Java 实体类型(9456)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/loveer/p/11342890.html">
+                            5. Idea jsp页面乱码(6178)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<!-- 评论排行榜 -->
+
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/loveer/p/11479249.html">
+                                1. 彻底理解同步 异步 阻塞 非阻塞(16)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/loveer/p/11303608.html">
+                                2. 分页工具一Pageable与Page(8)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/loveer/p/11604423.html">
+                                3. MySql 字段类型对应 Java 实体类型(4)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/loveer/p/11719628.html">
+                                4. 计算机网络之路由器(2)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/loveer/p/11619833.html">
+                                5. chkconfig 与 systemctl(2)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div></div></div>
+                    <script>loadBlogSideColumn();</script><iframe src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/container(1).html" style="visibility: hidden; display: none;"></iframe>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2021 LittleDonkey
+<br><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	<div> Powered By <a href="https://www.cnblogs.com/" target="_blank">Cnblogs</a> |
+            Theme <a href="https://github.com/esofar/cnblogs-theme-silence" target="_blank">Silence v2.0.1</a></div></div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8NACB8VE9qlHm6Ujjqxvg5AyZCr-kP-HJJj9ypi_XdQCAYzGT2GXyJQ-00dkSRKLLVRRUK3JwAUhK3iU1aac20_taoaCRRzLOHIIrW1xX37SnMajb4Bez-FhPQhE8JZ_EuaeYAF_pf6eC4nEyw61YBg">
+
+
+<script type="text/javascript">
+    $.silence({
+	base: {
+            avatar: 'https://files-cdn.cnblogs.com/files/loveer/three_fastener.gif',
+            favicon: 'https://files-cdn.cnblogs.com/files/loveer/three_fastener(min).gif',
+        },
+        catalog: {
+            enable: true,
+            move: true,
+            index: true,
+            level1: 'h2',
+            level2: 'h3',
+            level3: 'h4',
+        }
+    });
+</script><div class="esa-catalog">
+                        <div class="esa-catalog-contents" style="display: block;">
+                            <div class="esa-catalog-title">CONTENTS</div>
+                            <a class="esa-catalog-close">✕</a>
+                        <ul><li class="li_h3" title="前言">
+                            <i class="1003383400"></i><a class="esa-anchor-link"><span class="level2">0.1. </span>前言</a>
+                        </li><li class="li_h3" title="Java基础类型与包装类型">
+                            <i class="1059716100"></i><a class="esa-anchor-link"><span class="level2">0.2. </span>Java基础类型与包装类型</a>
+                        </li><li class="li_h3" title="ResultSet.getObject() 对 MySql 类型和 Java 类型转换表">
+                            <i class="1443357148"></i><a class="esa-anchor-link"><span class="level2">0.3. </span>ResultSet.getObject() 对 MySql 类型和 Java 类型转换表</a>
+                        </li><li class="li_h3" title="Mysql字段类型">
+                            <i class="2573318544"></i><a class="esa-anchor-link"><span class="level2">0.4. </span>Mysql字段类型</a>
+                        </li></ul></div>
+                    </div><div class="esa-toolbar">
+                <button class="esa-toolbar-gotop" data-tips="返回顶部" style="display: block;"></button>
+                <button class="esa-toolbar-contents" data-tips="阅读目录"></button>
+                <button class="esa-toolbar-follow" data-tips="关注博主"></button>
+            </div><script type="text/javascript">getFollowStatus('e91ec2be-7801-4c32-8ea4-08d70d12f13e');</script><iframe id="google_osd_static_frame_6681465065338" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/saved_resource.html"></iframe><div id="lightboxOverlay" tabindex="-1" class="lightboxOverlay" style="display: none;"></div><div id="lightbox" tabindex="-1" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt=""><div class="lb-nav"><a class="lb-prev" aria-label="Previous image" href="https://www.cnblogs.com/loveer/p/11604423.html"></a><a class="lb-next" aria-label="Next image" href="https://www.cnblogs.com/loveer/p/11604423.html"></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><iframe src="./MySql 字段类型对应 Java 实体类型 - LittleDonkey - 博客园_files/aframe.html" width="0" height="0" style="display: none;"></iframe></body><div id="cye-workaround-body" style="position: absolute; left: 0px; top: 0px; z-index: -2147483646; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(43, 42, 50); height: 5200px; width: 1363px;"></div><div id="cye-workaround-body-image" style="position: absolute; left: 0px; top: 0px; z-index: -2147483645; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0); height: 5200px; width: 1363px;"></div></html>

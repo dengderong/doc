@@ -1,0 +1,49 @@
+////初次使用流程
+git config --global user.name "邓德荣"
+git config --global user.email "369675678@qq.com"
+git remote rm origin
+git remote add origin https://git.oschina.net/dengderong/vue.git
+git commit -m '说明'
+git push origin master
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/focusor/focusor.github.io.git     //添加别名
+git push -u origin master
+
+
+
+git add .       //添加所以文件
+git commit -m '说明'
+git push origin master
+
+
+
+git status -s   查看状态
+
+
+
+
+//输入了各种无效和错误的命令后，终于找到了解决办法：
+
+
+1、git pull origin master --allow-unrelated-histories //把远程仓库和本地同步，消除差异
+
+
+2、重新add和commit相应文件
+
+
+3、git push origin master
+
+
+4、此时就能够上传成功了
+
+
+git用远程代码强制覆盖本地代码
+git强制覆盖：
+    git fetch --all
+    git reset --hard origin/master
+    git pull
+git强制覆盖本地命令（单条执行）：
+    git fetch --all && git reset --hard origin/master && git pull
