@@ -1,0 +1,180 @@
+*
+{
+font-family:microsoft yahei !important;
+}
+
+.bigFont
+{
+font-size:20px;
+font-family:microsoft yahei;
+}
+
+/*设置点赞*/
+#div_digg {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  border: 2px solid #169fe6;
+  padding: 10px;
+  width: 140px;
+  background-color: #fff;
+  border-radius: 5px 5px 5px 5px !important;
+  box-shadow: 0 0 0 1px #169fe6, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+}
+
+/*取消正文页多余信息*/
+#under_post_kb { display:none; } 
+#under_post_news { display:none; }
+
+/*adv*/
+#google_ad_c1,#div-gpt-ad-1320933818841-0,#google_ad_c2,#div-gpt-ad-1320933818841-1,#ad_under_google{
+display:none;
+visibility：hidden;
+}
+
+html body div.cnblogs_code *,html body div.cnblogs_code{
+font-size:16px !important;
+font-family:microsoft yahei !important;
+background:#fff;
+}
+
+html body div#cnblogs_post_body{
+font-size:16px !important;
+color:#000;
+background:#fff;
+}
+
+@media (max-width: 950px)
+{
+　　#home{max-width:inherit;}
+　　#main{min-width:inherit;max-width:inherit;}
+　　#mainContent, #mainContent .forFlow{ margin:auto;}
+　　#sideBar{display:none;}
+　　#mainContent{float:none;}
+}
+@media (max-width: 380px)
+{
+　　#MyLinks1_MyHomeLink, #MyLinks1_Syndication{display:none !important;}
+}
+
+html body ul#navList a:link{
+text-shadow: 0px 0px 0px #000;
+}
+
+html body .MathJax .noError
+{
+border:0 !important;
+}
+
+@media (min-width: 800px)
+{
+html body div#main{
+width:97%;
+}
+html body div#mainContent{
+width:100%;
+}
+html body #mainContent div.forFlow{
+width:auto !important;
+padding-right:310px;
+}
+html body div#sideBar{
+float:left;
+margin-left:-300px;
+}
+}
+/*超链接样式*/
+html body div a
+{
+color:#006;
+text-decoration: none !important;
+}
+
+/*目录*/
+html body #cnblogs_post_body h1{
+font-size:20px;
+margin:0;
+padding:4px 0px;;
+}
+html body  #cnblogs_post_body h2{
+font-size:18px;
+margin:0;
+padding:3px 0px;
+}
+html body  #cnblogs_post_body h3{
+font-size:16px;
+margin:0;
+padding:2px 0px;
+}
+
+
+html body div.cnblogs_code span,.cnblogs_code_toolbar a:hover,.cnblogs_code_toolbar a:link,.cnblogs_code_toolbar a:visited, .cnblogs_code_toolbar a:active,.cnblogs_code_toolbar a:link img,.cnblogs_code_toolbar a:visited img
+{
+background-color:#fff !important;
+}
+
+
+  #cnblogs_post_body img
+  {
+   max-width: 96% !important;
+  }
+
+html body #mainContent{
+max-width : none !important;
+flex: none !important;
+}
+
+
+/*
+.myRewards {top:123px !important;｝
+
+
+#AjaxHolder_UpdatePanel1,
+.post{padding:32px;}
+.feedbackItem{border:1px solid #E3E3E3;padding:5px;margin-bottom:10px;background-color:#F6F6F6;}
+.blog_comment_body{color:#929292;padding-top:10px;}
+.forFlow p{margin-bottom:18px;}
+.forFlow img{margin-top:1px;margin-bottom:1px;}
+.dayTitle a{margin-left:30px;}
+#blog-comments-placeholder{padding-top:5px;}
+.post{padding-bottom:5px;}
+.friendLink{padding-bottom:15px;}
+.friendLink h2{font-size:14px;color:#333;font-weight:bold;padding-bottom:10px;margin-bottom:5px;border-bottom:1px dashed #D4D4D4;}
+.friendLink a{display:block;font-size:16px;line-height:24px;}
+.newsItem .catListTitle{border:none!important;}
+#sideBarMain h3{margin-bottom:6px!important;margin-top:20px!important;padding-bottom:4px!important;}
+#sidebar_links827540 a{font-size:14px;color:#FF3100;}
+.github-fork{position:fixed;top:0;right:0;}
+.mygithub{margin-top:345px;margin-bottom:20px;}
+.mygithub .github-title{border-bottom:1px dashed #d4d4d4;}
+.mygithub img{width:200px;}
+.newsItem .catListTitle{display:none;}
+#cnzz_stat_icon_1259286380{display:block;text-align:center;margin-top:-30px;font-size:12px;}
+#cnzz_stat_icon_1259286380 a{color:#ddd;}
+iframe{width:917px!important;}
+code{padding:2px 4px;background-color:#f8f8f8;color:#d14;border:none;word-wrap:break-word;border-radius:3px;}
+.m-reward{width:976px;height:100px;border-left:5px solid #ff7300;background-color:#eee;color:#5e5e5e;margin-top:20px;}
+.m-desc{font-size:16px;height:42px;text-indent:20px;line-height:42px;}
+.reward-btn{width:100px;line-height:40px;text-align:center;background-color:#ff7300;color:#fff;margin-left:20px;font-size:14px;cursor:pointer;border-radius:5px;}
+.reward-btn:hover{background-color:hsl(27,97%,60%);}
+.reward-btn:active{background-color:hsl(27,97%,40%);}
+.reward-wrap{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:360px;border-radius:0px;background:#fff;box-shadow:0 0 0 2000px rgba(0,0,0,.5);border-radius:10px;}
+.reward-wrap h2{text-align:center;font-size:24px;color:#666;font-weight:normal;margin:22px 0;}
+.reward-wrap .wechat,
+.reward-wrap .zhifubao{position:relative;float:left;width:240px;height:240px;padding:10px;border:5px solid #ff7300;border-radius:10px;box-sizing:border-box;}
+.reward-wrap .wechat img,
+.reward-wrap .zhifubao img{width:100%;}
+.reward-wrap p{text-align:center;}
+.wechat::after,
+.zhifubao::after{content:"微信，扫一扫";position:absolute;color:#666;background:#fff;top:220px;padding:0 10px;font-size:16px;width:120px;left:50px;text-align:center;}
+.zhifubao::after{content:"支付宝，扫一扫";}
+.wechat{margin-left:40px;}
+.zhifubao{margin-left:40px;}
+.reward-btn-close{position:absolute;font-size:30px;color:#999;top:0px;right:0px;cursor:pointer;padding:10px 20px;transform:rotate(45deg);}
+.reward-btn-close:hover{transition:all .2s;color:#bbb;}
+.reward-btn-close:active{transition:all .2s;color:#666;}
+.postBody blockquote,
+.postCon blockquote{position:relative;background:#f8f8f8;padding:6px 0 6px 25px;width:100%;border:none;border-left:4px solid #ff7300;}
+.postBody blockquote::before,
+.postCon blockquote::before{position:absolute;top:12px;left:-12px;background-color:#ff7300;color:#fff;content:"!";width:20px;height:20px;border-radius:100%;text-align:center;line-height:20px;font-weight:bold;font-family:'Dosis','Source Sans Pro','Helvetica Neue',Arial,sans-serif;font-size:14px;}
+*/
