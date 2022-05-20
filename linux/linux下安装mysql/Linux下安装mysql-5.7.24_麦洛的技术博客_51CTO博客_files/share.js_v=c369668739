@@ -1,0 +1,2006 @@
+/*! art-template@4.13.1 for browser | https://github.com/aui/art-template */
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.template=t():e.template=t()}("undefined"!=typeof self?self:this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e["default"]}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=4)}([function(e,t,n){"use strict";var r=n(6),i=n(2),o=n(22),s=function(e,t){t.onerror(e,t);var n=function(){return"{Template Error}"};return n.mappings=[],n.sourcesContent=[],n},a=function u(e){var t=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};"string"!=typeof e?t=e:t.source=e,t=i.$extend(t),e=t.source,!0===t.debug&&(t.cache=!1,t.minimize=!1,t.compileDebug=!0),t.compileDebug&&(t.minimize=!1),t.filename&&(t.filename=t.resolveFilename(t.filename,t));var n=t.filename,a=t.cache,c=t.caches;if(a&&n){var l=c.get(n);if(l)return l}if(!e)try{e=t.loader(n,t),t.source=e}catch(m){var f=new o({name:"CompileError",path:n,message:"template not found: "+m.message,stack:m.stack});if(t.bail)throw f;return s(f,t)}var p=void 0,h=new r(t);try{p=h.build()}catch(f){if(f=new o(f),t.bail)throw f;return s(f,t)}var d=function(e,n){try{return p(e,n)}catch(f){if(!t.compileDebug)return t.cache=!1,t.compileDebug=!0,u(t)(e,n);if(f=new o(f),t.bail)throw f;return s(f,t)()}};return d.mappings=p.mappings,d.sourcesContent=p.sourcesContent,d.toString=function(){return p.toString()},a&&n&&c.set(n,d),d};a.Compiler=r,e.exports=a},function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=/((['"])(?:(?!\2|\\).|\\(?:\r\n|[\s\S]))*(\2)?|`(?:[^`\\$]|\\[\s\S]|\$(?!\{)|\$\{(?:[^{}]|\{[^}]*\}?)*\}?)*(`)?)|(\/\/.*)|(\/\*(?:[^*]|\*(?!\/))*(\*\/)?)|(\/(?!\*)(?:\[(?:(?![\]\\]).|\\.)*\]|(?![\/\]\\]).|\\.)+\/(?:(?!\s*(?:\b|[\u0080-\uFFFF$\\'"~({]|[+\-!](?!=)|\.?\d))|[gmiyu]{1,5}\b(?![\u0080-\uFFFF$\\]|\s*(?:[+\-*%&|^<>!=?({]|\/(?![\/*])))))|(0[xX][\da-fA-F]+|0[oO][0-7]+|0[bB][01]+|(?:\d*\.\d+|\d+\.?)(?:[eE][+-]?\d+)?)|((?!\d)(?:(?!\s)[$\w\u0080-\uFFFF]|\\u[\da-fA-F]{4}|\\u\{[\da-fA-F]+\})+)|(--|\+\+|&&|\|\||=>|\.{3}|(?:[+\-\/%&|^]|\*{1,2}|<{1,2}|>{1,3}|!=?|={1,2})=?|[?~.,:;[\](){}])|(\s+)|(^$|[\s\S])/g,t.matchToToken=function(e){var t={type:"invalid",value:e[0]};return e[1]?(t.type="string",t.closed=!(!e[3]&&!e[4])):e[5]?t.type="comment":e[6]?(t.type="comment",t.closed=!!e[7]):e[8]?t.type="regex":e[9]?t.type="number":e[10]?t.type="name":e[11]?t.type="punctuator":e[12]&&(t.type="whitespace"),t}},function(e,t,n){"use strict";function r(){this.$extend=function(e){return e=e||{},o(e,e instanceof r?e:this)}}var i=n(10),o=n(12),s=n(13),a=n(14),u=n(15),c=n(16),l=n(17),f=n(18),p=n(19),h=n(21),d="undefined"==typeof window,m={source:null,filename:null,rules:[f,l],escape:!0,debug:!!d&&"production"!==process.env.NODE_ENV,bail:!0,cache:!0,minimize:!0,compileDebug:!1,resolveFilename:h,include:s,htmlMinifier:p,htmlMinifierOptions:{collapseWhitespace:!0,minifyCSS:!0,minifyJS:!0,ignoreCustomFragments:[]},onerror:a,loader:c,caches:u,root:"/",extname:".art",ignore:[],imports:i};r.prototype=m,e.exports=new r},function(e,t){},function(e,t,n){"use strict";var r=n(5),i=n(0),o=n(23),s=function(e,t){return t instanceof Object?r({filename:e},t):i({filename:e,source:t})};s.render=r,s.compile=i,s.defaults=o,e.exports=s},function(e,t,n){"use strict";var r=n(0),i=function(e,t,n){return r(e,n)(t)};e.exports=i},function(e,t,n){"use strict";function r(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function i(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var s=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),a=n(7),u=n(9),c="$data",l="$imports",f="print",p="include",h="extend",d="block",m="$$out",v="$$line",g="$$blocks",y="$$slice",b="$$from",w="$$options",x=function(e,t){return Object.hasOwnProperty.call(e,t)},k=JSON.stringify,E=function(){function e(t){var n,s,a=this;o(this,e);var x=t.source,k=t.minimize,E=t.htmlMinifier;if(this.options=t,this.stacks=[],this.context=[],this.scripts=[],this.CONTEXT_MAP={},this.ignore=[c,l,w].concat(i(t.ignore)),this.internal=(n={},r(n,m,"''"),r(n,v,"[0,0]"),r(n,g,"arguments[1]||{}"),r(n,b,"null"),r(n,f,"function(){var s=''.concat.apply('',arguments);"+m+"+=s;return s}"),r(n,p,"function(src,data){var s="+w+".include(src,data||"+c+",arguments[2]||"+g+","+w+");"+m+"+=s;return s}"),r(n,h,"function(from){"+b+"=from}"),r(n,y,"function(c,p,s){p="+m+";"+m+"='';c();s="+m+";"+m+"=p+s;return s}"),r(n,d,"function(){var a=arguments,s;if(typeof a[0]==='function'){return "+y+"(a[0])}else if("+b+"){if(!"+g+"[a[0]]){"+g+"[a[0]]="+y+"(a[1])}else{"+m+"+="+g+"[a[0]]}}else{s="+g+"[a[0]];if(typeof s==='string'){"+m+"+=s}else{s="+y+"(a[1])}return s}}"),n),this.dependencies=(s={},r(s,f,[m]),r(s,p,[m,w,c,g]),r(s,h,[b,p]),r(s,d,[y,b,m,g]),s),this.importContext(m),t.compileDebug&&this.importContext(v),k)try{x=E(x,t)}catch(T){}this.source=x,this.getTplTokens(x,t.rules,this).forEach(function(e){e.type===u.TYPE_STRING?a.parseString(e):a.parseExpression(e)})}return s(e,[{key:"getTplTokens",value:function(){return u.apply(undefined,arguments)}},{key:"getEsTokens",value:function(e){return a(e)}},{key:"getVariables",value:function(e){var t=!1;return e.filter(function(e){return"whitespace"!==e.type&&"comment"!==e.type}).filter(function(e){return"name"===e.type&&!t||(t="punctuator"===e.type&&"."===e.value,!1)}).map(function(e){return e.value})}},{key:"importContext",value:function(e){var t=this,n="",r=this.internal,i=this.dependencies,o=this.ignore,s=this.context,a=this.options,u=a.imports,f=this.CONTEXT_MAP;x(f,e)||-1!==o.indexOf(e)||(x(r,e)?(n=r[e],x(i,e)&&i[e].forEach(function(e){return t.importContext(e)})):n="$escape"===e||"$each"===e||x(u,e)?l+"."+e:c+"."+e,f[e]=n,s.push({name:e,value:n}))}},{key:"parseString",value:function(e){var t=e.value;if(t){var n=m+"+="+k(t);this.scripts.push({source:t,tplToken:e,code:n})}}},{key:"parseExpression",value:function(e){var t=this,n=e.value,r=e.script,i=r.output,o=this.options.escape,s=r.code;i&&(s=!1===o||i===u.TYPE_RAW?m+"+="+r.code:m+"+=$escape("+r.code+")");var a=this.getEsTokens(s);this.getVariables(a).forEach(function(e){return t.importContext(e)}),this.scripts.push({source:n,tplToken:e,code:s})}},{key:"checkExpression",value:function(e){for(var t=[[/^\s*}[\w\W]*?{?[\s;]*$/,""],[/(^[\w\W]*?\([\w\W]*?(?:=>|\([\w\W]*?\))\s*{[\s;]*$)/,"$1})"],[/(^[\w\W]*?\([\w\W]*?\)\s*{[\s;]*$)/,"$1}"]],n=0;n<t.length;){if(t[n][0].test(e)){var r;e=(r=e).replace.apply(r,i(t[n]));break}n++}try{return new Function(e),!0}catch(o){return!1}}},{key:"build",value:function(){var e=this.options,t=this.context,n=this.scripts,r=this.stacks,i=this.source,o=e.filename,s=e.imports,a=[],f=x(this.CONTEXT_MAP,h),d=0,y=function(e,t){var n=t.line,i=t.start,o={generated:{line:r.length+d+1,column:1},original:{line:n+1,column:i+1}};return d+=e.split(/\n/).length-1,o},E=function(e){return e.replace(/^[\t ]+|[\t ]$/g,"")};r.push("function("+c+"){"),r.push("'use strict'"),r.push(c+"="+c+"||{}"),r.push("var "+t.map(function(e){return e.name+"="+e.value}).join(",")),e.compileDebug?(r.push("try{"),n.forEach(function(e){e.tplToken.type===u.TYPE_EXPRESSION&&r.push(v+"=["+[e.tplToken.line,e.tplToken.start].join(",")+"]"),a.push(y(e.code,e.tplToken)),r.push(E(e.code))}),r.push("}catch(error){"),r.push("throw {"+["name:'RuntimeError'","path:"+k(o),"message:error.message","line:"+v+"[0]+1","column:"+v+"[1]+1","source:"+k(i),"stack:error.stack"].join(",")+"}"),r.push("}")):n.forEach(function(e){a.push(y(e.code,e.tplToken)),r.push(E(e.code))}),f&&(r.push(m+"=''"),r.push(p+"("+b+","+c+","+g+")")),r.push("return "+m),r.push("}");var T=r.join("\n");try{var O=new Function(l,w,"return "+T)(s,e);return O.mappings=a,O.sourcesContent=[i],O}catch(P){for(var $=0,j=0,_=0,S=void 0;$<n.length;){var C=n[$];if(!this.checkExpression(C.code)){j=C.tplToken.line,_=C.tplToken.start,S=C.code;break}$++}throw{name:"CompileError",path:o,message:P.message,line:j+1,column:_+1,source:i,generated:S,stack:P.stack}}}}]),e}();E.CONSTS={DATA:c,IMPORTS:l,PRINT:f,INCLUDE:p,EXTEND:h,BLOCK:d,OPTIONS:w,OUT:m,LINE:v,BLOCKS:g,SLICE:y,FROM:b,ESCAPE:"$escape",EACH:"$each"},e.exports=E},function(e,t,n){"use strict";var r=n(8),i=n(1)["default"],o=n(1).matchToToken,s=function(e){return e.match(i).map(function(e){return i.lastIndex=0,o(i.exec(e))}).map(function(e){return"name"===e.type&&r(e.value)&&(e.type="keyword"),e})};e.exports=s},function(e,t,n){"use strict";var r={"abstract":!0,await:!0,"boolean":!0,"break":!0,"byte":!0,"case":!0,"catch":!0,"char":!0,"class":!0,"const":!0,"continue":!0,"debugger":!0,"default":!0,"delete":!0,"do":!0,"double":!0,"else":!0,"enum":!0,"export":!0,"extends":!0,"false":!0,"final":!0,"finally":!0,"float":!0,"for":!0,"function":!0,"goto":!0,"if":!0,"implements":!0,"import":!0,"in":!0,"instanceof":!0,"int":!0,"interface":!0,"let":!0,"long":!0,"native":!0,"new":!0,"null":!0,"package":!0,"private":!0,"protected":!0,"public":!0,"return":!0,"short":!0,"static":!0,"super":!0,"switch":!0,"synchronized":!0,"this":!0,"throw":!0,"transient":!0,"true":!0,"try":!0,"typeof":!0,"var":!0,"void":!0,"volatile":!0,"while":!0,"with":!0,"yield":!0};e.exports=function(e){return r.hasOwnProperty(e)}},function(e,t,n){"use strict";function r(e){var t=new String(e.value);return t.line=e.line,t.start=e.start,t.end=e.end,t}function i(e,t,n){this.type=e,this.value=t,this.script=null,n?(this.line=n.line+n.value.split(/\n/).length-1,this.line===n.line?this.start=n.end:this.start=n.value.length-n.value.lastIndexOf("\n")-1):(this.line=0,this.start=0),this.end=this.start+this.value.length}var o=function(e,t){for(var n=arguments.length>2&&arguments[2]!==undefined?arguments[2]:{},o=[new i("string",e)],s=0;s<t.length;s++)for(var a=t[s],u=a.test.ignoreCase?"ig":"g",c=new RegExp(a.test.source,u),l=0;l<o.length;l++){var f=o[l],p=o[l-1];if("string"===f.type){for(var h=void 0,d=0,m=[],v=f.value;null!==(h=c.exec(v));)h.index>d&&(p=new i("string",v.slice(d,h.index),p),m.push(p)),p=new i("expression",h[0],p),h[0]=r(p),p.script=a.use.apply(n,h),m.push(p),d=h.index+h[0].length;d<v.length&&(p=new i("string",v.slice(d),p),m.push(p)),o.splice.apply(o,[l,1].concat(m)),l+=m.length-1}}return o};o.TYPE_STRING="string",o.TYPE_EXPRESSION="expression",o.TYPE_RAW="raw",o.TYPE_ESCAPE="escape",e.exports=o},function(e,t,n){"use strict";(function(t){function n(e){return"string"!=typeof e&&(e=e===undefined||null===e?"":"function"==typeof e?n(e.call(e)):JSON.stringify(e)),e}function r(e){var t=""+e,n=s.exec(t);if(!n)return e;var r="",i=void 0,o=void 0,a=void 0;for(i=n.index,o=0;i<t.length;i++){switch(t.charCodeAt(i)){case 34:a="&#34;";break;case 38:a="&#38;";break;case 39:a="&#39;";break;case 60:a="&#60;";break;case 62:a="&#62;";break;default:continue}o!==i&&(r+=t.substring(o,i)),o=i+1,r+=a}return o!==i?r+t.substring(o,i):r}/*! art-template@runtime | https://github.com/aui/art-template */
+var i="undefined"!=typeof self?self:"undefined"!=typeof window?window:void 0!==t?t:{},o=Object.create(i),s=/["&'<>]/;o.$escape=function(e){return r(n(e))},o.$each=function(e,t){if(Array.isArray(e))for(var n=0,r=e.length;n<r;n++)t(e[n],n);else for(var i in e)t(e[i],i)},e.exports=o}).call(t,n(11))},function(e,t){var n;n=function(){return this}();try{n=n||Function("return this")()||(0,eval)("this")}catch(r){"object"==typeof window&&(n=window)}e.exports=n},function(e,t,n){"use strict";var r=Object.prototype.toString,i=function(e){return null===e?"Null":r.call(e).slice(8,-1)},o=function s(e,t){var n=void 0,r=i(e);if("Object"===r?n=Object.create(t||{}):"Array"===r&&(n=[].concat(t||[])),n){for(var o in e)Object.hasOwnProperty.call(e,o)&&(n[o]=s(e[o],n[o]));return n}return e};e.exports=o},function(e,t,n){"use strict";var r=function(e,t,r,i){var o=n(0);return i=i.$extend({filename:i.resolveFilename(e,i),bail:!0,source:null}),o(i)(t,r)};e.exports=r},function(e,t,n){"use strict";var r=function(e){console.error(e.name,e.message)};e.exports=r},function(e,t,n){"use strict";var r={__data:Object.create(null),set:function(e,t){this.__data[e]=t},get:function(e){return this.__data[e]},reset:function(){this.__data={}}};e.exports=r},function(e,t,n){"use strict";var r="undefined"==typeof window,i=function(e){if(r){return n(3).readFileSync(e,"utf8")}var t=document.getElementById(e);return t.value||t.innerHTML};e.exports=i},function(e,t,n){"use strict";var r={test:/{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}/,use:function(e,t,n,i){var o=this,s=o.options,a=o.getEsTokens(i),u=a.map(function(e){return e.value}),c={},l=void 0,f=!!t&&"raw",p=n+u.shift(),h=function(t,n){console.warn((s.filename||"anonymous")+":"+(e.line+1)+":"+(e.start+1)+"\nTemplate upgrade: {{"+t+"}} -> {{"+n+"}}")};switch("#"===t&&h("#value","@value"),p){case"set":i="var "+u.join("").trim();break;case"if":i="if("+u.join("").trim()+"){";break;case"else":var d=u.indexOf("if");~d?(u.splice(0,d+1),i="}else if("+u.join("").trim()+"){"):i="}else{";break;case"/if":i="}";break;case"each":l=r._split(a),l.shift(),"as"===l[1]&&(h("each object as value index","each object value index"),l.splice(1,1));i="$each("+(l[0]||"$data")+",function("+(l[1]||"$value")+","+(l[2]||"$index")+"){";break;case"/each":i="})";break;case"block":l=r._split(a),l.shift(),i="block("+l.join(",").trim()+",function(){";break;case"/block":i="})";break;case"echo":p="print",h("echo value","value");case"print":case"include":case"extend":if(0!==u.join("").trim().indexOf("(")){l=r._split(a),l.shift(),i=p+"("+l.join(",")+")";break}default:if(~u.indexOf("|")){var m=a.reduce(function(e,t){var n=t.value,r=t.type;return"|"===n?e.push([]):"whitespace"!==r&&"comment"!==r&&(e.length||e.push([]),":"===n&&1===e[e.length-1].length?h("value | filter: argv","value | filter argv"):e[e.length-1].push(t)),e},[]).map(function(e){return r._split(e)});i=m.reduce(function(e,t){var n=t.shift();return t.unshift(e),"$imports."+n+"("+t.join(",")+")"},m.shift().join(" ").trim())}f=f||"escape"}return c.code=i,c.output=f,c},_split:function(e){e=e.filter(function(e){var t=e.type;return"whitespace"!==t&&"comment"!==t});for(var t=0,n=e.shift(),r=/\]|\)/,i=[[n]];t<e.length;){var o=e[t];"punctuator"===o.type||"punctuator"===n.type&&!r.test(n.value)?i[i.length-1].push(o):i.push([o]),n=o,t++}return i.map(function(e){return e.map(function(e){return e.value}).join("")})}};e.exports=r},function(e,t,n){"use strict";var r={test:/<%(#?)((?:==|=#|[=-])?)[ \t]*([\w\W]*?)[ \t]*(-?)%>/,use:function(e,t,n,r){return n={"-":"raw","=":"escape","":!1,"==":"raw","=#":"raw"}[n],t&&(r="/*"+r+"*/",n=!1),{code:r,output:n}}};e.exports=r},function(e,t,n){"use strict";function r(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var i="undefined"==typeof window,o=function(e,t){if(i){var o,s=n(20).minify,a=t.htmlMinifierOptions,u=t.rules.map(function(e){return e.test});(o=a.ignoreCustomFragments).push.apply(o,r(u)),e=s(e,a)}return e};e.exports=o},function(e,t){!function(e){e.noop=function(){}}("object"==typeof e&&"object"==typeof e.exports?e.exports:window)},function(e,t,n){"use strict";var r="undefined"==typeof window,i=/^\.+\//,o=function(e,t){if(r){var o=n(3),s=t.root,a=t.extname;if(i.test(e)){var u=t.filename,c=!u||e===u,l=c?s:o.dirname(u);e=o.resolve(l,e)}else e=o.resolve(s,e);o.extname(e)||(e+=a)}return e};e.exports=o},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function o(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function s(e){var t=e.name,n=e.source,r=e.path,i=e.line,o=e.column,s=e.generated,a=e.message;if(!n)return a;var u=n.split(/\n/),c=Math.max(i-3,0),l=Math.min(u.length,i+3),f=u.slice(c,l).map(function(e,t){var n=t+c+1;return(n===i?" >> ":"    ")+n+"| "+e}).join("\n");return(r||"anonymous")+":"+i+":"+o+"\n"+f+"\n\n"+t+": "+a+(s?"\n   generated: "+s:"")}var a=function(e){function t(e){r(this,t);var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e.message));return n.name="TemplateError",n.message=s(e),Error.captureStackTrace&&Error.captureStackTrace(n,n.constructor),n}return o(t,e),t}(Error);e.exports=a},function(e,t,n){"use strict";e.exports=n(2)}])});
+;
+/**
+ * marked - a markdown parser
+ * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+ * https://github.com/chjj/marked
+ */
+(function(){var block={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:noop,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:noop,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:noop,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};block.bullet=/(?:[*+-]|\d+\.)/;block.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;block.item=replace(block.item,"gm")(/bull/g,block.bullet)();block.list=replace(block.list)(/bull/g,block.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+block.def.source+")")();block.blockquote=replace(block.blockquote)("def",block.def)();block._tag="(?!(?:"+"a|em|strong|small|s|cite|q|dfn|abbr|data|time|code"+"|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo"+"|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b";block.html=replace(block.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,block._tag)();block.paragraph=replace(block.paragraph)("hr",block.hr)("heading",block.heading)("lheading",block.lheading)("blockquote",block.blockquote)("tag","<"+block._tag)("def",block.def)();block.normal=merge({},block);block.gfm=merge({},block.normal,{fences:/^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,paragraph:/^/,heading:/^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/});block.gfm.paragraph=replace(block.paragraph)("(?!","(?!"+block.gfm.fences.source.replace("\\1","\\2")+"|"+block.list.source.replace("\\1","\\3")+"|")();block.tables=merge({},block.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/});function Lexer(options){this.tokens=[];this.tokens.links={};this.options=options||marked.defaults;this.rules=block.normal;if(this.options.gfm){if(this.options.tables){this.rules=block.tables}else{this.rules=block.gfm}}}Lexer.rules=block;Lexer.lex=function(src,options){var lexer=new Lexer(options);return lexer.lex(src)};Lexer.prototype.lex=function(src){src=src.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n");return this.token(src,true)};Lexer.prototype.token=function(src,top,bq){var src=src.replace(/^ +$/gm,""),next,loose,cap,bull,b,item,space,i,l;while(src){if(cap=this.rules.newline.exec(src)){src=src.substring(cap[0].length);if(cap[0].length>1){this.tokens.push({type:"space"})}}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);cap=cap[0].replace(/^ {4}/gm,"");this.tokens.push({type:"code",text:!this.options.pedantic?cap.replace(/\n+$/,""):cap});continue}if(cap=this.rules.fences.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"code",lang:cap[2],text:cap[3]||""});continue}if(cap=this.rules.heading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[1].length,text:cap[2]});continue}if(top&&(cap=this.rules.nptable.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].split(/ *\| */)}this.tokens.push(item);continue}if(cap=this.rules.lheading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[2]==="="?1:2,text:cap[1]});continue}if(cap=this.rules.hr.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"hr"});continue}if(cap=this.rules.blockquote.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"blockquote_start"});cap=cap[0].replace(/^ *> ?/gm,"");this.token(cap,top,true);this.tokens.push({type:"blockquote_end"});continue}if(cap=this.rules.list.exec(src)){src=src.substring(cap[0].length);bull=cap[2];this.tokens.push({type:"list_start",ordered:bull.length>1});cap=cap[0].match(this.rules.item);next=false;l=cap.length;i=0;for(;i<l;i++){item=cap[i];space=item.length;item=item.replace(/^ *([*+-]|\d+\.) +/,"");if(~item.indexOf("\n ")){space-=item.length;item=!this.options.pedantic?item.replace(new RegExp("^ {1,"+space+"}","gm"),""):item.replace(/^ {1,4}/gm,"")}if(this.options.smartLists&&i!==l-1){b=block.bullet.exec(cap[i+1])[0];if(bull!==b&&!(bull.length>1&&b.length>1)){src=cap.slice(i+1).join("\n")+src;i=l-1}}loose=next||/\n\n(?!\s*$)/.test(item);if(i!==l-1){next=item.charAt(item.length-1)==="\n";if(!loose)loose=next}this.tokens.push({type:loose?"loose_item_start":"list_item_start"});this.token(item,false,bq);this.tokens.push({type:"list_item_end"})}this.tokens.push({type:"list_end"});continue}if(cap=this.rules.html.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:this.options.sanitize?"paragraph":"html",pre:!this.options.sanitizer&&(cap[1]==="pre"||cap[1]==="script"||cap[1]==="style"),text:cap[0]});continue}if(!bq&&top&&(cap=this.rules.def.exec(src))){src=src.substring(cap[0].length);this.tokens.links[cap[1].toLowerCase()]={href:cap[2],title:cap[3]};continue}if(top&&(cap=this.rules.table.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/(?: *\| *)?\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */)}this.tokens.push(item);continue}if(top&&(cap=this.rules.paragraph.exec(src))){src=src.substring(cap[0].length);this.tokens.push({type:"paragraph",text:cap[1].charAt(cap[1].length-1)==="\n"?cap[1].slice(0,-1):cap[1]});continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"text",text:cap[0]});continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return this.tokens};var inline={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:noop,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:noop,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};inline._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;inline._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;inline.link=replace(inline.link)("inside",inline._inside)("href",inline._href)();inline.reflink=replace(inline.reflink)("inside",inline._inside)();inline.normal=merge({},inline);inline.pedantic=merge({},inline.normal,{strong:/^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/});inline.gfm=merge({},inline.normal,{escape:replace(inline.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:replace(inline.text)("]|","~]|")("|","|https?://|")()});inline.breaks=merge({},inline.gfm,{br:replace(inline.br)("{2,}","*")(),text:replace(inline.gfm.text)("{2,}","*")()});function InlineLexer(links,options){this.options=options||marked.defaults;this.links=links;this.rules=inline.normal;this.renderer=this.options.renderer||new Renderer;this.renderer.options=this.options;if(!this.links){throw new Error("Tokens array requires a `links` property.")}if(this.options.gfm){if(this.options.breaks){this.rules=inline.breaks}else{this.rules=inline.gfm}}else if(this.options.pedantic){this.rules=inline.pedantic}}InlineLexer.rules=inline;InlineLexer.output=function(src,links,options){var inline=new InlineLexer(links,options);return inline.output(src)};InlineLexer.prototype.output=function(src){var out="",link,text,href,cap;while(src){if(cap=this.rules.escape.exec(src)){src=src.substring(cap[0].length);out+=cap[1];continue}if(cap=this.rules.autolink.exec(src)){src=src.substring(cap[0].length);if(cap[2]==="@"){text=cap[1].charAt(6)===":"?this.mangle(cap[1].substring(7)):this.mangle(cap[1]);href=this.mangle("mailto:")+text}else{text=escape(cap[1]);href=text}out+=this.renderer.link(href,null,text);continue}if(!this.inLink&&(cap=this.rules.url.exec(src))){src=src.substring(cap[0].length);text=escape(cap[1]);href=text;out+=this.renderer.link(href,null,text);continue}if(cap=this.rules.tag.exec(src)){if(!this.inLink&&/^<a /i.test(cap[0])){this.inLink=true}else if(this.inLink&&/^<\/a>/i.test(cap[0])){this.inLink=false}src=src.substring(cap[0].length);out+=this.options.sanitize?this.options.sanitizer?this.options.sanitizer(cap[0]):escape(cap[0]):cap[0];continue}if(cap=this.rules.link.exec(src)){src=src.substring(cap[0].length);this.inLink=true;out+=this.outputLink(cap,{href:cap[2],title:cap[3]});this.inLink=false;continue}if((cap=this.rules.reflink.exec(src))||(cap=this.rules.nolink.exec(src))){src=src.substring(cap[0].length);link=(cap[2]||cap[1]).replace(/\s+/g," ");link=this.links[link.toLowerCase()];if(!link||!link.href){out+=cap[0].charAt(0);src=cap[0].substring(1)+src;continue}this.inLink=true;out+=this.outputLink(cap,link);this.inLink=false;continue}if(cap=this.rules.strong.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.strong(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.em.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.em(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.codespan(escape(cap[2],true));continue}if(cap=this.rules.br.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.br();continue}if(cap=this.rules.del.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.del(this.output(cap[1]));continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.text(escape(this.smartypants(cap[0])));continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return out};InlineLexer.prototype.outputLink=function(cap,link){var href=escape(link.href),title=link.title?escape(link.title):null;return cap[0].charAt(0)!=="!"?this.renderer.link(href,title,this.output(cap[1])):this.renderer.image(href,title,escape(cap[1]))};InlineLexer.prototype.smartypants=function(text){if(!this.options.smartypants)return text;return text.replace(/---/g,"—").replace(/--/g,"–").replace(/(^|[-\u2014/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…")};InlineLexer.prototype.mangle=function(text){if(!this.options.mangle)return text;var out="",l=text.length,i=0,ch;for(;i<l;i++){ch=text.charCodeAt(i);if(Math.random()>.5){ch="x"+ch.toString(16)}out+="&#"+ch+";"}return out};function Renderer(options){this.options=options||{}}Renderer.prototype.code=function(code,lang,escaped){if(this.options.highlight){var out=this.options.highlight(code,lang);if(out!=null&&out!==code){escaped=true;code=out}}if(!lang){return"<pre><code>"+(escaped?code:escape(code,true))+"\n</code></pre>"}return'<pre><code class="'+this.options.langPrefix+escape(lang,true)+'">'+(escaped?code:escape(code,true))+"\n</code></pre>\n"};Renderer.prototype.blockquote=function(quote){return"<blockquote>\n"+quote+"</blockquote>\n"};Renderer.prototype.html=function(html){return html};Renderer.prototype.heading=function(text,level,raw){return"<h"+level+' id="'+this.options.headerPrefix+raw.toLowerCase().replace(/[^\w]+/g,"-")+'">'+text+"</h"+level+">\n"};Renderer.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"};Renderer.prototype.list=function(body,ordered){var type=ordered?"ol":"ul";return"<"+type+">\n"+body+"</"+type+">\n"};Renderer.prototype.listitem=function(text){return"<li>"+text+"</li>\n"};Renderer.prototype.paragraph=function(text){return"<p>"+text+"</p>\n"};Renderer.prototype.table=function(header,body){return"<table>\n"+"<thead>\n"+header+"</thead>\n"+"<tbody>\n"+body+"</tbody>\n"+"</table>\n"};Renderer.prototype.tablerow=function(content){return"<tr>\n"+content+"</tr>\n"};Renderer.prototype.tablecell=function(content,flags){var type=flags.header?"th":"td";var tag=flags.align?"<"+type+' style="text-align:'+flags.align+'">':"<"+type+">";return tag+content+"</"+type+">\n"};Renderer.prototype.strong=function(text){return"<strong>"+text+"</strong>"};Renderer.prototype.em=function(text){return"<em>"+text+"</em>"};Renderer.prototype.codespan=function(text){return"<code>"+text+"</code>"};Renderer.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"};Renderer.prototype.del=function(text){return"<del>"+text+"</del>"};Renderer.prototype.link=function(href,title,text){if(this.options.sanitize){try{var prot=decodeURIComponent(unescape(href)).replace(/[^\w:]/g,"").toLowerCase()}catch(e){return""}if(prot.indexOf("javascript:")===0||prot.indexOf("vbscript:")===0){return""}}var out='<a href="'+href+'" target="_blank"';if(title){out+=' title="'+title+'"'}out+=">"+text+"</a>";return out};Renderer.prototype.image=function(href,title,text){var out='<img src="'+href+'" alt="'+text+'"';if(title){out+=' title="'+title+'"'}out+=this.options.xhtml?"/>":">";return out};Renderer.prototype.text=function(text){return text};function Parser(options){this.tokens=[];this.token=null;this.options=options||marked.defaults;this.options.renderer=this.options.renderer||new Renderer;this.renderer=this.options.renderer;this.renderer.options=this.options}Parser.parse=function(src,options,renderer){var parser=new Parser(options,renderer);return parser.parse(src)};Parser.prototype.parse=function(src){this.inline=new InlineLexer(src.links,this.options,this.renderer);this.tokens=src.reverse();var out="";while(this.next()){out+=this.tok()}return out};Parser.prototype.next=function(){return this.token=this.tokens.pop()};Parser.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0};Parser.prototype.parseText=function(){var body=this.token.text;while(this.peek().type==="text"){body+="\n"+this.next().text}return this.inline.output(body)};Parser.prototype.tok=function(){switch(this.token.type){case"space":{return""}case"hr":{return this.renderer.hr()}case"heading":{return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text)}case"code":{return this.renderer.code(this.token.text,this.token.lang,this.token.escaped)}case"table":{var header="",body="",i,row,cell,flags,j;cell="";for(i=0;i<this.token.header.length;i++){flags={header:true,align:this.token.align[i]};cell+=this.renderer.tablecell(this.inline.output(this.token.header[i]),{header:true,align:this.token.align[i]})}header+=this.renderer.tablerow(cell);for(i=0;i<this.token.cells.length;i++){row=this.token.cells[i];cell="";for(j=0;j<row.length;j++){cell+=this.renderer.tablecell(this.inline.output(row[j]),{header:false,align:this.token.align[j]})}body+=this.renderer.tablerow(cell)}return this.renderer.table(header,body)}case"blockquote_start":{var body="";while(this.next().type!=="blockquote_end"){body+=this.tok()}return this.renderer.blockquote(body)}case"list_start":{var body="",ordered=this.token.ordered;while(this.next().type!=="list_end"){body+=this.tok()}return this.renderer.list(body,ordered)}case"list_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.token.type==="text"?this.parseText():this.tok()}return this.renderer.listitem(body)}case"loose_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.tok()}return this.renderer.listitem(body)}case"html":{var html=!this.token.pre&&!this.options.pedantic?this.inline.output(this.token.text):this.token.text;return this.renderer.html(html)}case"paragraph":{return this.renderer.paragraph(this.inline.output(this.token.text))}case"text":{return this.renderer.paragraph(this.parseText())}}};function escape(html,encode){return html.replace(!encode?/&(?!#?\w+;)/g:/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function unescape(html){return html.replace(/&([#\w]+);/g,function(_,n){n=n.toLowerCase();if(n==="colon")return":";if(n.charAt(0)==="#"){return n.charAt(1)==="x"?String.fromCharCode(parseInt(n.substring(2),16)):String.fromCharCode(+n.substring(1))}return""})}function replace(regex,opt){regex=regex.source;opt=opt||"";return function self(name,val){if(!name)return new RegExp(regex,opt);val=val.source||val;val=val.replace(/(^|[^\[])\^/g,"$1");regex=regex.replace(name,val);return self}}function noop(){}noop.exec=noop;function merge(obj){var i=1,target,key;for(;i<arguments.length;i++){target=arguments[i];for(key in target){if(Object.prototype.hasOwnProperty.call(target,key)){obj[key]=target[key]}}}return obj}function marked(src,opt,callback){if(callback||typeof opt==="function"){if(!callback){callback=opt;opt=null}opt=merge({},marked.defaults,opt||{});var highlight=opt.highlight,tokens,pending,i=0;try{tokens=Lexer.lex(src,opt)}catch(e){return callback(e)}pending=tokens.length;var done=function(err){if(err){opt.highlight=highlight;return callback(err)}var out;try{out=Parser.parse(tokens,opt)}catch(e){err=e}opt.highlight=highlight;return err?callback(err):callback(null,out)};if(!highlight||highlight.length<3){return done()}delete opt.highlight;if(!pending)return done();for(;i<tokens.length;i++){(function(token){if(token.type!=="code"){return--pending||done()}return highlight(token.text,token.lang,function(err,code){if(err)return done(err);if(code==null||code===token.text){return--pending||done()}token.text=code;token.escaped=true;--pending||done()})})(tokens[i])}return}try{if(opt)opt=merge({},marked.defaults,opt);return Parser.parse(Lexer.lex(src,opt),opt)}catch(e){e.message+="\nPlease report this to https://github.com/chjj/marked.";if((opt||marked.defaults).silent){return"<p>An error occured:</p><pre>"+escape(e.message+"",true)+"</pre>"}throw e}}marked.options=marked.setOptions=function(opt){merge(marked.defaults,opt);return marked};marked.defaults={gfm:true,tables:true,breaks:false,pedantic:false,sanitize:false,sanitizer:null,mangle:true,smartLists:false,silent:false,highlight:null,langPrefix:"lang-",smartypants:false,headerPrefix:"",renderer:new Renderer,xhtml:false};marked.Parser=Parser;marked.parser=Parser.parse;marked.Renderer=Renderer;marked.Lexer=Lexer;marked.lexer=Lexer.lex;marked.InlineLexer=InlineLexer;marked.inlineLexer=InlineLexer.output;marked.parse=marked;if(typeof module!=="undefined"&&typeof exports==="object"){module.exports=marked}else if(typeof define==="function"&&define.amd){define(function(){return marked})}else{this.marked=marked}}).call(function(){return this||(typeof window!=="undefined"?window:global)}());
+;
+/*!
+ * clipboard.js v2.0.8
+ * https://clipboardjs.com/
+ *
+ * Licensed MIT © Zeno Rocha
+ */
+!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.ClipboardJS=e():t.ClipboardJS=e()}(this,function(){return n={134:function(t,e,n){"use strict";n.d(e,{default:function(){return r}});var e=n(279),i=n.n(e),e=n(370),a=n.n(e),e=n(817),o=n.n(e);function c(t){return(c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function u(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}var l=function(){function e(t){!function(t){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this),this.resolveOptions(t),this.initSelection()}var t,n,r;return t=e,(n=[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"createFakeElement",value:function(){var t="rtl"===document.documentElement.getAttribute("dir");this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[t?"right":"left"]="-9999px";t=window.pageYOffset||document.documentElement.scrollTop;return this.fakeElem.style.top="".concat(t,"px"),this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.fakeElem}},{key:"selectFake",value:function(){var t=this,e=this.createFakeElement();this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.container.appendChild(e),this.selectedText=o()(e),this.copyText(),this.removeFake()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=o()(this.target),this.copyText()}},{key:"copyText",value:function(){var e;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),document.activeElement.blur(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==c(t)||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}])&&u(t.prototype,n),r&&u(t,r),e}();function s(t){return(s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function f(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}function h(t,e){return(h=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function d(n){var r=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],function(){})),!0}catch(t){return!1}}();return function(){var t,e=p(n);return t=r?(t=p(this).constructor,Reflect.construct(e,arguments,t)):e.apply(this,arguments),e=this,!(t=t)||"object"!==s(t)&&"function"!=typeof t?function(t){if(void 0!==t)return t;throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}(e):t}}function p(t){return(p=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function y(t,e){t="data-clipboard-".concat(t);if(e.hasAttribute(t))return e.getAttribute(t)}var r=function(){!function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&h(t,e)}(o,i());var t,e,n,r=d(o);function o(t,e){var n;return function(t){if(!(t instanceof o))throw new TypeError("Cannot call a class as a function")}(this),(n=r.call(this)).resolveOptions(e),n.listenClick(t),n}return t=o,n=[{key:"isSupported",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:["copy","cut"],t="string"==typeof t?[t]:t,e=!!document.queryCommandSupported;return t.forEach(function(t){e=e&&!!document.queryCommandSupported(t)}),e}}],(e=[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===s(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=a()(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){t=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new l({action:this.action(t),target:this.target(t),text:this.text(t),container:this.container,trigger:t,emitter:this})}},{key:"defaultAction",value:function(t){return y("action",t)}},{key:"defaultTarget",value:function(t){t=y("target",t);if(t)return document.querySelector(t)}},{key:"defaultText",value:function(t){return y("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}])&&f(t.prototype,e),n&&f(t,n),o}()},828:function(t){var e;"undefined"==typeof Element||Element.prototype.matches||((e=Element.prototype).matches=e.matchesSelector||e.mozMatchesSelector||e.msMatchesSelector||e.oMatchesSelector||e.webkitMatchesSelector),t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}},438:function(t,e,n){var a=n(828);function i(t,e,n,r,o){var i=function(e,n,t,r){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&r.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,o),{destroy:function(){t.removeEventListener(n,i,o)}}}t.exports=function(t,e,n,r,o){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,r,o)}))}},879:function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},370:function(t,e,n){var l=n(879),s=n(438);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!l.string(e))throw new TypeError("Second argument must be a String");if(!l.fn(n))throw new TypeError("Third argument must be a Function");if(l.node(t))return c=e,u=n,(a=t).addEventListener(c,u),{destroy:function(){a.removeEventListener(c,u)}};if(l.nodeList(t))return r=t,o=e,i=n,Array.prototype.forEach.call(r,function(t){t.addEventListener(o,i)}),{destroy:function(){Array.prototype.forEach.call(r,function(t){t.removeEventListener(o,i)})}};if(l.string(t))return t=t,e=e,n=n,s(document.body,t,e,n);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var r,o,i,a,c,u}},817:function(t){t.exports=function(t){var e,n="SELECT"===t.nodeName?(t.focus(),t.value):"INPUT"===t.nodeName||"TEXTAREA"===t.nodeName?((e=t.hasAttribute("readonly"))||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),e||t.removeAttribute("readonly"),t.value):(t.hasAttribute("contenteditable")&&t.focus(),n=window.getSelection(),(e=document.createRange()).selectNodeContents(t),n.removeAllRanges(),n.addRange(e),n.toString());return n}},279:function(t){function e(){}e.prototype={on:function(t,e,n){var r=this.e||(this.e={});return(r[t]||(r[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var r=this;function o(){r.off(t,o),e.apply(n,arguments)}return o._=e,this.on(t,o,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),r=0,o=n.length;r<o;r++)n[r].fn.apply(n[r].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),r=n[t],o=[];if(r&&e)for(var i=0,a=r.length;i<a;i++)r[i].fn!==e&&r[i].fn._!==e&&o.push(r[i]);return o.length?n[t]=o:delete n[t],this}},t.exports=e,t.exports.TinyEmitter=e}},o={},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,{a:e}),e},r.d=function(t,e){for(var n in e)r.o(e,n)&&!r.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:e[n]})},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r(134).default;function r(t){if(o[t])return o[t].exports;var e=o[t]={exports:{}};return n[t](e,e.exports,r),e.exports}var n,o});
+;
+;(function(factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    }
+    else if (typeof exports === 'object') {
+        module.exports = factory(require("jquery"));
+    }
+    else {
+        factory(jQuery);
+    }
+}
+(function($) {
+    "use strict";
+
+    var pluginName = "tinyscrollbar"
+    ,   defaults = {
+            axis : 'y'
+        ,   wheel : true
+        ,   wheelSpeed : 40
+        ,   wheelLock : true
+        ,   touchLock : true
+        ,   trackSize : false
+        ,   thumbSize : false
+        ,   thumbSizeMin : 20
+        }
+    ;
+
+    function Plugin($container, options) {
+        /**
+         * The options of the carousel extend with the defaults.
+         *
+         * @property options
+         * @type Object
+         */
+        this.options = $.extend({}, defaults, options);
+
+        /**
+         * @property _defaults
+         * @type Object
+         * @private
+         * @default defaults
+         */
+        this._defaults = defaults;
+
+        /**
+         * @property _name
+         * @type String
+         * @private
+         * @final
+         * @default 'tinyscrollbar'
+         */
+        this._name = pluginName;
+
+        var self = this
+        ,   $viewport = $container.find(".viewport")
+        ,   $overview = $container.find(".overview")
+        ,   $scrollbar = $container.find(".scrollbar")
+        ,   $track = $scrollbar.find(".track")
+        ,   $thumb = $scrollbar.find(".thumb")
+
+        ,   hasTouchEvents = ("ontouchstart" in document.documentElement)
+        ,   wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+                         document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+                         "DOMMouseScroll" // let's assume that remaining browsers are older Firefox
+        ,   isHorizontal = this.options.axis === 'x'
+        ,   sizeLabel = isHorizontal ? "width" : "height"
+        ,   posiLabel = isHorizontal ? "left" : "top"
+
+        ,   mousePosition = 0
+        ;
+
+        /**
+         * The position of the content relative to the viewport.
+         *
+         * @property contentPosition
+         * @type Number
+         */
+        this.contentPosition = 0;
+
+        /**
+         * The height or width of the viewport.
+         *
+         * @property viewportSize
+         * @type Number
+         */
+        this.viewportSize = 0;
+
+        /**
+         * The height or width of the content.
+         *
+         * @property contentSize
+         * @type Number
+         */
+        this.contentSize = 0;
+
+        /**
+         * The ratio of the content size relative to the viewport size.
+         *
+         * @property contentRatio
+         * @type Number
+         */
+        this.contentRatio = 0;
+
+        /**
+         * The height or width of the content.
+         *
+         * @property trackSize
+         * @type Number
+         */
+        this.trackSize = 0;
+
+        /**
+         * The size of the track relative to the size of the content.
+         *
+         * @property trackRatio
+         * @type Number
+         */
+        this.trackRatio = 0;
+
+        /**
+         * The height or width of the thumb.
+         *
+         * @property thumbSize
+         * @type Number
+         */
+        this.thumbSize = 0;
+
+        /**
+         * The position of the thumb relative to the track.
+         *
+         * @property thumbPosition
+         * @type Number
+         */
+        this.thumbPosition = 0;
+
+        /**
+         * Will be true if there is content to scroll.
+         *
+         * @property hasContentToSroll
+         * @type Boolean
+         */
+        this.hasContentToSroll = false;
+
+        /**
+         * @method _initialize
+         * @private
+         */
+        function _initialize() {
+            self.update();
+            _setEvents();
+
+            return self;
+        }
+
+        /**
+         * You can use the update method to adjust the scrollbar to new content or to move the scrollbar to a certain point.
+         *
+         * @method update
+         * @chainable
+         * @param {Number|String} [scrollTo] Number in pixels or the values "relative" or "bottom". If you dont specify a parameter it will default to top
+         */
+        this.update = function(scrollTo) {
+            var sizeLabelCap = sizeLabel.charAt(0).toUpperCase() + sizeLabel.slice(1).toLowerCase();
+            this.viewportSize = $viewport[0]['offset'+ sizeLabelCap];
+            this.contentSize = $overview[0]['scroll'+ sizeLabelCap];
+            this.contentRatio = this.viewportSize / this.contentSize;
+            this.trackSize = this.options.trackSize || this.viewportSize;
+            this.thumbSize = Math.min(this.trackSize, Math.max(this.options.thumbSizeMin, (this.options.thumbSize || (this.trackSize * this.contentRatio))));
+            this.trackRatio = (this.contentSize - this.viewportSize) / (this.trackSize - this.thumbSize);
+            this.hasContentToSroll = this.contentRatio < 1;
+
+            $scrollbar.toggleClass("disable", !this.hasContentToSroll);
+
+            switch (scrollTo) {
+                case "bottom":
+                    this.contentPosition = Math.max(this.contentSize - this.viewportSize, 0);
+                    break;
+
+                case "relative":
+                    this.contentPosition = Math.min(Math.max(this.contentSize - this.viewportSize, 0), Math.max(0, this.contentPosition));
+                    break;
+
+                default:
+                    this.contentPosition = parseInt(scrollTo, 10) || 0;
+            }
+
+            this.thumbPosition = this.contentPosition / this.trackRatio;
+
+            _setCss();
+
+            return self;
+        };
+
+        /**
+         * @method _setCss
+         * @private
+         */
+        function _setCss() {
+            $thumb.css(posiLabel, self.thumbPosition);
+            $overview.css(posiLabel, -self.contentPosition);
+            $scrollbar.css(sizeLabel, self.trackSize);
+            $track.css(sizeLabel, self.trackSize);
+            $thumb.css(sizeLabel, self.thumbSize);
+        }
+
+        /**
+         * @method _setEvents
+         * @private
+         */
+        function _setEvents() {
+            if(hasTouchEvents) {
+                $viewport[0].ontouchstart = function(event) {
+                    if(1 === event.touches.length) {
+                        event.stopPropagation();
+
+                        _start(event.touches[0]);
+                    }
+                };
+            }
+            $thumb.bind("mousedown", function(event){
+                event.stopPropagation();
+                _start(event);
+            });
+            $track.bind("mousedown", function(event){
+                _start(event, true);
+            });
+
+            $(window).resize(function() {
+                self.update("relative");
+            });
+
+            if(self.options.wheel && window.addEventListener) {
+                $container[0].addEventListener(wheelEvent, _wheel, false);
+            }
+            else if(self.options.wheel) {
+                $container[0].onmousewheel = _wheel;
+            }
+        }
+
+        /**
+         * @method _isAtBegin
+         * @private
+         */
+        function _isAtBegin() {
+            return self.contentPosition > 0;
+        }
+
+        /**
+         * @method _isAtEnd
+         * @private
+         */
+        function _isAtEnd() {
+            
+            return self.contentPosition <= (self.contentSize - self.viewportSize) - 5;
+        }
+
+        /**
+         * @method _start
+         * @private
+         */
+        function _start(event, gotoMouse) {
+            if(self.hasContentToSroll) {
+                $("body").addClass("noSelect");
+
+                mousePosition = gotoMouse ? $thumb.offset()[posiLabel] : (isHorizontal ? event.pageX : event.pageY);
+
+                if(hasTouchEvents) {
+                    document.ontouchmove = function(event) {
+                        if(self.options.touchLock || _isAtBegin() && _isAtEnd()) {
+                            event.preventDefault();
+                        }
+                        event.touches[0][pluginName + "Touch"] = 1;
+                        _drag(event.touches[0]);
+                    };
+                    document.ontouchend = _end;
+                }
+                $(document).bind("mousemove", _drag);
+                $(document).bind("mouseup", _end);
+                $thumb.bind("mouseup", _end);
+                $track.bind("mouseup", _end);
+
+                _drag(event);
+            }
+        }
+
+        /**
+         * @method _wheel
+         * @private
+         */
+        function _wheel(event) {
+            if(self.hasContentToSroll) {
+                // Trying to make sense of all the different wheel event implementations..
+                //
+                var evntObj = event || window.event
+                ,   wheelDelta = -(evntObj.deltaY || evntObj.detail || (-1 / 3 * evntObj.wheelDelta)) / 40
+                ,   multiply = (evntObj.deltaMode === 1) ? self.options.wheelSpeed : 1
+                ;
+
+                self.contentPosition -= wheelDelta * multiply * self.options.wheelSpeed;
+                self.contentPosition = Math.min((self.contentSize - self.viewportSize), Math.max(0, self.contentPosition));
+                self.thumbPosition = self.contentPosition / self.trackRatio;
+
+                /**
+                 * The move event will trigger when the carousel slides to a new slide.
+                 *
+                 * @event move
+                 */
+                $container.trigger("move");
+
+                $thumb.css(posiLabel, self.thumbPosition);
+                $overview.css(posiLabel, -self.contentPosition);
+
+                if(self.options.wheelLock || _isAtBegin() && _isAtEnd()) {
+                                
+                    evntObj = $.event.fix(evntObj);
+                    evntObj.preventDefault();
+                }
+                if(!_isAtEnd()){
+                    self.addcontents(self);
+                }
+            }
+            event.stopPropagation();
+        }
+        //外面可以重写
+        this.addcontents = function(self) {
+            
+        };
+        /**
+         * @method _drag
+         * @private
+         */
+        function _drag(event) {
+            
+            if(self.hasContentToSroll) {
+                var mousePositionNew = isHorizontal ? event.pageX : event.pageY
+                ,   thumbPositionDelta = event[pluginName + "Touch"] ? 
+                        (mousePosition - mousePositionNew) : (mousePositionNew - mousePosition)
+                ,   thumbPositionNew = Math.min((self.trackSize - self.thumbSize), Math.max(0, self.thumbPosition + thumbPositionDelta))
+                ;
+
+                self.contentPosition = thumbPositionNew * self.trackRatio;
+
+                $container.trigger("move");
+
+                $thumb.css(posiLabel, thumbPositionNew);
+                $overview.css(posiLabel, -self.contentPosition);
+            }
+        }
+
+        /**
+         * @method _end
+         * @private
+         */
+        function _end() {
+            self.thumbPosition = parseInt($thumb.css(posiLabel), 10) || 0;
+
+            $("body").removeClass("noSelect");
+            $(document).unbind("mousemove", _drag);
+            $(document).unbind("mouseup", _end);
+            $thumb.unbind("mouseup", _end);
+            $track.unbind("mouseup", _end);
+            document.ontouchmove = document.ontouchend = null;
+        }
+
+        return _initialize();
+    }
+
+    /**
+    * @class tinyscrollbar
+    * @constructor
+    * @param {Object} options
+        @param {String} [options.axis='y'] Vertical or horizontal scroller? ( x || y ).
+        @param {Boolean} [options.wheel=true] Enable or disable the mousewheel.
+        @param {Boolean} [options.wheelSpeed=40] How many pixels must the mouswheel scroll at a time.
+        @param {Boolean} [options.wheelLock=true] Lock default window wheel scrolling when there is no more content to scroll.
+        @param {Number} [options.touchLock=true] Lock default window touch scrolling when there is no more content to scroll.
+        @param {Boolean|Number} [options.trackSize=false] Set the size of the scrollbar to auto(false) or a fixed number.
+        @param {Boolean|Number} [options.thumbSize=false] Set the size of the thumb to auto(false) or a fixed number
+        @param {Boolean} [options.thumbSizeMin=20] Minimum thumb size.
+    */
+    $.fn[pluginName] = function(options) {
+        return this.each(function() {
+            if(!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new Plugin($(this), options));
+            }
+        });
+    };
+}));
+
+;
+/* PrismJS 1.23.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+css-extras+git+go+java+jq+json+jsonp+markup-templating+perl+php+python+rust+sql+xml-doc&plugins=line-numbers+toolbar+copy-to-clipboard */
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},mdPrism=function(u){var c=/\blang(?:uage)?-([\w-]+)\b/i,n=0,e={},M={manual:u.Prism&&u.Prism.manual,disableWorkerMessageHandler:u.Prism&&u.Prism.disableWorkerMessageHandler,util:{encode:function e(n){return n instanceof W?new W(n.type,e(n.content),n.alias):Array.isArray(n)?n.map(e):n.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).slice(8,-1)},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++n}),e.__id},clone:function t(e,r){var a,n;switch(r=r||{},M.util.type(e)){case"Object":if(n=M.util.objId(e),r[n])return r[n];for(var i in a={},r[n]=a,e)e.hasOwnProperty(i)&&(a[i]=t(e[i],r));return a;case"Array":return n=M.util.objId(e),r[n]?r[n]:(a=[],r[n]=a,e.forEach(function(e,n){a[n]=t(e,r)}),a);default:return e}},getLanguage:function(e){for(;e&&!c.test(e.className);)e=e.parentElement;return e?(e.className.match(c)||[,"none"])[1].toLowerCase():"none"},currentScript:function(){if("undefined"==typeof document)return null;if("currentScript"in document)return document.currentScript;try{throw new Error}catch(e){var n=(/at [^(\r\n]*\((.*):.+:.+\)$/i.exec(e.stack)||[])[1];if(n){var t=document.getElementsByTagName("script");for(var r in t)if(t[r].src==n)return t[r]}return null}},isActive:function(e,n,t){for(var r="no-"+n;e;){var a=e.classList;if(a.contains(n))return!0;if(a.contains(r))return!1;e=e.parentElement}return!!t}},languages:{plain:e,plaintext:e,text:e,txt:e,extend:function(e,n){var t=M.util.clone(M.languages[e]);for(var r in n)t[r]=n[r];return t},insertBefore:function(t,e,n,r){var a=(r=r||M.languages)[t],i={};for(var l in a)if(a.hasOwnProperty(l)){if(l==e)for(var o in n)n.hasOwnProperty(o)&&(i[o]=n[o]);n.hasOwnProperty(l)||(i[l]=a[l])}var s=r[t];return r[t]=i,M.languages.DFS(M.languages,function(e,n){n===s&&e!=t&&(this[e]=i)}),i},DFS:function e(n,t,r,a){a=a||{};var i=M.util.objId;for(var l in n)if(n.hasOwnProperty(l)){t.call(n,l,n[l],r||l);var o=n[l],s=M.util.type(o);"Object"!==s||a[i(o)]?"Array"!==s||a[i(o)]||(a[i(o)]=!0,e(o,t,l,a)):(a[i(o)]=!0,e(o,t,null,a))}}},plugins:{},highlightAll:function(e,n){M.highlightAllUnder(document,e,n)},highlightAllUnder:function(e,n,t){var r={callback:t,container:e,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};M.hooks.run("before-highlightall",r),r.elements=Array.prototype.slice.apply(r.container.querySelectorAll(r.selector)),M.hooks.run("before-all-elements-highlight",r);for(var a,i=0;a=r.elements[i++];)M.highlightElement(a,!0===n,r.callback)},highlightElement:function(e,n,t){var r=M.util.getLanguage(e),a=M.languages[r];e.className=e.className.replace(c,"").replace(/\s+/g," ")+" language-"+r;var i=e.parentElement;i&&"pre"===i.nodeName.toLowerCase()&&(i.className=i.className.replace(c,"").replace(/\s+/g," ")+" language-"+r);var l={element:e,language:r,grammar:a,code:e.textContent};function o(e){l.highlightedCode=e,M.hooks.run("before-insert",l),l.element.innerHTML=l.highlightedCode,M.hooks.run("after-highlight",l),M.hooks.run("complete",l),t&&t.call(l.element)}if(M.hooks.run("before-sanity-check",l),(i=l.element.parentElement)&&"pre"===i.nodeName.toLowerCase()&&!i.hasAttribute("tabindex")&&i.setAttribute("tabindex","0"),!l.code)return M.hooks.run("complete",l),void(t&&t.call(l.element));if(M.hooks.run("before-highlight",l),l.grammar)if(n&&u.Worker){var s=new Worker(M.filename);s.onmessage=function(e){o(e.data)},s.postMessage(JSON.stringify({language:l.language,code:l.code,immediateClose:!0}))}else o(M.highlight(l.code,l.grammar,l.language));else o(M.util.encode(l.code))},highlight:function(e,n,t){var r={code:e,grammar:n,language:t};return M.hooks.run("before-tokenize",r),r.tokens=M.tokenize(r.code,r.grammar),M.hooks.run("after-tokenize",r),W.stringify(M.util.encode(r.tokens),r.language)},tokenize:function(e,n){var t=n.rest;if(t){for(var r in t)n[r]=t[r];delete n.rest}var a=new i;return I(a,a.head,e),function e(n,t,r,a,i,l){for(var o in r)if(r.hasOwnProperty(o)&&r[o]){var s=r[o];s=Array.isArray(s)?s:[s];for(var u=0;u<s.length;++u){if(l&&l.cause==o+","+u)return;var c=s[u],g=c.inside,f=!!c.lookbehind,h=!!c.greedy,d=c.alias;if(h&&!c.pattern.global){var p=c.pattern.toString().match(/[imsuy]*$/)[0];c.pattern=RegExp(c.pattern.source,p+"g")}for(var v=c.pattern||c,m=a.next,y=i;m!==t.tail&&!(l&&y>=l.reach);y+=m.value.length,m=m.next){var b=m.value;if(t.length>n.length)return;if(!(b instanceof W)){var k,x=1;if(h){if(!(k=z(v,y,n,f)))break;var w=k.index,A=k.index+k[0].length,P=y;for(P+=m.value.length;P<=w;)m=m.next,P+=m.value.length;if(P-=m.value.length,y=P,m.value instanceof W)continue;for(var E=m;E!==t.tail&&(P<A||"string"==typeof E.value);E=E.next)x++,P+=E.value.length;x--,b=n.slice(y,P),k.index-=y}else if(!(k=z(v,0,b,f)))continue;var w=k.index,S=k[0],O=b.slice(0,w),L=b.slice(w+S.length),N=y+b.length;l&&N>l.reach&&(l.reach=N);var j=m.prev;O&&(j=I(t,j,O),y+=O.length),q(t,j,x);var C=new W(o,g?M.tokenize(S,g):S,d,S);if(m=I(t,j,C),L&&I(t,m,L),1<x){var _={cause:o+","+u,reach:N};e(n,t,r,m.prev,y,_),l&&_.reach>l.reach&&(l.reach=_.reach)}}}}}}(e,a,n,a.head,0),function(e){var n=[],t=e.head.next;for(;t!==e.tail;)n.push(t.value),t=t.next;return n}(a)},hooks:{all:{},add:function(e,n){var t=M.hooks.all;t[e]=t[e]||[],t[e].push(n)},run:function(e,n){var t=M.hooks.all[e];if(t&&t.length)for(var r,a=0;r=t[a++];)r(n)}},Token:W};function W(e,n,t,r){this.type=e,this.content=n,this.alias=t,this.length=0|(r||"").length}function z(e,n,t,r){e.lastIndex=n;var a=e.exec(t);if(a&&r&&a[1]){var i=a[1].length;a.index+=i,a[0]=a[0].slice(i)}return a}function i(){var e={value:null,prev:null,next:null},n={value:null,prev:e,next:null};e.next=n,this.head=e,this.tail=n,this.length=0}function I(e,n,t){var r=n.next,a={value:t,prev:n,next:r};return n.next=a,r.prev=a,e.length++,a}function q(e,n,t){for(var r=n.next,a=0;a<t&&r!==e.tail;a++)r=r.next;(n.next=r).prev=n,e.length-=a}if(u.Prism=M,W.stringify=function n(e,t){if("string"==typeof e)return e;if(Array.isArray(e)){var r="";return e.forEach(function(e){r+=n(e,t)}),r}var a={type:e.type,content:n(e.content,t),tag:"span",classes:["token",e.type],attributes:{},language:t},i=e.alias;i&&(Array.isArray(i)?Array.prototype.push.apply(a.classes,i):a.classes.push(i)),M.hooks.run("wrap",a);var l="";for(var o in a.attributes)l+=" "+o+'="'+(a.attributes[o]||"").replace(/"/g,"&quot;")+'"';return"<"+a.tag+' class="'+a.classes.join(" ")+'"'+l+">"+a.content+"</"+a.tag+">"},!u.document)return u.addEventListener&&(M.disableWorkerMessageHandler||u.addEventListener("message",function(e){var n=JSON.parse(e.data),t=n.language,r=n.code,a=n.immediateClose;u.postMessage(M.highlight(r,M.languages[t],t)),a&&u.close()},!1)),M;var t=M.util.currentScript();function r(){M.manual||M.highlightAll()}if(t&&(M.filename=t.src,t.hasAttribute("data-manual")&&(M.manual=!0)),!M.manual){var a=document.readyState;"loading"===a||"interactive"===a&&t&&t.defer?document.addEventListener("DOMContentLoaded",r):window.requestAnimationFrame?window.requestAnimationFrame(r):window.setTimeout(r,16)}return M}(_self);"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+Prism.languages.markup={comment:/<!--[\s\S]*?-->/,prolog:/<\?[\s\S]+?\?>/,doctype:{pattern:/<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,greedy:!0,inside:{"internal-subset":{pattern:/(\[)[\s\S]+(?=\]>$)/,lookbehind:!0,greedy:!0,inside:null},string:{pattern:/"[^"]*"|'[^']*'/,greedy:!0},punctuation:/^<!|>$|[[\]]/,"doctype-tag":/^DOCTYPE/,name:/[^\s<>'"]+/}},cdata:/<!\[CDATA\[[\s\S]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,greedy:!0,inside:{tag:{pattern:/^<\/?[^\s>\/]+/,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"special-attr":[],"attr-value":{pattern:/=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,inside:{punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:[{pattern:/&[\da-z]{1,8};/i,alias:"named-entity"},/&#x?[\da-f]{1,8};/i]},Prism.languages.markup.tag.inside["attr-value"].inside.entity=Prism.languages.markup.entity,Prism.languages.markup.doctype.inside["internal-subset"].inside=Prism.languages.markup,Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Object.defineProperty(Prism.languages.markup.tag,"addInlined",{value:function(a,e){var s={};s["language-"+e]={pattern:/(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,lookbehind:!0,inside:Prism.languages[e]},s.cdata=/^<!\[CDATA\[|\]\]>$/i;var t={"included-cdata":{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,inside:s}};t["language-"+e]={pattern:/[\s\S]+/,inside:Prism.languages[e]};var n={};n[a]={pattern:RegExp("(<__[^>]*>)(?:<!\\[CDATA\\[(?:[^\\]]|\\](?!\\]>))*\\]\\]>|(?!<!\\[CDATA\\[)[^])*?(?=</__>)".replace(/__/g,function(){return a}),"i"),lookbehind:!0,greedy:!0,inside:t},Prism.languages.insertBefore("markup","cdata",n)}}),Object.defineProperty(Prism.languages.markup.tag,"addAttribute",{value:function(a,e){Prism.languages.markup.tag.inside["special-attr"].push({pattern:RegExp("(^|[\"'\\s])(?:"+a+")\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^\\s'\">=]+(?=[\\s>]))","i"),lookbehind:!0,inside:{"attr-name":/^[^\s=]+/,"attr-value":{pattern:/=[\s\S]+/,inside:{value:{pattern:/(=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,lookbehind:!0,alias:[e,"language-"+e],inside:Prism.languages[e]},punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}}}})}}),Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup,Prism.languages.xml=Prism.languages.extend("markup",{}),Prism.languages.ssml=Prism.languages.xml,Prism.languages.atom=Prism.languages.xml,Prism.languages.rss=Prism.languages.xml;
+!function(s){var e=/("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;s.languages.css={comment:/\/\*[\s\S]*?\*\//,atrule:{pattern:/@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,inside:{rule:/^@[\w-]+/,"selector-function-argument":{pattern:/(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,lookbehind:!0,alias:"selector"},keyword:{pattern:/(^|[^\w-])(?:and|not|only|or)(?![\w-])/,lookbehind:!0}}},url:{pattern:RegExp("\\burl\\((?:"+e.source+"|(?:[^\\\\\r\n()\"']|\\\\[^])*)\\)","i"),greedy:!0,inside:{function:/^url/i,punctuation:/^\(|\)$/,string:{pattern:RegExp("^"+e.source+"$"),alias:"url"}}},selector:RegExp("[^{}\\s](?:[^{};\"'\\s]|\\s+(?![\\s{])|"+e.source+")*(?=\\s*\\{)"),string:{pattern:e,greedy:!0},property:/(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,important:/!important\b/i,function:/[-a-z0-9]+(?=\()/i,punctuation:/[(){};:,]/},s.languages.css.atrule.inside.rest=s.languages.css;var t=s.languages.markup;t&&(t.tag.addInlined("style","css"),t.tag.addAttribute("style","css"))}(Prism);
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,lookbehind:!0,greedy:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0,greedy:!0}],string:{pattern:/(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,lookbehind:!0,inside:{punctuation:/[.\\]/}},keyword:/\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,boolean:/\b(?:true|false)\b/,function:/\w+(?=\()/,number:/\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,operator:/[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,punctuation:/[{}[\];(),.:]/};
+Prism.languages.javascript=Prism.languages.extend("clike",{"class-name":[Prism.languages.clike["class-name"],{pattern:/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:prototype|constructor))/,lookbehind:!0}],keyword:[{pattern:/((?:^|})\s*)catch\b/,lookbehind:!0},{pattern:/(^|[^.]|\.\.\.\s*)\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally(?=\s*(?:\{|$))|for|from(?=\s*(?:['"]|$))|function|(?:get|set)(?=\s*(?:[#\[$\w\xA0-\uFFFF]|$))|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,lookbehind:!0}],function:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,number:/\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,operator:/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/}),Prism.languages.javascript["class-name"][0].pattern=/(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/,Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,lookbehind:!0,greedy:!0,inside:{"regex-source":{pattern:/^(\/)[\s\S]+(?=\/[a-z]*$)/,lookbehind:!0,alias:"language-regex",inside:Prism.languages.regex},"regex-flags":/[a-z]+$/,"regex-delimiter":/^\/|\/$/}},"function-variable":{pattern:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/,alias:"function"},parameter:[{pattern:/(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,inside:Prism.languages.javascript},{pattern:/(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,lookbehind:!0,inside:Prism.languages.javascript}],constant:/\b[A-Z](?:[A-Z_]|\dx?)*\b/}),Prism.languages.insertBefore("javascript","string",{hashbang:{pattern:/^#!.*/,greedy:!0,alias:"comment"},"template-string":{pattern:/`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,greedy:!0,inside:{"template-punctuation":{pattern:/^`|`$/,alias:"string"},interpolation:{pattern:/((?:^|[^\\])(?:\\{2})*)\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,lookbehind:!0,inside:{"interpolation-punctuation":{pattern:/^\${|}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&(Prism.languages.markup.tag.addInlined("script","javascript"),Prism.languages.markup.tag.addAttribute("on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)","javascript")),Prism.languages.js=Prism.languages.javascript;
+!function(e){var t="\\b(?:BASH|BASHOPTS|BASH_ALIASES|BASH_ARGC|BASH_ARGV|BASH_CMDS|BASH_COMPLETION_COMPAT_DIR|BASH_LINENO|BASH_REMATCH|BASH_SOURCE|BASH_VERSINFO|BASH_VERSION|COLORTERM|COLUMNS|COMP_WORDBREAKS|DBUS_SESSION_BUS_ADDRESS|DEFAULTS_PATH|DESKTOP_SESSION|DIRSTACK|DISPLAY|EUID|GDMSESSION|GDM_LANG|GNOME_KEYRING_CONTROL|GNOME_KEYRING_PID|GPG_AGENT_INFO|GROUPS|HISTCONTROL|HISTFILE|HISTFILESIZE|HISTSIZE|HOME|HOSTNAME|HOSTTYPE|IFS|INSTANCE|JOB|LANG|LANGUAGE|LC_ADDRESS|LC_ALL|LC_IDENTIFICATION|LC_MEASUREMENT|LC_MONETARY|LC_NAME|LC_NUMERIC|LC_PAPER|LC_TELEPHONE|LC_TIME|LESSCLOSE|LESSOPEN|LINES|LOGNAME|LS_COLORS|MACHTYPE|MAILCHECK|MANDATORY_PATH|NO_AT_BRIDGE|OLDPWD|OPTERR|OPTIND|ORBIT_SOCKETDIR|OSTYPE|PAPERSIZE|PATH|PIPESTATUS|PPID|PS1|PS2|PS3|PS4|PWD|RANDOM|REPLY|SECONDS|SELINUX_INIT|SESSION|SESSIONTYPE|SESSION_MANAGER|SHELL|SHELLOPTS|SHLVL|SSH_AUTH_SOCK|TERM|UID|UPSTART_EVENTS|UPSTART_INSTANCE|UPSTART_JOB|UPSTART_SESSION|USER|WINDOWID|XAUTHORITY|XDG_CONFIG_DIRS|XDG_CURRENT_DESKTOP|XDG_DATA_DIRS|XDG_GREETER_DATA_DIR|XDG_MENU_PREFIX|XDG_RUNTIME_DIR|XDG_SEAT|XDG_SEAT_PATH|XDG_SESSION_DESKTOP|XDG_SESSION_ID|XDG_SESSION_PATH|XDG_SESSION_TYPE|XDG_VTNR|XMODIFIERS)\\b",n={pattern:/(^(["']?)\w+\2)[ \t]+\S.*/,lookbehind:!0,alias:"punctuation",inside:null},a={bash:n,environment:{pattern:RegExp("\\$"+t),alias:"constant"},variable:[{pattern:/\$?\(\([\s\S]+?\)\)/,greedy:!0,inside:{variable:[{pattern:/(^\$\(\([\s\S]+)\)\)/,lookbehind:!0},/^\$\(\(/],number:/\b0x[\dA-Fa-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:[Ee]-?\d+)?/,operator:/--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,punctuation:/\(\(?|\)\)?|,|;/}},{pattern:/\$\((?:\([^)]+\)|[^()])+\)|`[^`]+`/,greedy:!0,inside:{variable:/^\$\(|^`|\)$|`$/}},{pattern:/\$\{[^}]+\}/,greedy:!0,inside:{operator:/:[-=?+]?|[!\/]|##?|%%?|\^\^?|,,?/,punctuation:/[\[\]]/,environment:{pattern:RegExp("(\\{)"+t),lookbehind:!0,alias:"constant"}}},/\$(?:\w+|[#?*!@$])/],entity:/\\(?:[abceEfnrtv\\"]|O?[0-7]{1,3}|x[0-9a-fA-F]{1,2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/};e.languages.bash={shebang:{pattern:/^#!\s*\/.*/,alias:"important"},comment:{pattern:/(^|[^"{\\$])#.*/,lookbehind:!0},"function-name":[{pattern:/(\bfunction\s+)[\w-]+(?=(?:\s*\(?:\s*\))?\s*\{)/,lookbehind:!0,alias:"function"},{pattern:/\b[\w-]+(?=\s*\(\s*\)\s*\{)/,alias:"function"}],"for-or-select":{pattern:/(\b(?:for|select)\s+)\w+(?=\s+in\s)/,alias:"variable",lookbehind:!0},"assign-left":{pattern:/(^|[\s;|&]|[<>]\()\w+(?=\+?=)/,inside:{environment:{pattern:RegExp("(^|[\\s;|&]|[<>]\\()"+t),lookbehind:!0,alias:"constant"}},alias:"variable",lookbehind:!0},string:[{pattern:/((?:^|[^<])<<-?\s*)(\w+?)\s[\s\S]*?(?:\r?\n|\r)\2/,lookbehind:!0,greedy:!0,inside:a},{pattern:/((?:^|[^<])<<-?\s*)(["'])(\w+)\2\s[\s\S]*?(?:\r?\n|\r)\3/,lookbehind:!0,greedy:!0,inside:{bash:n}},{pattern:/(^|[^\\](?:\\\\)*)"(?:\\[\s\S]|\$\([^)]+\)|\$(?!\()|`[^`]+`|[^"\\`$])*"/,lookbehind:!0,greedy:!0,inside:a},{pattern:/(^|[^$\\])'[^']*'/,lookbehind:!0,greedy:!0},{pattern:/\$'(?:[^'\\]|\\[\s\S])*'/,greedy:!0,inside:{entity:a.entity}}],environment:{pattern:RegExp("\\$?"+t),alias:"constant"},variable:a.variable,function:{pattern:/(^|[\s;|&]|[<>]\()(?:add|apropos|apt|aptitude|apt-cache|apt-get|aspell|automysqlbackup|awk|basename|bash|bc|bconsole|bg|bzip2|cal|cat|cfdisk|chgrp|chkconfig|chmod|chown|chroot|cksum|clear|cmp|column|comm|composer|cp|cron|crontab|csplit|curl|cut|date|dc|dd|ddrescue|debootstrap|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|du|egrep|eject|env|ethtool|expand|expect|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|git|gparted|grep|groupadd|groupdel|groupmod|groups|grub-mkconfig|gzip|halt|head|hg|history|host|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|ip|jobs|join|kill|killall|less|link|ln|locate|logname|logrotate|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|lynx|make|man|mc|mdadm|mkconfig|mkdir|mke2fs|mkfifo|mkfs|mkisofs|mknod|mkswap|mmv|more|most|mount|mtools|mtr|mutt|mv|nano|nc|netstat|nice|nl|nohup|notify-send|npm|nslookup|op|open|parted|passwd|paste|pathchk|ping|pkill|pnpm|popd|pr|printcap|printenv|ps|pushd|pv|quota|quotacheck|quotactl|ram|rar|rcp|reboot|remsync|rename|renice|rev|rm|rmdir|rpm|rsync|scp|screen|sdiff|sed|sendmail|seq|service|sftp|sh|shellcheck|shuf|shutdown|sleep|slocate|sort|split|ssh|stat|strace|su|sudo|sum|suspend|swapon|sync|tac|tail|tar|tee|time|timeout|top|touch|tr|traceroute|tsort|tty|umount|uname|unexpand|uniq|units|unrar|unshar|unzip|update-grub|uptime|useradd|userdel|usermod|users|uudecode|uuencode|v|vdir|vi|vim|virsh|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yarn|yes|zenity|zip|zsh|zypper)(?=$|[)\s;|&])/,lookbehind:!0},keyword:{pattern:/(^|[\s;|&]|[<>]\()(?:if|then|else|elif|fi|for|while|in|case|esac|function|select|do|done|until)(?=$|[)\s;|&])/,lookbehind:!0},builtin:{pattern:/(^|[\s;|&]|[<>]\()(?:\.|:|break|cd|continue|eval|exec|exit|export|getopts|hash|pwd|readonly|return|shift|test|times|trap|umask|unset|alias|bind|builtin|caller|command|declare|echo|enable|help|let|local|logout|mapfile|printf|read|readarray|source|type|typeset|ulimit|unalias|set|shopt)(?=$|[)\s;|&])/,lookbehind:!0,alias:"class-name"},boolean:{pattern:/(^|[\s;|&]|[<>]\()(?:true|false)(?=$|[)\s;|&])/,lookbehind:!0},"file-descriptor":{pattern:/\B&\d\b/,alias:"important"},operator:{pattern:/\d?<>|>\||\+=|==?|!=?|=~|<<[<-]?|[&\d]?>>|\d?[<>]&?|&[>&]?|\|[&|]?|<=?|>=?/,inside:{"file-descriptor":{pattern:/^\d/,alias:"important"}}},punctuation:/\$?\(\(?|\)\)?|\.\.|[{}[\];\\]/,number:{pattern:/(^|\s)(?:[1-9]\d*|0)(?:[.,]\d+)?\b/,lookbehind:!0}},n.inside=e.languages.bash;for(var s=["comment","function-name","for-or-select","assign-left","string","environment","function","keyword","builtin","boolean","file-descriptor","operator","punctuation","number"],i=a.variable[1].inside,o=0;o<s.length;o++)i[s[o]]=e.languages.bash[s[o]];e.languages.shell=e.languages.bash}(Prism);
+Prism.languages.c=Prism.languages.extend("clike",{comment:{pattern:/\/\/(?:[^\r\n\\]|\\(?:\r\n?|\n|(?![\r\n])))*|\/\*[\s\S]*?(?:\*\/|$)/,greedy:!0},"class-name":{pattern:/(\b(?:enum|struct)\s+(?:__attribute__\s*\(\([\s\S]*?\)\)\s*)?)\w+|\b[a-z]\w*_t\b/,lookbehind:!0},keyword:/\b(?:__attribute__|_Alignas|_Alignof|_Atomic|_Bool|_Complex|_Generic|_Imaginary|_Noreturn|_Static_assert|_Thread_local|asm|typeof|inline|auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while)\b/,function:/[a-z_]\w*(?=\s*\()/i,number:/(?:\b0x(?:[\da-f]+(?:\.[\da-f]*)?|\.[\da-f]+)(?:p[+-]?\d+)?|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?)[ful]{0,4}/i,operator:/>>=?|<<=?|->|([-+&|:])\1|[?:~]|[-+*/%&|^!=<>]=?/}),Prism.languages.insertBefore("c","string",{macro:{pattern:/(^\s*)#\s*[a-z](?:[^\r\n\\/]|\/(?!\*)|\/\*(?:[^*]|\*(?!\/))*\*\/|\\(?:\r\n|[\s\S]))*/im,lookbehind:!0,greedy:!0,alias:"property",inside:{string:[{pattern:/^(#\s*include\s*)<[^>]+>/,lookbehind:!0},Prism.languages.c.string],comment:Prism.languages.c.comment,"macro-name":[{pattern:/(^#\s*define\s+)\w+\b(?!\()/i,lookbehind:!0},{pattern:/(^#\s*define\s+)\w+\b(?=\()/i,lookbehind:!0,alias:"function"}],directive:{pattern:/^(#\s*)[a-z]+/,lookbehind:!0,alias:"keyword"},"directive-hash":/^#/,punctuation:/##|\\(?=[\r\n])/,expression:{pattern:/\S[\s\S]*/,inside:Prism.languages.c}}},constant:/\b(?:__FILE__|__LINE__|__DATE__|__TIME__|__TIMESTAMP__|__func__|EOF|NULL|SEEK_CUR|SEEK_END|SEEK_SET|stdin|stdout|stderr)\b/}),delete Prism.languages.c.boolean;
+!function(s){function a(e,s){return e.replace(/<<(\d+)>>/g,function(e,n){return"(?:"+s[+n]+")"})}function t(e,n,s){return RegExp(a(e,n),s||"")}function e(e,n){for(var s=0;s<n;s++)e=e.replace(/<<self>>/g,function(){return"(?:"+e+")"});return e.replace(/<<self>>/g,"[^\\s\\S]")}var n="bool byte char decimal double dynamic float int long object sbyte short string uint ulong ushort var void",i="class enum interface struct",r="add alias and ascending async await by descending from get global group into join let nameof not notnull on or orderby partial remove select set unmanaged value when where",o="abstract as base break case catch checked const continue default delegate do else event explicit extern finally fixed for foreach goto if implicit in internal is lock namespace new null operator out override params private protected public readonly ref return sealed sizeof stackalloc static switch this throw try typeof unchecked unsafe using virtual volatile while yield";function l(e){return"\\b(?:"+e.trim().replace(/ /g,"|")+")\\b"}var d=l(i),p=RegExp(l(n+" "+i+" "+r+" "+o)),c=l(i+" "+r+" "+o),u=l(n+" "+i+" "+o),g=e("<(?:[^<>;=+\\-*/%&|^]|<<self>>)*>",2),b=e("\\((?:[^()]|<<self>>)*\\)",2),h="@?\\b[A-Za-z_]\\w*\\b",f=a("<<0>>(?:\\s*<<1>>)?",[h,g]),m=a("(?!<<0>>)<<1>>(?:\\s*\\.\\s*<<1>>)*",[c,f]),k="\\[\\s*(?:,\\s*)*\\]",y=a("<<0>>(?:\\s*(?:\\?\\s*)?<<1>>)*(?:\\s*\\?)?",[m,k]),w=a("(?:<<0>>|<<1>>)(?:\\s*(?:\\?\\s*)?<<2>>)*(?:\\s*\\?)?",[a("\\(<<0>>+(?:,<<0>>+)+\\)",[a("[^,()<>[\\];=+\\-*/%&|^]|<<0>>|<<1>>|<<2>>",[g,b,k])]),m,k]),v={keyword:p,punctuation:/[<>()?,.:[\]]/},x="'(?:[^\r\n'\\\\]|\\\\.|\\\\[Uux][\\da-fA-F]{1,8})'",$='"(?:\\\\.|[^\\\\"\r\n])*"';s.languages.csharp=s.languages.extend("clike",{string:[{pattern:t("(^|[^$\\\\])<<0>>",['@"(?:""|\\\\[^]|[^\\\\"])*"(?!")']),lookbehind:!0,greedy:!0},{pattern:t("(^|[^@$\\\\])<<0>>",[$]),lookbehind:!0,greedy:!0},{pattern:RegExp(x),greedy:!0,alias:"character"}],"class-name":[{pattern:t("(\\busing\\s+static\\s+)<<0>>(?=\\s*;)",[m]),lookbehind:!0,inside:v},{pattern:t("(\\busing\\s+<<0>>\\s*=\\s*)<<1>>(?=\\s*;)",[h,w]),lookbehind:!0,inside:v},{pattern:t("(\\busing\\s+)<<0>>(?=\\s*=)",[h]),lookbehind:!0},{pattern:t("(\\b<<0>>\\s+)<<1>>",[d,f]),lookbehind:!0,inside:v},{pattern:t("(\\bcatch\\s*\\(\\s*)<<0>>",[m]),lookbehind:!0,inside:v},{pattern:t("(\\bwhere\\s+)<<0>>",[h]),lookbehind:!0},{pattern:t("(\\b(?:is(?:\\s+not)?|as)\\s+)<<0>>",[y]),lookbehind:!0,inside:v},{pattern:t("\\b<<0>>(?=\\s+(?!<<1>>)<<2>>(?:\\s*[=,;:{)\\]]|\\s+(?:in|when)\\b))",[w,u,h]),inside:v}],keyword:p,number:/(?:\b0(?:x[\da-f_]*[\da-f]|b[01_]*[01])|(?:\B\.\d+(?:_+\d+)*|\b\d+(?:_+\d+)*(?:\.\d+(?:_+\d+)*)?)(?:e[-+]?\d+(?:_+\d+)*)?)(?:ul|lu|[dflmu])?\b/i,operator:/>>=?|<<=?|[-=]>|([-+&|])\1|~|\?\?=?|[-+*/%&|^!=<>]=?/,punctuation:/\?\.?|::|[{}[\];(),.:]/}),s.languages.insertBefore("csharp","number",{range:{pattern:/\.\./,alias:"operator"}}),s.languages.insertBefore("csharp","punctuation",{"named-parameter":{pattern:t("([(,]\\s*)<<0>>(?=\\s*:)",[h]),lookbehind:!0,alias:"punctuation"}}),s.languages.insertBefore("csharp","class-name",{namespace:{pattern:t("(\\b(?:namespace|using)\\s+)<<0>>(?:\\s*\\.\\s*<<0>>)*(?=\\s*[;{])",[h]),lookbehind:!0,inside:{punctuation:/\./}},"type-expression":{pattern:t("(\\b(?:default|typeof|sizeof)\\s*\\(\\s*(?!\\s))(?:[^()\\s]|\\s(?!\\s)|<<0>>)*(?=\\s*\\))",[b]),lookbehind:!0,alias:"class-name",inside:v},"return-type":{pattern:t("<<0>>(?=\\s+(?:<<1>>\\s*(?:=>|[({]|\\.\\s*this\\s*\\[)|this\\s*\\[))",[w,m]),inside:v,alias:"class-name"},"constructor-invocation":{pattern:t("(\\bnew\\s+)<<0>>(?=\\s*[[({])",[w]),lookbehind:!0,inside:v,alias:"class-name"},"generic-method":{pattern:t("<<0>>\\s*<<1>>(?=\\s*\\()",[h,g]),inside:{function:t("^<<0>>",[h]),generic:{pattern:RegExp(g),alias:"class-name",inside:v}}},"type-list":{pattern:t("\\b((?:<<0>>\\s+<<1>>|where\\s+<<2>>)\\s*:\\s*)(?:<<3>>|<<4>>)(?:\\s*,\\s*(?:<<3>>|<<4>>))*(?=\\s*(?:where|[{;]|=>|$))",[d,f,h,w,p.source]),lookbehind:!0,inside:{keyword:p,"class-name":{pattern:RegExp(w),greedy:!0,inside:v},punctuation:/,/}},preprocessor:{pattern:/(^\s*)#.*/m,lookbehind:!0,alias:"property",inside:{directive:{pattern:/(\s*#)\b(?:define|elif|else|endif|endregion|error|if|line|pragma|region|undef|warning)\b/,lookbehind:!0,alias:"keyword"}}}});var _=$+"|"+x,B=a("/(?![*/])|//[^\r\n]*[\r\n]|/\\*(?:[^*]|\\*(?!/))*\\*/|<<0>>",[_]),E=e(a("[^\"'/()]|<<0>>|\\(<<self>>*\\)",[B]),2),R="\\b(?:assembly|event|field|method|module|param|property|return|type)\\b",P=a("<<0>>(?:\\s*\\(<<1>>*\\))?",[m,E]);s.languages.insertBefore("csharp","class-name",{attribute:{pattern:t("((?:^|[^\\s\\w>)?])\\s*\\[\\s*)(?:<<0>>\\s*:\\s*)?<<1>>(?:\\s*,\\s*<<1>>)*(?=\\s*\\])",[R,P]),lookbehind:!0,greedy:!0,inside:{target:{pattern:t("^<<0>>(?=\\s*:)",[R]),alias:"keyword"},"attribute-arguments":{pattern:t("\\(<<0>>*\\)",[E]),inside:s.languages.csharp},"class-name":{pattern:RegExp(m),inside:{punctuation:/\./}},punctuation:/[:,]/}}});var z=":[^}\r\n]+",S=e(a("[^\"'/()]|<<0>>|\\(<<self>>*\\)",[B]),2),j=a("\\{(?!\\{)(?:(?![}:])<<0>>)*<<1>>?\\}",[S,z]),A=e(a("[^\"'/()]|/(?!\\*)|/\\*(?:[^*]|\\*(?!/))*\\*/|<<0>>|\\(<<self>>*\\)",[_]),2),F=a("\\{(?!\\{)(?:(?![}:])<<0>>)*<<1>>?\\}",[A,z]);function U(e,n){return{interpolation:{pattern:t("((?:^|[^{])(?:\\{\\{)*)<<0>>",[e]),lookbehind:!0,inside:{"format-string":{pattern:t("(^\\{(?:(?![}:])<<0>>)*)<<1>>(?=\\}$)",[n,z]),lookbehind:!0,inside:{punctuation:/^:/}},punctuation:/^\{|\}$/,expression:{pattern:/[\s\S]+/,alias:"language-csharp",inside:s.languages.csharp}}},string:/[\s\S]+/}}s.languages.insertBefore("csharp","string",{"interpolation-string":[{pattern:t('(^|[^\\\\])(?:\\$@|@\\$)"(?:""|\\\\[^]|\\{\\{|<<0>>|[^\\\\{"])*"',[j]),lookbehind:!0,greedy:!0,inside:U(j,S)},{pattern:t('(^|[^@\\\\])\\$"(?:\\\\.|\\{\\{|<<0>>|[^\\\\"{])*"',[F]),lookbehind:!0,greedy:!0,inside:U(F,A)}]})}(Prism),Prism.languages.dotnet=Prism.languages.cs=Prism.languages.csharp;
+!function(e){var t=/\b(?:alignas|alignof|asm|auto|bool|break|case|catch|char|char8_t|char16_t|char32_t|class|compl|concept|const|consteval|constexpr|constinit|const_cast|continue|co_await|co_return|co_yield|decltype|default|delete|do|double|dynamic_cast|else|enum|explicit|export|extern|final|float|for|friend|goto|if|import|inline|int|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|long|module|mutable|namespace|new|noexcept|nullptr|operator|override|private|protected|public|register|reinterpret_cast|requires|return|short|signed|sizeof|static|static_assert|static_cast|struct|switch|template|this|thread_local|throw|try|typedef|typeid|typename|union|unsigned|using|virtual|void|volatile|wchar_t|while)\b/,n="\\b(?!<keyword>)\\w+(?:\\s*\\.\\s*\\w+)*\\b".replace(/<keyword>/g,function(){return t.source});e.languages.cpp=e.languages.extend("c",{"class-name":[{pattern:RegExp("(\\b(?:class|concept|enum|struct|typename)\\s+)(?!<keyword>)\\w+".replace(/<keyword>/g,function(){return t.source})),lookbehind:!0},/\b[A-Z]\w*(?=\s*::\s*\w+\s*\()/,/\b[A-Z_]\w*(?=\s*::\s*~\w+\s*\()/i,/\w+(?=\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>\s*::\s*\w+\s*\()/],keyword:t,number:{pattern:/(?:\b0b[01']+|\b0x(?:[\da-f']+(?:\.[\da-f']*)?|\.[\da-f']+)(?:p[+-]?[\d']+)?|(?:\b[\d']+(?:\.[\d']*)?|\B\.[\d']+)(?:e[+-]?[\d']+)?)[ful]{0,4}/i,greedy:!0},operator:/>>=?|<<=?|->|--|\+\+|&&|\|\||[?:~]|<=>|[-+*/%&|^!=<>]=?|\b(?:and|and_eq|bitand|bitor|not|not_eq|or|or_eq|xor|xor_eq)\b/,boolean:/\b(?:true|false)\b/}),e.languages.insertBefore("cpp","string",{module:{pattern:RegExp('(\\b(?:module|import)\\s+)(?:"(?:\\\\(?:\r\n|[^])|[^"\\\\\r\n])*"|<[^<>\r\n]*>|'+"<mod-name>(?:\\s*:\\s*<mod-name>)?|:\\s*<mod-name>".replace(/<mod-name>/g,function(){return n})+")"),lookbehind:!0,greedy:!0,inside:{string:/^[<"][\s\S]+/,operator:/:/,punctuation:/\./}},"raw-string":{pattern:/R"([^()\\ ]{0,16})\([\s\S]*?\)\1"/,alias:"string",greedy:!0}}),e.languages.insertBefore("cpp","keyword",{"generic-function":{pattern:/\b[a-z_]\w*\s*<(?:[^<>]|<(?:[^<>])*>)*>(?=\s*\()/i,inside:{function:/^\w+/,generic:{pattern:/<[\s\S]+/,alias:"class-name",inside:e.languages.cpp}}}}),e.languages.insertBefore("cpp","operator",{"double-colon":{pattern:/::/,alias:"punctuation"}}),e.languages.insertBefore("cpp","class-name",{"base-clause":{pattern:/(\b(?:class|struct)\s+\w+\s*:\s*)[^;{}"'\s]+(?:\s+[^;{}"'\s]+)*(?=\s*[;{])/,lookbehind:!0,greedy:!0,inside:e.languages.extend("cpp",{})}}),e.languages.insertBefore("inside","double-colon",{"class-name":/\b[a-z_]\w*\b(?!\s*::)/i},e.languages.cpp["base-clause"])}(Prism);
+!function(e){var a,n=/("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;e.languages.css.selector={pattern:e.languages.css.selector,inside:a={"pseudo-element":/:(?:after|before|first-letter|first-line|selection)|::[-\w]+/,"pseudo-class":/:[-\w]+/,class:/\.[-\w]+/,id:/#[-\w]+/,attribute:{pattern:RegExp("\\[(?:[^[\\]\"']|"+n.source+")*\\]"),greedy:!0,inside:{punctuation:/^\[|\]$/,"case-sensitivity":{pattern:/(\s)[si]$/i,lookbehind:!0,alias:"keyword"},namespace:{pattern:/^(\s*)(?:(?!\s)[-*\w\xA0-\uFFFF])*\|(?!=)/,lookbehind:!0,inside:{punctuation:/\|$/}},"attr-name":{pattern:/^(\s*)(?:(?!\s)[-\w\xA0-\uFFFF])+/,lookbehind:!0},"attr-value":[n,{pattern:/(=\s*)(?:(?!\s)[-\w\xA0-\uFFFF])+(?=\s*$)/,lookbehind:!0}],operator:/[|~*^$]?=/}},"n-th":[{pattern:/(\(\s*)[+-]?\d*[\dn](?:\s*[+-]\s*\d+)?(?=\s*\))/,lookbehind:!0,inside:{number:/[\dn]+/,operator:/[+-]/}},{pattern:/(\(\s*)(?:even|odd)(?=\s*\))/i,lookbehind:!0}],combinator:/>|\+|~|\|\|/,punctuation:/[(),]/}},e.languages.css.atrule.inside["selector-function-argument"].inside=a,e.languages.insertBefore("css","property",{variable:{pattern:/(^|[^-\w\xA0-\uFFFF])--(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*/i,lookbehind:!0}});var r={pattern:/(\b\d+)(?:%|[a-z]+\b)/,lookbehind:!0},i={pattern:/(^|[^\w.-])-?(?:\d+(?:\.\d+)?|\.\d+)/,lookbehind:!0};e.languages.insertBefore("css","function",{operator:{pattern:/(\s)[+\-*\/](?=\s)/,lookbehind:!0},hexcode:{pattern:/\B#(?:[\da-f]{1,2}){3,4}\b/i,alias:"color"},color:[/\b(?:AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGr[ae]y|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|DarkOrange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGr[ae]y|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGr[ae]y|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gr[ae]y|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGr[ae]y|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGr[ae]y|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGr[ae]y|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Transparent|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)\b/i,{pattern:/\b(?:rgb|hsl)\(\s*\d{1,3}\s*,\s*\d{1,3}%?\s*,\s*\d{1,3}%?\s*\)\B|\b(?:rgb|hsl)a\(\s*\d{1,3}\s*,\s*\d{1,3}%?\s*,\s*\d{1,3}%?\s*,\s*(?:0|0?\.\d+|1)\s*\)\B/i,inside:{unit:r,number:i,function:/[\w-]+(?=\()/,punctuation:/[(),]/}}],entity:/\\[\da-f]{1,8}/i,unit:r,number:i})}(Prism);
+Prism.languages.git={comment:/^#.*/m,deleted:/^[-–].*/m,inserted:/^\+.*/m,string:/("|')(?:\\.|(?!\1)[^\\\r\n])*\1/m,command:{pattern:/^.*\$ git .*$/m,inside:{parameter:/\s--?\w+/m}},coord:/^@@.*@@$/m,"commit-sha1":/^commit \w{40}$/m};
+Prism.languages.go=Prism.languages.extend("clike",{string:{pattern:/(["'`])(?:\\[\s\S]|(?!\1)[^\\])*\1/,greedy:!0},keyword:/\b(?:break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go(?:to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)\b/,boolean:/\b(?:_|iota|nil|true|false)\b/,number:/(?:\b0x[a-f\d]+|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[-+]?\d+)?)i?/i,operator:/[*\/%^!=]=?|\+[=+]?|-[=-]?|\|[=|]?|&(?:=|&|\^=?)?|>(?:>=?|=)?|<(?:<=?|=|-)?|:=|\.\.\./,builtin:/\b(?:bool|byte|complex(?:64|128)|error|float(?:32|64)|rune|string|u?int(?:8|16|32|64)?|uintptr|append|cap|close|complex|copy|delete|imag|len|make|new|panic|print(?:ln)?|real|recover)\b/}),delete Prism.languages.go["class-name"];
+!function(e){var t=/\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|exports|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|module|native|new|non-sealed|null|open|opens|package|permits|private|protected|provides|public|record|requires|return|sealed|short|static|strictfp|super|switch|synchronized|this|throw|throws|to|transient|transitive|try|uses|var|void|volatile|while|with|yield)\b/,n="(^|[^\\w.])(?:[a-z]\\w*\\s*\\.\\s*)*(?:[A-Z]\\w*\\s*\\.\\s*)*",a={pattern:RegExp(n+"[A-Z](?:[\\d_A-Z]*[a-z]\\w*)?\\b"),lookbehind:!0,inside:{namespace:{pattern:/^[a-z]\w*(?:\s*\.\s*[a-z]\w*)*(?:\s*\.)?/,inside:{punctuation:/\./}},punctuation:/\./}};e.languages.java=e.languages.extend("clike",{"class-name":[a,{pattern:RegExp(n+"[A-Z]\\w*(?=\\s+\\w+\\s*[;,=())])"),lookbehind:!0,inside:a.inside}],keyword:t,function:[e.languages.clike.function,{pattern:/(\:\:\s*)[a-z_]\w*/,lookbehind:!0}],number:/\b0b[01][01_]*L?\b|\b0x(?:\.[\da-f_p+-]+|[\da-f_]+(?:\.[\da-f_p+-]+)?)\b|(?:\b\d[\d_]*(?:\.[\d_]*)?|\B\.\d[\d_]*)(?:e[+-]?\d[\d_]*)?[dfl]?/i,operator:{pattern:/(^|[^.])(?:<<=?|>>>?=?|->|--|\+\+|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?)/m,lookbehind:!0}}),e.languages.insertBefore("java","string",{"triple-quoted-string":{pattern:/"""[ \t]*[\r\n](?:(?:"|"")?(?:\\.|[^"\\]))*"""/,greedy:!0,alias:"string"}}),e.languages.insertBefore("java","class-name",{annotation:{pattern:/(^|[^.])@\w+(?:\s*\.\s*\w+)*/,lookbehind:!0,alias:"punctuation"},generics:{pattern:/<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&))*>)*>)*>)*>/,inside:{"class-name":a,keyword:t,punctuation:/[<>(),.:]/,operator:/[?&|]/}},namespace:{pattern:RegExp("(\\b(?:exports|import(?:\\s+static)?|module|open|opens|package|provides|requires|to|transitive|uses|with)\\s+)(?!<keyword>)[a-z]\\w*(?:\\.[a-z]\\w*)*\\.?".replace(/<keyword>/g,function(){return t.source})),lookbehind:!0,inside:{punctuation:/\./}}})}(Prism);
+!function(e){var n="\\\\\\((?:[^()]|\\([^()]*\\))*\\)",t=RegExp('"(?:[^"\r\n\\\\]|\\\\[^\r\n(]|__)*"'.replace(/__/g,function(){return n})),i={interpolation:{pattern:RegExp("((?:^|[^\\\\])(?:\\\\{2})*)"+n),lookbehind:!0,inside:{content:{pattern:/^(\\\()[\s\S]+(?=\)$)/,lookbehind:!0,inside:null},punctuation:/^\\\(|\)$/}}},a=e.languages.jq={comment:/#.*/,property:{pattern:RegExp(t.source+"(?=\\s*:(?!:))"),greedy:!0,inside:i},string:{pattern:t,greedy:!0,inside:i},function:{pattern:/(\bdef\s+)[a-z_]\w+/i,lookbehind:!0},variable:/\B\$\w+/,"property-literal":{pattern:/\b[a-z_]\w*(?=\s*:(?!:))/i,alias:"property"},keyword:/\b(?:as|break|catch|def|elif|else|end|foreach|if|import|include|label|module|modulemeta|null|reduce|then|try|while)\b/,boolean:/\b(?:true|false)\b/,number:/(?:\b\d+\.|\B\.)?\b\d+(?:[eE][+-]?\d+)?\b/,operator:[{pattern:/\|=?/,alias:"pipe"},/\.\.|[!=<>]?=|\?\/\/|\/\/=?|[-+*/%]=?|[<>?]|\b(?:and|or|not)\b/],"c-style-function":{pattern:/\b[a-z_]\w*(?=\s*\()/i,alias:"function"},punctuation:/::|[()\[\]{},:;]|\.(?=\s*[\[\w$])/,dot:{pattern:/\./,alias:"important"}};i.interpolation.inside.content.inside=a}(Prism);
+Prism.languages.json={property:{pattern:/(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,lookbehind:!0,greedy:!0},string:{pattern:/(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?!\s*:)/,lookbehind:!0,greedy:!0},comment:{pattern:/\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,greedy:!0},number:/-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/i,punctuation:/[{}[\],]/,operator:/:/,boolean:/\b(?:true|false)\b/,null:{pattern:/\bnull\b/,alias:"keyword"}},Prism.languages.webmanifest=Prism.languages.json;
+Prism.languages.jsonp=Prism.languages.extend("json",{punctuation:/[{}[\]();,.]/}),Prism.languages.insertBefore("jsonp","punctuation",{function:/(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*\()/});
+!function(h){function v(e,n){return"___"+e.toUpperCase()+n+"___"}Object.defineProperties(h.languages["markup-templating"]={},{buildPlaceholders:{value:function(a,r,e,o){if(a.language===r){var c=a.tokenStack=[];a.code=a.code.replace(e,function(e){if("function"==typeof o&&!o(e))return e;for(var n,t=c.length;-1!==a.code.indexOf(n=v(r,t));)++t;return c[t]=e,n}),a.grammar=h.languages.markup}}},tokenizePlaceholders:{value:function(p,k){if(p.language===k&&p.tokenStack){p.grammar=h.languages[k];var m=0,d=Object.keys(p.tokenStack);!function e(n){for(var t=0;t<n.length&&!(m>=d.length);t++){var a=n[t];if("string"==typeof a||a.content&&"string"==typeof a.content){var r=d[m],o=p.tokenStack[r],c="string"==typeof a?a:a.content,i=v(k,r),u=c.indexOf(i);if(-1<u){++m;var g=c.substring(0,u),l=new h.Token(k,h.tokenize(o,p.grammar),"language-"+k,o),s=c.substring(u+i.length),f=[];g&&f.push.apply(f,e([g])),f.push(l),s&&f.push.apply(f,e([s])),"string"==typeof a?n.splice.apply(n,[t,1].concat(f)):a.content=f}}else a.content&&e(a.content)}return n}(p.tokens)}}}})}(Prism);
+Prism.languages.perl={comment:[{pattern:/(^\s*)=\w[\s\S]*?=cut.*/m,lookbehind:!0},{pattern:/(^|[^\\$])#.*/,lookbehind:!0}],string:[{pattern:/\b(?:q|qq|qx|qw)\s*([^a-zA-Z0-9\s{(\[<])(?:(?!\1)[^\\]|\\[\s\S])*\1/,greedy:!0},{pattern:/\b(?:q|qq|qx|qw)\s+([a-zA-Z0-9])(?:(?!\1)[^\\]|\\[\s\S])*\1/,greedy:!0},{pattern:/\b(?:q|qq|qx|qw)\s*\((?:[^()\\]|\\[\s\S])*\)/,greedy:!0},{pattern:/\b(?:q|qq|qx|qw)\s*\{(?:[^{}\\]|\\[\s\S])*\}/,greedy:!0},{pattern:/\b(?:q|qq|qx|qw)\s*\[(?:[^[\]\\]|\\[\s\S])*\]/,greedy:!0},{pattern:/\b(?:q|qq|qx|qw)\s*<(?:[^<>\\]|\\[\s\S])*>/,greedy:!0},{pattern:/("|`)(?:(?!\1)[^\\]|\\[\s\S])*\1/,greedy:!0},{pattern:/'(?:[^'\\\r\n]|\\.)*'/,greedy:!0}],regex:[{pattern:/\b(?:m|qr)\s*([^a-zA-Z0-9\s{(\[<])(?:(?!\1)[^\\]|\\[\s\S])*\1[msixpodualngc]*/,greedy:!0},{pattern:/\b(?:m|qr)\s+([a-zA-Z0-9])(?:(?!\1)[^\\]|\\[\s\S])*\1[msixpodualngc]*/,greedy:!0},{pattern:/\b(?:m|qr)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngc]*/,greedy:!0},{pattern:/\b(?:m|qr)\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngc]*/,greedy:!0},{pattern:/\b(?:m|qr)\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngc]*/,greedy:!0},{pattern:/\b(?:m|qr)\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngc]*/,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*([^a-zA-Z0-9\s{(\[<])(?:(?!\2)[^\\]|\\[\s\S])*\2(?:(?!\2)[^\\]|\\[\s\S])*\2[msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s+([a-zA-Z0-9])(?:(?!\2)[^\\]|\\[\s\S])*\2(?:(?!\2)[^\\]|\\[\s\S])*\2[msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\((?:[^()\\]|\\[\s\S])*\)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\{(?:[^{}\\]|\\[\s\S])*\}\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\[(?:[^[\]\\]|\\[\s\S])*\]\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*<(?:[^<>\\]|\\[\s\S])*>\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngcer]*/,lookbehind:!0,greedy:!0},{pattern:/\/(?:[^\/\\\r\n]|\\.)*\/[msixpodualngc]*(?=\s*(?:$|[\r\n,.;})&|\-+*~<>!?^]|(?:lt|gt|le|ge|eq|ne|cmp|not|and|or|xor|x)\b))/,greedy:!0}],variable:[/[&*$@%]\{\^[A-Z]+\}/,/[&*$@%]\^[A-Z_]/,/[&*$@%]#?(?=\{)/,/[&*$@%]#?(?:(?:::)*'?(?!\d)[\w$]+(?![\w$]))+(?:::)*/i,/[&*$@%]\d+/,/(?!%=)[$@%][!"#$%&'()*+,\-.\/:;<=>?@[\\\]^_`{|}~]/],filehandle:{pattern:/<(?![<=])\S*>|\b_\b/,alias:"symbol"},vstring:{pattern:/v\d+(?:\.\d+)*|\d+(?:\.\d+){2,}/,alias:"string"},function:{pattern:/sub [a-z0-9_]+/i,inside:{keyword:/sub/}},keyword:/\b(?:any|break|continue|default|delete|die|do|else|elsif|eval|for|foreach|given|goto|if|last|local|my|next|our|package|print|redo|require|return|say|state|sub|switch|undef|unless|until|use|when|while)\b/,number:/\b(?:0x[\dA-Fa-f](?:_?[\dA-Fa-f])*|0b[01](?:_?[01])*|(?:(?:\d(?:_?\d)*)?\.)?\d(?:_?\d)*(?:[Ee][+-]?\d+)?)\b/,operator:/-[rwxoRWXOezsfdlpSbctugkTBMAC]\b|\+[+=]?|-[-=>]?|\*\*?=?|\/\/?=?|=[=~>]?|~[~=]?|\|\|?=?|&&?=?|<(?:=>?|<=?)?|>>?=?|![~=]?|[%^]=?|\.(?:=|\.\.?)?|[\\?]|\bx(?:=|\b)|\b(?:lt|gt|le|ge|eq|ne|cmp|not|and|or|xor)\b/,punctuation:/[{}[\];(),:]/};
+!function(a){var e=/\/\*[\s\S]*?\*\/|\/\/.*|#(?!\[).*/,t=[{pattern:/\b(?:false|true)\b/i,alias:"boolean"},{pattern:/(::\s*)\b[a-z_]\w*\b(?!\s*\()/i,greedy:!0,lookbehind:!0},{pattern:/(\b(?:case|const)\s+)\b[a-z_]\w*(?=\s*[;=])/i,greedy:!0,lookbehind:!0},/\b(?:null)\b/i,/\b[A-Z_][A-Z0-9_]*\b(?!\s*\()/],i=/\b0b[01]+(?:_[01]+)*\b|\b0o[0-7]+(?:_[0-7]+)*\b|\b0x[\da-f]+(?:_[\da-f]+)*\b|(?:\b\d+(?:_\d+)*\.?(?:\d+(?:_\d+)*)?|\B\.\d+)(?:e[+-]?\d+)?/i,n=/<?=>|\?\?=?|\.{3}|\??->|[!=]=?=?|::|\*\*=?|--|\+\+|&&|\|\||<<|>>|[?~]|[/^|%*&<>.+-]=?/,s=/[{}\[\](),:;]/;a.languages.php={delimiter:{pattern:/\?>$|^<\?(?:php(?=\s)|=)?/i,alias:"important"},comment:e,variable:/\$+(?:\w+\b|(?={))/i,package:{pattern:/(namespace\s+|use\s+(?:function\s+)?)(?:\\?\b[a-z_]\w*)+\b(?!\\)/i,lookbehind:!0,inside:{punctuation:/\\/}},"class-name-definition":{pattern:/(\b(?:class|enum|interface|trait)\s+)\b[a-z_]\w*(?!\\)\b/i,lookbehind:!0,alias:"class-name"},"function-definition":{pattern:/(\bfunction\s+)[a-z_]\w*(?=\s*\()/i,lookbehind:!0,alias:"function"},keyword:[{pattern:/(\(\s*)\b(?:bool|boolean|int|integer|float|string|object|array)\b(?=\s*\))/i,alias:"type-casting",greedy:!0,lookbehind:!0},{pattern:/([(,?]\s*)\b(?:bool|int|float|string|object|array(?!\s*\()|mixed|self|static|callable|iterable|(?:null|false)(?=\s*\|))\b(?=\s*\$)/i,alias:"type-hint",greedy:!0,lookbehind:!0},{pattern:/([(,?]\s*[a-z0-9_|]\|\s*)(?:null|false)\b(?=\s*\$)/i,alias:"type-hint",greedy:!0,lookbehind:!0},{pattern:/(\)\s*:\s*(?:\?\s*)?)\b(?:bool|int|float|string|object|void|array(?!\s*\()|mixed|self|static|callable|iterable|(?:null|false)(?=\s*\|))\b/i,alias:"return-type",greedy:!0,lookbehind:!0},{pattern:/(\)\s*:\s*(?:\?\s*)?[a-z0-9_|]\|\s*)(?:null|false)\b/i,alias:"return-type",greedy:!0,lookbehind:!0},{pattern:/\b(?:bool|int|float|string|object|void|array(?!\s*\()|mixed|iterable|(?:null|false)(?=\s*\|))\b/i,alias:"type-declaration",greedy:!0},{pattern:/(\|\s*)(?:null|false)\b/i,alias:"type-declaration",greedy:!0,lookbehind:!0},{pattern:/\b(?:parent|self|static)(?=\s*::)/i,alias:"static-context",greedy:!0},{pattern:/(\byield\s+)from\b/i,lookbehind:!0},/\bclass\b/i,{pattern:/((?:^|[^\s>:]|(?:^|[^-])>|(?:^|[^:]):)\s*)\b(?:__halt_compiler|abstract|and|array|as|break|callable|case|catch|clone|const|continue|declare|default|die|do|echo|else|elseif|empty|enddeclare|endfor|endforeach|endif|endswitch|endwhile|enum|eval|exit|extends|final|finally|for|foreach|function|global|goto|if|implements|include|include_once|instanceof|insteadof|interface|isset|list|namespace|match|new|or|parent|print|private|protected|public|require|require_once|return|self|static|switch|throw|trait|try|unset|use|var|while|xor|yield)\b/i,lookbehind:!0}],"argument-name":{pattern:/([(,]\s+)\b[a-z_]\w*(?=\s*:(?!:))/i,lookbehind:!0},"class-name":[{pattern:/(\b(?:extends|implements|instanceof|new(?!\s+self|\s+static))\s+|\bcatch\s*\()\b[a-z_]\w*(?!\\)\b/i,greedy:!0,lookbehind:!0},{pattern:/(\|\s*)\b[a-z_]\w*(?!\\)\b/i,greedy:!0,lookbehind:!0},{pattern:/\b[a-z_]\w*(?!\\)\b(?=\s*\|)/i,greedy:!0},{pattern:/(\|\s*)(?:\\?\b[a-z_]\w*)+\b/i,alias:"class-name-fully-qualified",greedy:!0,lookbehind:!0,inside:{punctuation:/\\/}},{pattern:/(?:\\?\b[a-z_]\w*)+\b(?=\s*\|)/i,alias:"class-name-fully-qualified",greedy:!0,inside:{punctuation:/\\/}},{pattern:/(\b(?:extends|implements|instanceof|new(?!\s+self\b|\s+static\b))\s+|\bcatch\s*\()(?:\\?\b[a-z_]\w*)+\b(?!\\)/i,alias:"class-name-fully-qualified",greedy:!0,lookbehind:!0,inside:{punctuation:/\\/}},{pattern:/\b[a-z_]\w*(?=\s*\$)/i,alias:"type-declaration",greedy:!0},{pattern:/(?:\\?\b[a-z_]\w*)+(?=\s*\$)/i,alias:["class-name-fully-qualified","type-declaration"],greedy:!0,inside:{punctuation:/\\/}},{pattern:/\b[a-z_]\w*(?=\s*::)/i,alias:"static-context",greedy:!0},{pattern:/(?:\\?\b[a-z_]\w*)+(?=\s*::)/i,alias:["class-name-fully-qualified","static-context"],greedy:!0,inside:{punctuation:/\\/}},{pattern:/([(,?]\s*)[a-z_]\w*(?=\s*\$)/i,alias:"type-hint",greedy:!0,lookbehind:!0},{pattern:/([(,?]\s*)(?:\\?\b[a-z_]\w*)+(?=\s*\$)/i,alias:["class-name-fully-qualified","type-hint"],greedy:!0,lookbehind:!0,inside:{punctuation:/\\/}},{pattern:/(\)\s*:\s*(?:\?\s*)?)\b[a-z_]\w*(?!\\)\b/i,alias:"return-type",greedy:!0,lookbehind:!0},{pattern:/(\)\s*:\s*(?:\?\s*)?)(?:\\?\b[a-z_]\w*)+\b(?!\\)/i,alias:["class-name-fully-qualified","return-type"],greedy:!0,lookbehind:!0,inside:{punctuation:/\\/}}],constant:t,function:/\b\w+(?=\s*\()/,property:{pattern:/(->\s*)\w+/,lookbehind:!0},number:i,operator:n,punctuation:s};var l={pattern:/{\$(?:{(?:{[^{}]+}|[^{}]+)}|[^{}])+}|(^|[^\\{])\$+(?:\w+(?:\[[^\r\n\[\]]+\]|->\w+)*)/,lookbehind:!0,inside:a.languages.php},r=[{pattern:/<<<'([^']+)'[\r\n](?:.*[\r\n])*?\1;/,alias:"nowdoc-string",greedy:!0,inside:{delimiter:{pattern:/^<<<'[^']+'|[a-z_]\w*;$/i,alias:"symbol",inside:{punctuation:/^<<<'?|[';]$/}}}},{pattern:/<<<(?:"([^"]+)"[\r\n](?:.*[\r\n])*?\1;|([a-z_]\w*)[\r\n](?:.*[\r\n])*?\2;)/i,alias:"heredoc-string",greedy:!0,inside:{delimiter:{pattern:/^<<<(?:"[^"]+"|[a-z_]\w*)|[a-z_]\w*;$/i,alias:"symbol",inside:{punctuation:/^<<<"?|[";]$/}},interpolation:l}},{pattern:/`(?:\\[\s\S]|[^\\`])*`/,alias:"backtick-quoted-string",greedy:!0},{pattern:/'(?:\\[\s\S]|[^\\'])*'/,alias:"single-quoted-string",greedy:!0},{pattern:/"(?:\\[\s\S]|[^\\"])*"/,alias:"double-quoted-string",greedy:!0,inside:{interpolation:l}}];a.languages.insertBefore("php","variable",{string:r,attribute:{pattern:/#\[(?:[^"'\/#]|\/(?![*/])|\/\/.*$|#(?!\[).*$|\/\*(?:[^*]|\*(?!\/))*\*\/|"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*')+\](?=\s*[a-z$#])/im,greedy:!0,inside:{"attribute-content":{pattern:/^(#\[)[\s\S]+(?=]$)/,lookbehind:!0,inside:{comment:e,string:r,"attribute-class-name":[{pattern:/([^:]|^)\b[a-z_]\w*(?!\\)\b/i,alias:"class-name",greedy:!0,lookbehind:!0},{pattern:/([^:]|^)(?:\\?\b[a-z_]\w*)+/i,alias:["class-name","class-name-fully-qualified"],greedy:!0,lookbehind:!0,inside:{punctuation:/\\/}}],constant:t,number:i,operator:n,punctuation:s}},delimiter:{pattern:/^#\[|]$/,alias:"punctuation"}}}}),a.hooks.add("before-tokenize",function(e){if(/<\?/.test(e.code)){a.languages["markup-templating"].buildPlaceholders(e,"php",/<\?(?:[^"'/#]|\/(?![*/])|("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|(?:\/\/|#(?!\[))(?:[^?\n\r]|\?(?!>))*(?=$|\?>|[\r\n])|#\[|\/\*(?:[^*]|\*(?!\/))*(?:\*\/|$))*?(?:\?>|$)/gi)}}),a.hooks.add("after-tokenize",function(e){a.languages["markup-templating"].tokenizePlaceholders(e,"php")})}(Prism);
+Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-interpolation":{pattern:/(?:f|rf|fr)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,greedy:!0,inside:{interpolation:{pattern:/((?:^|[^{])(?:{{)*){(?!{)(?:[^{}]|{(?!{)(?:[^{}]|{(?!{)(?:[^{}])+})+})+}/,lookbehind:!0,inside:{"format-spec":{pattern:/(:)[^:(){}]+(?=}$)/,lookbehind:!0},"conversion-option":{pattern:/![sra](?=[:}]$)/,alias:"punctuation"},rest:null}},string:/[\s\S]+/}},"triple-quoted-string":{pattern:/(?:[rub]|rb|br)?("""|''')[\s\S]*?\1/i,greedy:!0,alias:"string"},string:{pattern:/(?:[rub]|rb|br)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i,greedy:!0},function:{pattern:/((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g,lookbehind:!0},"class-name":{pattern:/(\bclass\s+)\w+/i,lookbehind:!0},decorator:{pattern:/(^\s*)@\w+(?:\.\w+)*/im,lookbehind:!0,alias:["annotation","punctuation"],inside:{punctuation:/\./}},keyword:/\b(?:and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b/,builtin:/\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b/,boolean:/\b(?:True|False|None)\b/,number:/(?:\b(?=\d)|\B(?=\.))(?:0[bo])?(?:(?:\d|0x[\da-f])[\da-f]*(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?j?\b/i,operator:/[-+%=]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,punctuation:/[{}[\];(),.:]/},Prism.languages.python["string-interpolation"].inside.interpolation.inside.rest=Prism.languages.python,Prism.languages.py=Prism.languages.python;
+!function(e){for(var a="/\\*(?:[^*/]|\\*(?!/)|/(?!\\*)|<self>)*\\*/",t=0;t<2;t++)a=a.replace(/<self>/g,function(){return a});a=a.replace(/<self>/g,function(){return"[^\\s\\S]"}),e.languages.rust={comment:[{pattern:RegExp("(^|[^\\\\])"+a),lookbehind:!0,greedy:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0,greedy:!0}],string:{pattern:/b?"(?:\\[\s\S]|[^\\"])*"|b?r(#*)"(?:[^"]|"(?!\1))*"\1/,greedy:!0},char:{pattern:/b?'(?:\\(?:x[0-7][\da-fA-F]|u\{(?:[\da-fA-F]_*){1,6}\}|.)|[^\\\r\n\t'])'/,greedy:!0,alias:"string"},attribute:{pattern:/#!?\[(?:[^\[\]"]|"(?:\\[\s\S]|[^\\"])*")*\]/,greedy:!0,alias:"attr-name",inside:{string:null}},"closure-params":{pattern:/([=(,:]\s*|\bmove\s*)\|[^|]*\||\|[^|]*\|(?=\s*(?:\{|->))/,lookbehind:!0,greedy:!0,inside:{"closure-punctuation":{pattern:/^\||\|$/,alias:"punctuation"},rest:null}},"lifetime-annotation":{pattern:/'\w+/,alias:"symbol"},"fragment-specifier":{pattern:/(\$\w+:)[a-z]+/,lookbehind:!0,alias:"punctuation"},variable:/\$\w+/,"function-definition":{pattern:/(\bfn\s+)\w+/,lookbehind:!0,alias:"function"},"type-definition":{pattern:/(\b(?:enum|struct|union)\s+)\w+/,lookbehind:!0,alias:"class-name"},"module-declaration":[{pattern:/(\b(?:crate|mod)\s+)[a-z][a-z_\d]*/,lookbehind:!0,alias:"namespace"},{pattern:/(\b(?:crate|self|super)\s*)::\s*[a-z][a-z_\d]*\b(?:\s*::(?:\s*[a-z][a-z_\d]*\s*::)*)?/,lookbehind:!0,alias:"namespace",inside:{punctuation:/::/}}],keyword:[/\b(?:abstract|as|async|await|become|box|break|const|continue|crate|do|dyn|else|enum|extern|final|fn|for|if|impl|in|let|loop|macro|match|mod|move|mut|override|priv|pub|ref|return|self|Self|static|struct|super|trait|try|type|typeof|union|unsafe|unsized|use|virtual|where|while|yield)\b/,/\b(?:[ui](?:8|16|32|64|128|size)|f(?:32|64)|bool|char|str)\b/],function:/\b[a-z_]\w*(?=\s*(?:::\s*<|\())/,macro:{pattern:/\w+!/,alias:"property"},constant:/\b[A-Z_][A-Z_\d]+\b/,"class-name":/\b[A-Z]\w*\b/,namespace:{pattern:/(?:\b[a-z][a-z_\d]*\s*::\s*)*\b[a-z][a-z_\d]*\s*::(?!\s*<)/,inside:{punctuation:/::/}},number:/\b(?:0x[\dA-Fa-f](?:_?[\dA-Fa-f])*|0o[0-7](?:_?[0-7])*|0b[01](?:_?[01])*|(?:(?:\d(?:_?\d)*)?\.)?\d(?:_?\d)*(?:[Ee][+-]?\d+)?)(?:_?(?:[iu](?:8|16|32|64|size)?|f32|f64))?\b/,boolean:/\b(?:false|true)\b/,punctuation:/->|\.\.=|\.{1,3}|::|[{}[\];(),:]/,operator:/[-+*\/%!^]=?|=[=>]?|&[&=]?|\|[|=]?|<<?=?|>>?=?|[@?]/},e.languages.rust["closure-params"].inside.rest=e.languages.rust,e.languages.rust.attribute.inside.string=e.languages.rust.string}(Prism);
+Prism.languages.sql={comment:{pattern:/(^|[^\\])(?:\/\*[\s\S]*?\*\/|(?:--|\/\/|#).*)/,lookbehind:!0},variable:[{pattern:/@(["'`])(?:\\[\s\S]|(?!\1)[^\\])+\1/,greedy:!0},/@[\w.$]+/],string:{pattern:/(^|[^@\\])("|')(?:\\[\s\S]|(?!\2)[^\\]|\2\2)*\2/,greedy:!0,lookbehind:!0},function:/\b(?:AVG|COUNT|FIRST|FORMAT|LAST|LCASE|LEN|MAX|MID|MIN|MOD|NOW|ROUND|SUM|UCASE)(?=\s*\()/i,keyword:/\b(?:ACTION|ADD|AFTER|ALGORITHM|ALL|ALTER|ANALYZE|ANY|APPLY|AS|ASC|AUTHORIZATION|AUTO_INCREMENT|BACKUP|BDB|BEGIN|BERKELEYDB|BIGINT|BINARY|BIT|BLOB|BOOL|BOOLEAN|BREAK|BROWSE|BTREE|BULK|BY|CALL|CASCADED?|CASE|CHAIN|CHAR(?:ACTER|SET)?|CHECK(?:POINT)?|CLOSE|CLUSTERED|COALESCE|COLLATE|COLUMNS?|COMMENT|COMMIT(?:TED)?|COMPUTE|CONNECT|CONSISTENT|CONSTRAINT|CONTAINS(?:TABLE)?|CONTINUE|CONVERT|CREATE|CROSS|CURRENT(?:_DATE|_TIME|_TIMESTAMP|_USER)?|CURSOR|CYCLE|DATA(?:BASES?)?|DATE(?:TIME)?|DAY|DBCC|DEALLOCATE|DEC|DECIMAL|DECLARE|DEFAULT|DEFINER|DELAYED|DELETE|DELIMITERS?|DENY|DESC|DESCRIBE|DETERMINISTIC|DISABLE|DISCARD|DISK|DISTINCT|DISTINCTROW|DISTRIBUTED|DO|DOUBLE|DROP|DUMMY|DUMP(?:FILE)?|DUPLICATE|ELSE(?:IF)?|ENABLE|ENCLOSED|END|ENGINE|ENUM|ERRLVL|ERRORS|ESCAPED?|EXCEPT|EXEC(?:UTE)?|EXISTS|EXIT|EXPLAIN|EXTENDED|FETCH|FIELDS|FILE|FILLFACTOR|FIRST|FIXED|FLOAT|FOLLOWING|FOR(?: EACH ROW)?|FORCE|FOREIGN|FREETEXT(?:TABLE)?|FROM|FULL|FUNCTION|GEOMETRY(?:COLLECTION)?|GLOBAL|GOTO|GRANT|GROUP|HANDLER|HASH|HAVING|HOLDLOCK|HOUR|IDENTITY(?:_INSERT|COL)?|IF|IGNORE|IMPORT|INDEX|INFILE|INNER|INNODB|INOUT|INSERT|INT|INTEGER|INTERSECT|INTERVAL|INTO|INVOKER|ISOLATION|ITERATE|JOIN|KEYS?|KILL|LANGUAGE|LAST|LEAVE|LEFT|LEVEL|LIMIT|LINENO|LINES|LINESTRING|LOAD|LOCAL|LOCK|LONG(?:BLOB|TEXT)|LOOP|MATCH(?:ED)?|MEDIUM(?:BLOB|INT|TEXT)|MERGE|MIDDLEINT|MINUTE|MODE|MODIFIES|MODIFY|MONTH|MULTI(?:LINESTRING|POINT|POLYGON)|NATIONAL|NATURAL|NCHAR|NEXT|NO|NONCLUSTERED|NULLIF|NUMERIC|OFF?|OFFSETS?|ON|OPEN(?:DATASOURCE|QUERY|ROWSET)?|OPTIMIZE|OPTION(?:ALLY)?|ORDER|OUT(?:ER|FILE)?|OVER|PARTIAL|PARTITION|PERCENT|PIVOT|PLAN|POINT|POLYGON|PRECEDING|PRECISION|PREPARE|PREV|PRIMARY|PRINT|PRIVILEGES|PROC(?:EDURE)?|PUBLIC|PURGE|QUICK|RAISERROR|READS?|REAL|RECONFIGURE|REFERENCES|RELEASE|RENAME|REPEAT(?:ABLE)?|REPLACE|REPLICATION|REQUIRE|RESIGNAL|RESTORE|RESTRICT|RETURN(?:S|ING)?|REVOKE|RIGHT|ROLLBACK|ROUTINE|ROW(?:COUNT|GUIDCOL|S)?|RTREE|RULE|SAVE(?:POINT)?|SCHEMA|SECOND|SELECT|SERIAL(?:IZABLE)?|SESSION(?:_USER)?|SET(?:USER)?|SHARE|SHOW|SHUTDOWN|SIMPLE|SMALLINT|SNAPSHOT|SOME|SONAME|SQL|START(?:ING)?|STATISTICS|STATUS|STRIPED|SYSTEM_USER|TABLES?|TABLESPACE|TEMP(?:ORARY|TABLE)?|TERMINATED|TEXT(?:SIZE)?|THEN|TIME(?:STAMP)?|TINY(?:BLOB|INT|TEXT)|TOP?|TRAN(?:SACTIONS?)?|TRIGGER|TRUNCATE|TSEQUAL|TYPES?|UNBOUNDED|UNCOMMITTED|UNDEFINED|UNION|UNIQUE|UNLOCK|UNPIVOT|UNSIGNED|UPDATE(?:TEXT)?|USAGE|USE|USER|USING|VALUES?|VAR(?:BINARY|CHAR|CHARACTER|YING)|VIEW|WAITFOR|WARNINGS|WHEN|WHERE|WHILE|WITH(?: ROLLUP|IN)?|WORK|WRITE(?:TEXT)?|YEAR)\b/i,boolean:/\b(?:TRUE|FALSE|NULL)\b/i,number:/\b0x[\da-f]+\b|\b\d+(?:\.\d*)?|\B\.\d+\b/i,operator:/[-+*\/=%^~]|&&?|\|\|?|!=?|<(?:=>?|<|>)?|>[>=]?|\b(?:AND|BETWEEN|DIV|IN|ILIKE|IS|LIKE|NOT|OR|REGEXP|RLIKE|SOUNDS LIKE|XOR)\b/i,punctuation:/[;[\]()`,.]/};
+!function(n){function a(a,e){n.languages[a]&&n.languages.insertBefore(a,"comment",{"doc-comment":e})}var e=n.languages.markup.tag,t={pattern:/\/\/\/.*/,greedy:!0,alias:"comment",inside:{tag:e}},g={pattern:/'''.*/,greedy:!0,alias:"comment",inside:{tag:e}};a("csharp",t),a("fsharp",t),a("vbnet",g)}(Prism);
+!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var o="line-numbers",a=/\n(?!$)/g,e=Prism.plugins.lineNumbers={getLine:function(e,n){if("PRE"===e.tagName&&e.classList.contains(o)){var t=e.querySelector(".line-numbers-rows");if(t){var i=parseInt(e.getAttribute("data-start"),10)||1,r=i+(t.children.length-1);n<i&&(n=i),r<n&&(n=r);var s=n-i;return t.children[s]}}},resize:function(e){u([e])},assumeViewportIndependence:!0},t=function(e){return e?window.getComputedStyle?getComputedStyle(e):e.currentStyle||null:null},n=void 0;window.addEventListener("resize",function(){e.assumeViewportIndependence&&n===window.innerWidth||(n=window.innerWidth,u(Array.prototype.slice.call(document.querySelectorAll("pre."+o))))}),Prism.hooks.add("complete",function(e){if(e.code){var n=e.element,t=n.parentNode;if(t&&/pre/i.test(t.nodeName)&&!n.querySelector(".line-numbers-rows")&&Prism.util.isActive(n,o)){n.classList.remove(o),t.classList.add(o);var i,r=e.code.match(a),s=r?r.length+1:1,l=new Array(s+1).join("<span></span>");(i=document.createElement("span")).setAttribute("aria-hidden","true"),i.className="line-numbers-rows",i.innerHTML=l,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(i),u([t]),Prism.hooks.run("line-numbers",e)}}}),Prism.hooks.add("line-numbers",function(e){e.plugins=e.plugins||{},e.plugins.lineNumbers=!0})}function u(e){if(0!=(e=e.filter(function(e){var n=t(e)["white-space"];return"pre-wrap"===n||"pre-line"===n})).length){var n=e.map(function(e){var n=e.querySelector("code"),t=e.querySelector(".line-numbers-rows");if(n&&t){var i=e.querySelector(".line-numbers-sizer"),r=n.textContent.split(a);i||((i=document.createElement("span")).className="line-numbers-sizer",n.appendChild(i)),i.innerHTML="0",i.style.display="block";var s=i.getBoundingClientRect().height;return i.innerHTML="",{element:e,lines:r,lineHeights:[],oneLinerHeight:s,sizer:i}}}).filter(Boolean);n.forEach(function(e){var i=e.sizer,n=e.lines,r=e.lineHeights,s=e.oneLinerHeight;r[n.length-1]=void 0,n.forEach(function(e,n){if(e&&1<e.length){var t=i.appendChild(document.createElement("span"));t.style.display="block",t.textContent=e}else r[n]=s})}),n.forEach(function(e){for(var n=e.sizer,t=e.lineHeights,i=0,r=0;r<t.length;r++)void 0===t[r]&&(t[r]=n.children[i++].getBoundingClientRect().height)}),n.forEach(function(e){var n=e.sizer,t=e.element.querySelector(".line-numbers-rows");n.style.display="none",n.innerHTML="",e.lineHeights.forEach(function(e,n){t.children[n].style.height=e+"px"})})}}}();
+!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var i=[],l={},d=function(){};Prism.plugins.toolbar={};var e=Prism.plugins.toolbar.registerButton=function(e,n){var t;t="function"==typeof n?n:function(e){var t;return"function"==typeof n.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",function(){n.onClick.call(this,e)})):"string"==typeof n.url?(t=document.createElement("a")).href=n.url:t=document.createElement("span"),n.className&&t.classList.add(n.className),t.textContent=n.text,t},e in l?console.warn('There is a button with the key "'+e+'" registered already.'):i.push(l[e]=t)},t=Prism.plugins.toolbar.hook=function(a){var e=a.element.parentNode;if(e&&/pre/i.test(e.nodeName)&&!e.parentNode.classList.contains("code-toolbar")){var t=document.createElement("div");t.classList.add("code-toolbar"),e.parentNode.insertBefore(t,e),t.appendChild(e);var r=document.createElement("div");r.classList.add("toolbar");var n=i,o=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);o&&(n=o.map(function(e){return l[e]||d})),n.forEach(function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),r.appendChild(n)}}),t.appendChild(r)}};e("label",function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}}),Prism.hooks.add("complete",t)}}();
+;
+// 展示代码行数
+var prenumber = function(classStrArr) {
+    classStrArr.map(function(item) {
+        $('.' + item + ' pre').addClass("prettyprint")
+    })
+    $("pre.prettyprint code").each(function() {
+        var deleten = $(this).text().replace(/(\n+)$/g,"")
+        var t = deleten.split("\n").length , e = $("<ul/>").addClass("pre-numbering").hide();
+        $(this).addClass("has-numbering").parent().append(e)
+        for (let i = 1; i <= t; i++)
+            e.append($("<li/>").text(i+"."));
+        e.fadeIn(1500)
+    })
+}
+// 展示pre行号
+var addPreNumber = function() {
+    var preArr = $('.editor-preview-side pre:not(:has(code))')
+    if(preArr.length == 0) return;
+    preArr.each(function() {
+        var deleten = $(this)[0].innerText.replace(/(\n+)$/g,"")
+        var t = deleten.split("\n").length , e = $("<ul/>").addClass("pre-numbering").hide();
+        $(this).addClass("has-pre-numbering").append(e)
+        for (let i = 1; i <= t; i++)
+            e.append($("<li/>").text(i+"."));
+        e.fadeIn(1500)
+    })
+}
+;
+// zjf20171011
+var  version_Js = 20211104//更新js版本号
+var IntroduceFn1 = function(){this.Init()}
+IntroduceFn1.prototype = {   
+    Init: function(){
+        var _this = this
+        _this.LoadPageParms = {
+            blog_id: blog_id,
+            order_field: 'create_time',
+            order:0,
+            page: cid != 0 ? page : 1,//cid 通过链接上cid参数直接访问该条评论所在的当页
+            page_size:10,
+        };
+        _this.page_isClick = 0;
+        _this.timer1;
+        _this.Sort()            //排序
+        _this.Favorites()       //收藏
+        _this.Praise()          //文章点赞
+        _this.Report()          // 举报
+        _this.ReportSubmit()    // 提交举报信息
+        _this.ReportCancel()    // 取消举报
+        _this.LoadPage(_this.LoadPageParms)        //分页
+        _this.SetPageClick() 
+        _this.showMore()
+        _this.SetReplay()       //发表评论
+        _this.SetReply()        //回复评论
+        _this.Remove()          //删除
+        _this.Focus()
+        _this.Ahref('.Topraise','#comment')
+        _this.Ahref('.comment-num','#comment')
+        _this.setPraise($('.comment-List .vote'))//评论点赞
+        _this.ScrollWindowTop();
+        _this.ShowCopyright();
+        _this.ToSx();
+        _this.ScrollHeader();
+        _this.saveReply();
+        _this.stoptextareaPropagation();
+        _this.setAlink() //超链接处理
+        _this.handleReportType()  // 选择举报类型
+        _this.handleReportReasons() // 选择举报原因
+        _this.handleFontCount(); // 控制补充说明右下角计数
+        _this.handleUploadImg(); // 上传截图
+        _this.handleDeleteImg(); // 删除已经上传的图片
+        _this.handleCloseMaskDialog(); // 点击遮罩关闭弹窗
+        _this.handleStopClick(); // 阻止事件冒泡
+    },
+    Focus: function(){
+        var _this = this
+        $('.textarea-show').click(function(e){
+            if(isLogin != 1) {
+                Login({scene:'comment1'})
+            }else{
+                e.stopPropagation();
+                $('.textarea-show').hide()
+                $('.textarea-hide').show()
+                $('.textarea-hide textarea').focus();
+            }
+        })
+    },
+    stoptextareaPropagation:function(){
+        $('#textareadiv-publish').click(function(e){
+            e.stopPropagation();
+        })
+    },
+    SetReplay: function(){//发表评论参数
+        var _this = this
+        $('.publish-btn').unbind()
+        $('.publish-btn').click(function(e){
+            e.stopPropagation();
+            var me = $(this)
+            var flag = me.attr('flag') // 1评论 2回复
+            var content = me.parent().parent().find('.textareadiv').val()
+            var first_pid = flag==1 ? 0 : me.parents('.comment-List').find('.first_pid').val()
+            var parent_id = flag==1 ? 0 : me.parents('.comment-List').find('.parent_id').val()
+            var reply_uid = flag==1 ? 0 : me.parents('.comment-List').find('.reply_uid').val()
+            var data = {
+                'blog_id': blog_id,
+                'content': $.trim(content),
+                'parent_id': parent_id,
+                'first_pid': first_pid,
+                'reply_uid':reply_uid,
+            }
+            _this.ReplayAjax(data,me)
+       })
+    },
+    SetReply: function(){
+        var _this = this
+        $('.reply').unbind("click")
+        $('.reply').click(function(){//回复
+            var me = $(this)
+            _this.SetReplyCon(me)
+        })
+    },
+    SetReplyCon: function(me){
+        var _this = this
+        var placeholder_txt = '@'+me.parents('.comment-detail').find('h3 a').text();
+        var reply_text = $('<div class="textarea-hide"><div class="top"><textarea class="textareadiv textareadiv-publish" name="" id="" placeholder="'+placeholder_txt+'" maxlength="500"></textarea></div><div class="bot clearfix"><strong class="fr publish-btn" flag="2">发布评论</strong><span class="fr cancel-btn-2">取消</span></div></div>');
+        if(isLogin != 1) {
+            Login({scene:'comment2'})
+            return false;
+        }
+        $('.comment-List').find('.textarea-hide').remove();
+        if(me.parents('.comment-detail').find('.textarea-hide').length == 0){
+            me.parents('.comment-detail').append(reply_text)
+        }        
+        _this.CancelBtn()       //取消回复
+        _this.SetReplay()       //发表评论
+        _this.Remove()          //删除
+        _this.SetPageClick()    //click page
+        setTimeout(function(){
+            reply_text.find('textarea').focus()
+        },250)
+    },
+    SetPageClick: function() {
+        var _this = this;
+        $(".pagination-ajax li a").click(function(e) {
+            _this.LoadPageParms.page = parseInt($(this).attr('data-page'))+1         
+            if(!$(this).parent('li').hasClass('active')){		
+                e.preventDefault();
+                _this.page_isClick = 1 //点击了分页，地址上的cid定位失效
+                _this.LoadPage(_this.LoadPageParms);
+                _this.ScrollTopFn($('#comment'))
+            }              
+        })
+    },
+    Sort: function(){//评论排序
+        var _this = this
+        $(".comment-num .sort").click(function(e) {
+            _this.is_load = false;
+            $(this).addClass('on').siblings('.sort').removeClass('on')
+            _this.LoadPageParms.order_field = $(this).attr('type')
+            _this.LoadPageParms.order = $(this).attr('order')
+            _this.LoadPage(_this.LoadPageParms);
+        })
+    },
+    LoadPage: function(parms){//分页
+        var _this = this
+        if(_this.is_load)return false;
+        $(".comment-List-box").html('<img src="'+img_url+'images/loading.gif" style="margin: 200px 370px;">');
+        _this.is_load = true;       
+        $.get(comment_list,parms,function(e){
+            _this.is_load = false;
+            if(e.code == 0){   
+                if(e.data.total>0){
+                    var htmlData = template('commentListScript', e.data);
+                    $(".comment-List-box").html(htmlData);
+                    $('#comment .comment-num').show()
+                    $('#CommentNum,.comments_num').text(e.data.total)
+                }else{
+                    $('#comment .comment-num').hide()
+                    $('.comments_num,#CommentNum').text('')
+                    $(".comment-List-box").html('');
+                }            
+                _this.setPraise($('.comment-List .vote'))//点赞
+                _this.SetPageClick()    //click page
+                _this.CancelBtn()       //取消回复
+                _this.SetReplay()       //发表评论
+                _this.SetReply()        //回复评论
+                _this.Remove()          //删除
+                _this.showMore()
+                if (cid && _this.page_isClick == 0){ //通过链接地址定位某一页评论
+                    _this.ScrollTopFn($('#'+cid))
+                }
+            } else {
+                new AutoBox({content:e.msg,autoClose:3})
+            }
+        },'json')
+    },
+    showMore:function(){
+        $('body').on('click','.more-toggle',function(){           
+            $(this).parent('.floor-2').find('.comment-List').slideDown();
+            $(this).hide();
+        })
+    },
+    ReplayAjax: function(data,dom){//评论ajax
+        var _this = this
+        if(isLogin != 1) {
+            Login({scene:'comment2'})
+            return false;
+        }
+        if(data.content.length==0){
+            new AutoBox({content:'评论内容不能为空~',mask:"#000",autoClose:3})
+        }else{
+            $.ajax({
+                url: addReply_url,
+                data: data,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(e){
+                    if(e.code == 0){                        
+                        _this.LoadPage(_this.LoadPageParms) 
+                        if(dom.attr('flag') == 1){//评论
+                            _this.ScrollTopFn($('#comment'))   
+                        }else{//回复
+                           setTimeout(function(){
+                            var pid = dom.parents('.comment-List').find('.first_pid').val();
+                            _this.ScrollTopFn($('#'+pid))  
+                           },300)
+                        }                
+                        $('.textareadiv-publish').val('')
+                        $('.comment-textarea .textarea-show span').text('提问和评论都可以，用心的回复会被更多人看到');
+                        $('.comment-textarea .textarea-show').show();
+                        $('.comment-textarea .textarea-hide').hide();
+                        if($('.detail-content-left').hasClass('set-right')){//博文沉浸式阅读重新绘制了
+                            $('#page_center').height($('.detail-content-left').height())
+                        }  
+                        _this.openDalog()                      
+                    }else if(e.code == 10005){
+                        new AutoBox({W:360,content:'<div style="padding: 0 40px;">很抱歉，您的账号因违规已被关闭，不能发布评论。如果您有疑问，请联系<span class="off-zhiCustomBtn" style="color:#3e71f6; cursor: pointer;">在线客服</span></div>',mask:"#000"})
+                    }else if(e.code == 10004){
+                        Login({scene:'comment2'})
+                    }else{
+                        new AutoBox({content:'<div style="padding: 0 40px;">'+e.msg+'</div>',mask:"#000",autoClose:3})
+                    }
+                }
+            })
+        }
+    },
+    CancelBtn: function(){//取消回复
+        $('.cancel-btn-2').click(function(){
+            $(this).parents('.textarea-hide').remove();
+        })
+    },
+    saveReply:function(){
+        $('body').click(function(e){
+            if(!$('.comment-textarea .textarea-hide').is(':hidden')){
+                if(e.target.id != 'textareadiv-publish' || e.target.id != 'publish-btn'){
+                    $('.comment-textarea .textarea-show').show();
+                    $('.comment-textarea .textarea-hide').hide();
+                    if($('#textareadiv-publish').val()!= ''){
+                        $('.comment-textarea .textarea-show span').text($('#textareadiv-publish').val())   
+                    }else{
+                        $('.comment-textarea .textarea-show span').text('提问和评论都可以，用心的回复会被更多人看到') 
+                    }                   
+                }
+            }
+            
+        })
+    },
+    openDalog: function (){
+        var _this = this
+        var mask = $('<div class="mask"></div>')
+            msg_index_box = $('<div class="msg-index-box"></div>'),
+            cls = $('<p class="follow-close"></p>'),
+            top_bg = $('<p class="top-bg"></p>'),
+            con_box = $('<div class="con-box"></div>'),
+            icon_1 = $('<p class="icon-bg icon-1"></p>')
+            icon_2 = $('<p class="icon-bg icon-2"></p>')
+            h2 = $('<h2>发布成功</h2>')
+            con = $('<div class="con">关注并绑定官方微信服务号可随时随地</div><div class="con">收到回复提醒</div>'),
+            btn_box = $('<div class="btn-box"><p class="btn-1">不再提醒</p><p class="btn-2">知道了</p></div>')
+
+            if(getCookie('follow1') && getCookie('follow2'))return false;
+
+            $.get('/wechat-ajax/qrcode', function (res) {
+                if (res.code == 0) {
+                    var data = res.data
+                    if (!data.qr_code) {
+                        if(getCookie('follow2'))return false;
+                        msg_index_box.remove()
+                        $('body').append(mask).append(msg_index_box)
+                        msg_index_box.append(cls).append(top_bg).append(con_box)
+                        con_box.html('').append(icon_2).append(h22).append(con1).append(btn_box)
+                        msg_index_box.css('height','150px')
+                    } else {
+                       if(getCookie('follow1'))return false;
+                        qrcodeSid = data.sid
+                        var code_bg = '<div class="code-bg"><img src="' + data.qr_code + '" ></img></div>'
+                        msg_index_box.remove()
+                        $('body').append(mask).append(msg_index_box)
+                        msg_index_box.append(cls).append(top_bg).append(con_box)
+                        con_box.html('').append(icon_1).append(h2).append(code_bg).append(btn_box)
+                        msg_index_box.css('height', '250px') 
+                    }
+                    $('.mask').show()
+                    $('.btn-box .btn-2, .msg-index-box .follow-close').bind('click', function () {
+                        $('.msg-index-box').remove()
+                        $('.mask').remove()
+                        clearInterval(_this.timer1)
+                    })
+                    $('.btn-box .btn-1').bind('click', function () {
+                        if (!data.qr_code) {
+                            setCookie('follow2','follow2',3650)
+                        } else {
+                            setCookie('follow1','follow1',3650)
+                        }
+                        $('.msg-index-box').remove()
+                        $('.mask').remove()
+                        clearInterval(_this.timer1)
+                    })
+                    // $("body").on('click',".code-bg img",function(){
+                    //     if (_this.timer1) {
+                    //         return false
+                    //     }
+                    //     $.get('/wechat-ajax/qrcode', function (res) {
+                    //     if (res.code == 0) {
+                    //         clearInterval(_this.timer1)
+                    //         qrcodeSid = res.data.sid
+                    //         $(".code-bg img").attr("src", res.data.qr_code)
+                    //         polling()
+                    //     }
+                    // }, 'json')
+                    // })
+                    // 轮循
+                    data.qr_code && polling()
+                }
+            }, 'json')
+    },
+    Remove: function(){//删除回复
+        var _this = this
+        $('.comment-List .delete').unbind("click");
+        $('.comment-List .delete').click(function(){
+            var _me = $(this)
+            var id = _me.parents('.comment-List').find('.parent_id').val();
+            _this.isLogin()
+            new AutoBox({content:'<div style="padding: 0 30px 30px 30px;">是否要删除发布的评论？</div>',img:'remind',mask:"#000",Yes:'确定',No:'取消',
+                yc:function(){   
+                    $.post(removeUrl,{blog_id: blog_id,id: id},function(e){
+                        if(e.code == 0){        
+                            _this.LoadPage(_this.LoadPageParms)                    
+                            if($('.detail-content-left').hasClass('set-right')){//博文沉浸式阅读重新绘制了
+                                $('#page_center').height($('.detail-content-left').height())
+                            }
+                        }else{
+                            new AutoBox({content:e.msg,img:'remind',mask:"#000",autoClose:3})
+                        }
+                    },'json')
+                }
+            })
+        })
+    },
+    setPraise: function(obj){//赞
+        obj.click(function(ev){
+            var me = $(this),
+                text = parseInt(me.find('b').attr('num')),
+                blog_id =  me.parents('.comment-List').find('.parent_id').val()
+                userid = me.parents('.comment-List').find('.reply_uid').val()
+            if(me.hasClass('on')){
+                new AutoBox({content:'您已点赞过',mask:"#000",autoClose:2})
+                return false;
+            }
+            if(isLogin == 1){//登录
+            $.post(praise_url,{id:blog_id,type:2,userid:userid},function(e){
+                if(e.status == 1){                
+                    me.addClass('on')
+                    me.find('b').text(text+1)
+                    var x = $('<div class="jia1">+1</div>')
+                    .css({'top':ev.pageY-15,'left':ev.pageX+6,'z-index':10})
+                    $("body").append(x)
+                    x.animate({top:ev.pageY-20,left:ev.pageX+10,'font-size':'16px',opacity:'show'},300,'swing',function(){
+                        x.fadeOut(500)
+                    })    
+
+                }else{
+                new AutoBox({content:e.msg,img:'remind',mask:"#000",autoClose:3})
+                }
+            },'JSON')
+            }else{//没登录
+            Login({scene:'LikeButton2'})
+            }
+        })
+    },
+    Favorites: function(){//收藏
+        var _this = this
+        $('.favorites-opt').click(function(){
+            var me = $(this)
+                bVal = me.find('.favorites-num').text()!='' ? parseInt(me.find('.favorites-num').text()) : 0;
+            if(isLogin != 1){
+                Login({scene:'house1'})
+                return false;
+            }
+            if(me.hasClass('on')){
+                new AutoBox({content:'您已收藏过',mask:"#000",autoClose:2})
+                return false;
+            }
+            //更新状态
+            $('.favorites-opt').addClass('no-favorites on') 
+            var params = {
+                data_id:blog_id,
+                data_type:0,
+                url:window.location.href
+            }
+            $.ajax({
+                    url: collect_url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data:params,
+                    success: function (res) {
+                        if(res.code == 0){//成功
+                            $('.favorites-num').text(bVal+1)                                   
+                        }else{//其他
+                            $('.favorites-opt').removeClass('no-favorites on')
+                            new AutoBox({content:res.msg,mask:"#000",autoClose:3})
+                        }
+                    }
+                })
+        });
+    },
+    Praise: function(){//赞
+        var _this = this
+        $('.is-praise').click(function(ev){
+            var me = $(this),
+                text = parseInt(me.find('.praise-num').text() == '' ? 0 : me.find('.praise-num').text()),
+                type = me.attr('type'),
+                blog_id = me.attr('blog_id'),
+                userid = me.attr('userid');
+            if(isLogin != 1){
+                Login({scene:'LikeButton1'})
+                return false;
+            }
+            if(me.hasClass('on')){
+                new AutoBox({content:'您已点赞过',mask:"#000",autoClose:2})
+                return false;
+            }
+            //更新状态
+            $('.is-praise').addClass('no-praise on')
+            $.post(praise_url,{id:blog_id,type:type,userid:userid},function(e){
+                if(e.status == 1){
+                    $('.is-praise .praise-num').text(text+1)
+                }else{
+                    $('.is-praise').removeClass('no-praise on')
+                    new AutoBox({content:e.msg,img:'remind',mask:"#000",autoClose:3})
+                }
+            },'JSON')
+        })
+    },
+    Report: function() { // 举报
+        var _this = this;
+        $('.article-report').click(function() {
+            if(isLogin != 1){
+                Login({scene:'writetostate1'})
+                return false;   
+            }
+            $('.Mask').show();
+            $('.report-dialog-root').show();
+            $('.report-dialog-container').show();
+        })
+    },
+    // 提交举报信息
+    ReportSubmit: function() {
+        var _this = this;
+        $('.report-btn-concert').click(function() {
+            var reportType = $('#report-specific-type').attr('data-type');
+            var reportReasons = $('#report-specific-reasons').attr('data-type');
+            var reportOriginalLink = $('.report-orgin_input').val().trim();
+            var reportMoreInfo = $('#report-more-info').val().trim();
+            var reportImg = $('#report-img').attr('src');
+            var isCanSubmit = true;
+            var myTimer = null;
+            if(reportType == 0) {
+                $('.report-warm-tip').text('请选择举报类型');
+                isCanSubmit = false;
+            }
+            if((reportType == 1) && (reportReasons == 0)) {
+                $('.report-warm-tip').text('请选择具体原因');
+                isCanSubmit = false;
+            }
+            if((reportType == 3) && (!reportOriginalLink)) {
+                $('.report-warm-tip').text('请正确输入原文链接');
+                isCanSubmit = false;
+            }
+            if((reportType == 5) && (!reportMoreInfo)) {
+                $('.report-warm-tip').text('请填写补充说明');
+                isCanSubmit = false;
+            }
+            if(!isCanSubmit) {
+                $('.report-warm-tip').show();
+                setTimeout(function(){
+                    $('.report-warm-tip').hide();
+                }, 2000);
+                return;
+            }
+            var subParams = {
+                blog_id: blog_id,
+                reason_type: reportType,
+                reason_detail_type: reportReasons,
+                original_url: reportOriginalLink,
+                more_info: reportMoreInfo,
+                image_url: ""
+            }
+            $('.report-btn-concert').attr('disabled', true);
+            function submitReportData(data) {
+                $.ajax({
+                    type: 'POST',
+                    url: blog_url+'/blogger-ajax/report',
+                    data: subParams,
+                    success: function(res) {
+                        if(res.status == 1) {
+                            $('.report-warm-tip').text('已经收到您得举报信息，我们会尽快审核');
+                            $('.report-warm-tip').show();
+                        }
+                        if(res.status == 0) {
+                            $('.report-warm-tip').text(res.msg);
+                            $('.report-warm-tip').show();
+                        }
+                        setTimeout(function(){
+                            $('.report-warm-tip').hide();
+                            _this.handleInitReportInfo();
+                        }, 2000);
+                    },
+                    error: function(error){
+                        $('.report-warm-tip').text(error + ',请稍后重试');
+                        $('.report-warm-tip').show();
+                        setTimeout(function(){
+                            $('.report-warm-tip').hide();
+                            _this.handleInitReportInfo();
+                        }, 2000);
+                    }
+                });
+            }
+
+            if(reportImg) {
+                var blob = base64ToBlob(reportImg);
+                var imgFile = blobToFile(blob, '123');
+                // console.log('imgFile----', imgFile);
+                function callbackRes(res) {
+                    // console.log('tupian----', res);
+                    subParams.image_url = res;
+                    submitReportData(subParams);
+                }
+                uploadNow(imgFile,callbackRes);
+            }else {
+                submitReportData(subParams);
+            }    
+        })
+    },
+    // 取消举报
+    ReportCancel: function() {
+        var _this = this;
+        $('.report-btn-cancel').click(function() {
+            _this.handleInitReportInfo();
+        })
+    },
+    // 初始化举报弹窗数据
+    handleInitReportInfo: function() {
+        var _this = this;
+        $('.report-type-item').css({
+            background: '#F6F7F8',
+            color: '#9399A6'
+        })
+        $('#report-specific-type').attr('data-type', '0');
+        $('#report-specific-reasons').attr('data-type', '0');
+        $('.tip-left').text('0');
+        $('.report-orgin_input').val('');
+        $('#report-more-info').val('');
+        $('#report-img').attr('src', '');
+        $('.report-img_rule').show();
+        $('.repot-btn-select').hide();
+        $('.report-img-show').hide();
+        $('.report-img-container').show();
+        $('#report-specific-reasons').hide();
+        $('#report-original-link').hide();
+        $('.report-dialog-container').hide();
+        $('.report-dialog-root').hide();
+        $('.Mask').hide();
+        $('#report-more-info').prev().text('补充说明');
+        $('.report-btn-concert').attr('disabled', false);
+        // _this.handleUploadImg();
+    },
+    // 选择举报类型 
+    handleReportType: function() {
+        var _this = this;
+        $('.type-item_first').click(function() {
+            var currentType = $(this).attr('data-type');
+            $(this).parent().parent().attr('data-type', currentType);
+            // console.log('currentType-------', currentType)
+            $('.type-item_first').css({
+                background: '#F6F7F8',
+                color: '#9399A6'
+            })
+            $(this).css({
+                background: '#3E71F6',
+                color: '#FFF'
+            });
+            if(currentType == 1) {
+                $('#report-specific-reasons').show();
+            }
+            if(currentType != 1){
+                $('#report-specific-reasons').attr('data-type', '0');
+                $('.type-item_second').css({
+                    background: '#F6F7F8',
+                    color: '#9399A6'
+                });
+                $('#report-specific-reasons').hide();
+            }
+            if(currentType == 3) {
+                $('#report-original-link').show();
+            }
+            if(currentType != 3) {
+                $('#report-original-link').hide();
+                $('.report-orgin_input').val('');
+            }
+            if(currentType == 5) {
+                $('#report-more-info').prev().text('补充说明（必填）');
+            }
+            if(currentType != 5) {
+                $('#report-more-info').prev().text('补充说明');
+            }
+
+        })
+    },
+    // 选择具体原因
+    handleReportReasons: function() {
+        var _this = this;
+        $('.type-item_second').click(function() {
+            var currentType = $(this).attr('data-type');
+            $(this).parent().parent().attr('data-type', currentType);
+            $('.type-item_second').css({
+                background: '#F6F7F8',
+                color: '#9399A6'
+            })
+            $(this).css({
+                background: '#3E71F6',
+                color: '#FFF'
+            });
+        })
+    },
+    // 控制补充说明右下角数字
+    handleFontCount: function() {
+        var _this = this;
+        $('#report-more-info').bind('input propertychange', function() {
+            var val = $('#report-more-info').val();
+            $('.tip-left').text(val.length);
+        });
+    },
+    // 上传图片
+    handleUploadImg: function() {
+        var _this = this;
+        $('.report-img-container').click(function() {
+            // console.log('aaaaaaaa')
+            // $('.repot-btn-select').show();
+            $('.repot-btn-select').click(function(e) {
+                $('.repot-btn-select').unbind("click");
+                // $("#fileToUpload").live('change', function(){
+                //     selectImg(this);
+                //  })
+                // $('.repot-btn-select').change(function() {
+                //     selectImg(this);
+                //     $('.repot-btn-select').unbind("change");
+                // });
+                e.stopPropagation();
+            });
+            
+            $('.repot-btn-select').click();
+            $('.report-img-container').unbind("click");
+            setTimeout(function () {
+                _this.handleUploadImg();
+            }, 1000);
+        })
+    },
+    // 取消已上传的图片 
+    handleDeleteImg: function() {
+        var _this = this;
+        $('.report-img-close').click(function() {
+            $('#report-img').attr('src', '');
+            $('.report-img_rule').show();
+            $('.report-img-show').hide();
+            $('.report-img-container').show();
+            // _this.handleUploadImg();
+        })
+    },
+    // 点击遮罩层关闭弹窗
+    handleCloseMaskDialog: function() {
+        var _this = this;
+        $('.report-dialog-root').click(function() {
+            _this.handleInitReportInfo();
+        });
+    },
+    // 阻止事件冒泡
+    handleStopClick: function() {
+        var _this = this;
+        $('.report-dialog-container').click(function(event) {
+            event.stopPropagation();
+        });
+    },
+    Time: function(t){//评论时间
+        t = t * 1000;
+        var date = new Date(t);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    },
+    SetBr: function(content){//评论换行
+        return content.replace(/[\r\n]/g, '<br />');
+    },
+    isLogin: function(){
+        var _this = this
+        if(isLogin != 1) _this.Login()
+    },
+    Login: function(){
+        Login()
+    },
+    ScrollTopFn:function(b){
+        if(b.length==0)return false
+        var scrollTop = b.offset().top-90
+        if(scrollTop > 0){
+            $("html,body").animate({scrollTop:scrollTop},'slow',function(){$(this).stop(true,true);});
+        }
+    },
+    Ahref: function(obj,id){
+        $('body').on('click', obj, function(){
+            if($(id) != 'undefined'){
+                var scrollTop = $(id).offset().top
+                scrollTop>0?$(window).scrollTop(scrollTop-90):""
+            }
+        })
+    },
+    AddAnimate: function(obj){
+        obj.append('<font class="jia2">+1</font>').find('font').animate({top:'-16px',right:'4px',opacity:'0'},300,'swing',function(){$('.jia2').fadeOut(500)})
+    },
+    ScrollPopover:function(){
+        var self = this;
+        var initialHeight = $(document).scrollTop();
+        var w_height = $(window).height();
+        $(document).scroll(function(){
+            var scroH = $(document).scrollTop();
+            if((scroH - initialHeight >w_height ||scroH - initialHeight < -w_height) && isLogin != 1){
+                self.Login()
+                $(document).unbind("scroll")
+            }
+        })
+        
+    },
+    ScrollWindowTop:function(){
+        $('.ScrollWindowTop').click(function(){
+            $(window).scrollTop(0) 
+            $('.fixtitle').hide();
+            $('.Header,.home-top').show();
+        })        
+    },
+    ScrollHeader:function(){
+        var scrolltop = new Array();
+        var index = 0;
+        scrolltop[0] = 0;
+        $(document).scroll(function(){
+            if($(document).scrollTop()>500){           
+                index ++;
+                scrolltop[index] = $(document).scrollTop();
+                if (scrolltop[index] > scrolltop[index-1]) {
+                    $('.fixtitle').show();
+                    $('.Header,.home-top').hide();
+                }else{
+                    $('.fixtitle').hide();
+                    $('.Header,.home-top').show();
+                };
+            }
+            if($(window).width()<=1440){        
+                if( $(document).scrollTop() > $('#asideoffset').offset().top-100  ){
+                    $('.action-aside-left').hide();
+                    $('body').removeClass('body_padding')
+                }else{
+                    if(!$('.detail-content-left').hasClass('set-right')){//博文沉浸式阅读重新绘制了
+                        $('.action-aside-left').show();
+                        $('body').addClass('body_padding')
+                    }                    
+                }
+            }
+        })    
+    },
+    ShowCopyright:function(){
+        $('#copyright-btn').click(function(){
+            $('.copytext').slideToggle(200);
+        })
+    },
+    ToSx:function(){
+        var _this = this
+        $('#ToSx').click(function(event){   
+          event.stopPropagation();    //  阻止事件冒泡
+         
+            if(isLogin != 1){
+                Login({scene:'Privateletter1'})
+                return false;
+            }else{
+              window.open($(this).attr('data'))
+            }
+        })
+    },
+    setAlink:function(){
+        //var reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/
+        var regUrl = /^((http(s)?:)?\/\/)?((\w+-?)?\w+\.)*51cto.com(\/.*)*$/;
+        var flags = false;        
+        //$('.editor-preview-side a:not([href^="#"])').attr('target', "_blank") 
+        $('.editor-preview-side a:not([href^="#"])').click(function(e){
+            e.preventDefault() 
+            var me = $(this)
+            var url = me.attr('href');
+            if(typeof (url) != 'undefined'){                           
+                if(flags == true) return false;
+                flags = true;                                
+                if(!regUrl.test(url)){  
+                    if(url=='http://love51cto.mikecrm.com/6TVXoS6'){
+                        window.open(url)
+                    }else{
+                        window.open(blog_url+'transfer?'+url)   
+                    }                         
+                }
+                else{
+                    window.open(url)
+                }               
+                setTimeout(function(){
+                    flags = false;
+                },1000);
+            }
+        })  
+        $('.editor-preview-side a').each(function(){
+            var me = $(this)
+            var url = me.attr('href');
+            if(typeof (url) != 'undefined'){ 
+                if($(this).find('img').length == 0){
+                    $(this).prepend('<i class="iconblog bloglink" style="font-size:inherit;"></i>&nbsp;')
+                } 
+            }          
+        })
+    }
+}
+var Introduce1 = new IntroduceFn1()
+// 
+setTimeout(function(){
+    $('.bdsharebuttonbox a').removeAttr('title')
+},1000);
+$('.action-aside .share').hover(function(){
+  $('.action-aside .share .ins img').attr('src',shareimgUrl)
+},function(){})
+
+// $('.about-aticle-list').on('click', function(e) {
+//     e.preventDefault()
+//     var href = $(this).attr('href'), query = $(this).attr('data-report-query')
+//     var hrefStr = href+'?'+query
+//     window.open(hrefStr,'_blank')
+// })
+// 
+
+getUserStat(blog_id)
+getInfoStat(blog_id)
+getDatelist(blog_id)
+function getUserStat(id){//用户数据
+    $('#userStat').append('<img src="'+img_url+'images/loading.gif" style="margin: 0 auto;display:block;">');	
+    $.ajax({
+        url: BLOG_URL + 'blog/user-stat',
+        type: 'get',
+        dataType: 'json',
+        data:{id:id},
+        success: function (res) {
+            if (res.status === 0) {  
+                var htmlData = template('userStatScript', res.data);
+                $('#userStat').html(htmlData);												
+            }
+        }
+    })
+}
+function getInfoStat(id){//博文统计
+    $.ajax({
+        url: BLOG_URL + 'blog/info-stat',
+        type: 'get',
+        dataType: 'json',
+        data:{id:id},
+        success: function (res) {
+            if (res.status === 0) {  
+                $('.praise-num').text(res.data.apraise>0 ? res.data.apraise : '')													
+                $('.favorites-num').text(res.data.favorite>0 ? res.data.favorite : '')
+                $('#CommentNum,.comments_num').text(res.data.comments>0 ? res.data.comments : '')
+                if(res.data.pv != ''){
+                    $('.article-detail .mess-tag').append('<strong class="fl"><em class="fl">阅读数</em><b class="fl">'+res.data.pv+'</b></strong>')
+                }
+            }
+        }
+    })
+}
+function getDatelist(id){//时间轴
+    $('#Datelist').append('<img src="'+img_url+'images/loading.gif" style="margin: 0 auto;display:block;">');	
+    $.ajax({
+        url: BLOG_URL + 'blog/datelist',
+        type: 'get',
+        dataType: 'json',
+        data:{id:id},
+        success: function (res) {
+            if (res.status === 0) { 
+                if(res.data&&Array.isArray(res.data)&&res.data.length==0){
+                    $('#Datelist').remove();
+                }else{
+                    var htmlData = template('datelistScript', res.data);
+                    $('#Datelist').html(htmlData);
+                }										
+            }
+        }
+    })
+}
+
+function base64ToBlob(base64Data) {
+    var arr = base64Data.split(','),
+        fileType = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        l = bstr.length,
+        u8Arr = new Uint8Array(l);
+        
+    while (l--) {
+        u8Arr[l] = bstr.charCodeAt(l);
+    }
+    return new Blob([u8Arr], {
+        type: fileType
+    });
+};
+// blob转file
+function blobToFile(newBlob, fileName) {
+    newBlob.lastModifiedDate = new Date();
+    newBlob.name = fileName;
+    return newBlob;
+};
+
+function selectImg(file) {
+    // console.log(111)
+    if (!file.files || !file.files[0]) {
+        return;
+    }
+    //定以一个读取文件的对象
+    var reader = new FileReader();
+
+    reader.onload = function (evt) {
+        //获取的是图片的base64代码
+        var replaceSrc = evt.target.result;
+        // console.log('replaceSrc-----', replaceSrc)
+
+        //定义一个Image对象
+        var image = new Image();
+        image.src = replaceSrc;
+        // 再将获取值赋给img标签
+        $('#report-img').attr("src", replaceSrc);
+        $('.report-img_rule').hide();
+        $('.report-img-container').hide();
+        $('.report-img-show').show();
+        $('.repot-btn-select').hide();
+    };
+    reader.readAsDataURL(file.files[0]);
+    $('.repot-btn-select').replaceWith('<input type="file" accept="image/jpg,image/jpeg,image/png" name="file" class="repot-btn-select" onchange="selectImg(this)"></input>');
+}
+
+// console.log('blog_url----', blog_url);
+// console.log('blog_id=====', blog_id);
+// 获取图片上传需要的sign值
+function getImageUploadInfo() {
+    if(window.infoOption) {
+        return infoOptionBack = window.infoOption
+    }
+    $.ajax({
+        type: "GET",
+        url: blog_url+"/blogger/upload-sign",
+        dataType: "json",
+        timeout: 5000,
+        success: function(res) {
+            infoOptionBack = res.data;
+            // console.log('infoOptionBack-----', infoOptionBack);
+        },
+        error: function(error){
+            // console.log(error)
+        }
+    })
+}
+if(userId!=''){
+    getImageUploadInfo();
+}
+
+
+// 获取图片上传地址
+function postUploadoss(options, callback) {
+    $.ajax({
+        type: 'POST',
+        url: blog_url+'/blogger/getoss',
+        data: options,
+        success: function(res) {
+            if(res.status) return callback(res.data)
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+}
+// 上传图片到阿里云
+function uploadimg(dataOss, callback) {
+    var formData = new FormData();
+    formData.append("OSSAccessKeyId", dataOss.OSSAccessKeyId);
+    formData.append("policy", dataOss.policy);
+    formData.append("signature", dataOss.signature);
+    //文件名字
+    formData.append("key", dataOss.key);
+    formData.append("dir", dataOss.dir);
+    formData.append("success_action_status", "200");
+    //文件必须声明在最后，否则异常
+    formData.append("file", dataOss.file);
+    $.ajax({
+        url: dataOss.host,
+        type: 'POST',
+        data: formData,
+        processData:false,
+        contentType: false,
+        success: function(res) {
+            callback(dataOss.host + dataOss.dir)
+        },
+        error: function(error){
+            console.log(error)
+        }
+    })
+}
+// 立即上传图片到阿里云
+function uploadNow(file, callback) {
+    if(infoOptionBack) {
+        var options = {
+            uploadSign: infoOptionBack.sign,
+            ext: file.type,
+            name: file.name,
+            uploadType: "image",
+        };
+        postUploadoss(options, function(res) {
+            var host = res.host, policy = res.policy, accessid = res.accessid, signature = res.signature, dir = res.dir
+            var dataOss = {
+                host: host,
+                policy: policy,
+                OSSAccessKeyId: accessid,
+                callback: "",
+                signature: signature,
+                dir: dir,
+                key: dir,
+                success_action_status: 200,
+                file: file
+            };
+            uploadimg(dataOss, function(res) {
+                callback(res)
+            })
+        })
+    }
+}
+
+$('#report-more-info').focus(function () { 
+    $('#report-more-info').addClass('specical-border');
+})
+$('#report-more-info').blur(function () { 
+    $('#report-more-info').removeClass('specical-border');
+})
+$('.report-orgin_input').focus(function () { 
+    $('.report-orgin_input').addClass('specical-border');
+})
+$('.report-orgin_input').blur(function () { 
+    $('.report-orgin_input').removeClass('specical-border');
+})
+$('body').on('click','.off-zhiCustomBtn',function(){
+    $('#hide-zhiCustomBtn').trigger('click');
+})
+$(document).scroll(function(){
+	if($(document).scrollTop()>30){           
+		$('.Header').css('top',0)
+        $('.home-top').hide()
+	}else{
+		$('.Header').css('top',30)
+        $('.home-top').show()
+	}
+})
+;
+(function(){
+	var clientWidth = (document.body.clientWidth - 1200) / 2 - 100
+	if(clientWidth > 0) {
+		var fixedRight =  clientWidth.toFixed(2)
+		$('.group_img_box').css('right', fixedRight+'px')
+	} else {
+		$('.group_img_box').css('right', '0px')
+	}
+	var checkdata, checkResult;
+	var Appreciate = function(){
+	  	this.init()
+	}
+	Appreciate.prototype.init = function(){
+		this.pointerClick()
+	}
+    Appreciate.prototype.setHTML = function() {
+    	var text = '<div class="mask"><div class="appreciate-nbox"><p class="close"></p><div class="appreciate-nbox-1"><h2>有你赞赏支持，博客原创会更美好</h2>'
+			text += '<ul class="list"><li><span>1</span>元</li><li><span>2</span>元</li><li class="on"><span>5</span>元</li><br><li><span>10</span>元</li><li><span>20</span>元</li><li><span>50</span>元</li><div class="clear"></div></ul>'
+			text += '<input class="place_number" type="text" value="手动输入"><p class="msg">您需支付<font class="show-money">5</font>元，感谢您的赞赏</p><p class="appreciate-ajax">去支付</p></div>'
+			text += '<div class="appreciate-nbox-2"><h3>微信/支付宝扫码付款</h3><img src=""><p class="error-1 error-msg">赞赏金额<em>￥0</em></p><p class="error-2 error-msg"></p><p class="error-3 error-msg"><i></i>支付成功</p></div>'
+			text += '</div></div>'
+		$('body').append(text)
+    }
+	Appreciate.prototype.checkMoney = function() {
+		var value = $('.show-money').text()
+		$('.appreciate-nbox-1 .error-msg').remove();
+		var re = /^[0-9]+$/ ;
+		if(value == '' || value == 0) {
+			$('.appreciate-ajax').before('<p class="error-msg">请选择赞赏金额或输入任意金额</p>');
+			return false;
+		} else if(!re.test(value)) {
+			$('.appreciate-ajax').before('<p class="error-msg">请选择赞赏金额或输入任意金额</p>')
+			return false;
+		} else if(value < 0 || value > 200) {
+			$('.appreciate-ajax').before('<p class="error-msg">最多可赞赏200哦</p>')
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	Appreciate.prototype.getQrcode = function() {
+		var me = this
+			money = parseInt($('.show-money').text());
+		$('.appreciate-nbox-2 .error-1 em').html('￥'+money);
+		$('.appreciate-nbox-2 .error-msg').hide();
+	    $('.appreciate-nbox-2 .error-1').show();
+		$.ajax({
+	        url: blog_url + 'qr/get-qr-url',
+	        data: {'id':blog_id, 'type':2, 'm':money},
+	        type: 'POST',
+	        dataType: 'JSON',
+	        success: function(e){
+	            if(e.status == 1){
+	            	var qr_url = e.data.url;
+	            	$('.appreciate-nbox-2 img').attr('src', qr_url);
+	            	checkdata = e.data.checkdata
+					checkResult = setInterval(me.checkPayResult, 5000)
+	            } else {
+	                new AutoBox({content:'<div style="padding: 0 40px;">'+e.msg+'</div>',mask:"#000",autoClose:3})
+	            }
+	        }
+	    })
+	}
+	Appreciate.prototype.stopCheckPay = function() {
+		var me = this
+		checkResult=window.clearInterval(checkResult);
+	}
+	Appreciate.prototype.checkPayResult = function() {
+		var me = this
+		if(!checkdata) {return false;}
+		$.ajax({
+	        url: blog_url + 'pay/check-buy',
+	        data:{checkdata: checkdata},
+	        type: 'POST',
+	        dataType: 'JSON',
+	        success: function(e){
+	            if(e.status == 1){
+	            	Appreciate.stopCheckPay()
+	            	$('.appreciate-nbox-2 .error-msg').hide();
+	            	$('.appreciate-nbox-2 .error-3').show();
+	            } else if(e.status == 2) {
+	            } else if(e.status == -1) {
+	            	Appreciate.stopCheckPay();
+	            	$('.appreciate-nbox-2 .error-msg').hide();
+	            	$('.appreciate-nbox-2 .error-2').html('<i></i>二维码失效<br><span>二维码失效，请点击二维码刷新</span>').show();
+	            } else if(e.status == 0) {
+	            	Appreciate.stopCheckPay();
+	            	$('.appreciate-nbox-2 .error-msg').hide();
+	            	$('.appreciate-nbox-2 .error-2').html('<i></i>'+e.msg).show();
+	            } else {
+	            	$('.appreciate-nbox-2 .error-msg').hide();
+	            	$('.appreciate-nbox-2 .error-1').show();
+	            }
+	        }
+	    })
+	}
+	Appreciate.prototype.isShow1 = function (obj,objpar,sClass){
+		if($(obj).hasClass(sClass)){
+			$(objpar).css('visibility','hidden')
+			$(obj).removeClass(sClass)
+		}else{
+			$(objpar).css('visibility','visible')
+			$(obj).addClass(sClass)
+		}
+	}
+	Appreciate.prototype.isShow2 = function (obj,objpar,sClass){
+		if($(obj).hasClass(sClass)){
+			$(objpar).removeClass(sClass)
+			$(obj).removeClass(sClass)
+		}else{
+			$(objpar).removeClass(sClass)
+			$(obj).addClass(sClass)
+		}
+	}
+	Appreciate.prototype.setPos = function (){
+		var me = this
+			me.setHTML()
+			$('.mask').show()
+		var width = $('.appreciate-nbox').width()
+			height = $('.appreciate-nbox').height()
+		$('.appreciate-nbox').css({'margin-left':-width/2+'px','margin-top':-height/2+'px' })
+	}
+	Appreciate.prototype.placeNumberCheck = function() {
+	    var place_number = $(".place_number").val();
+	    var str = place_number.replace(/[^\d]/g, "");
+	    var maxlen = 3;
+	    if (str.length < maxlen) {
+	        maxlen = str.length;
+	    }
+	    var temp = "";
+	    for (var i = 0; i < maxlen; i++) {
+	        temp = temp + str.substring(i, i + 1);
+	        if (i != 0 && (i + 1) % 4 == 0 && i != 11) {
+	            temp = temp + " ";
+	        }
+	    }
+	    $(".place_number").val(temp);
+	}
+	Appreciate.prototype.pointerClick = function(){
+		var me = this
+		$('.appreciate-end').click(function(){
+			if(isLogin != 1){Login({scene:'Gratuity1'})}else{
+				new AutoBox({content:'<div style="padding: 0 40px;margin-top: -20px;">自己不能赞赏自己的文章</div>',mask:"#000",autoClose:3})
+			}
+		})
+		$('.appreciate-open').click(function() {
+			if(isLogin != 1){Login({scene:'Gratuity1'})}else{me.setPos()}
+		})
+		$('body').on('keyup', '.place_number', function() {
+	        me.placeNumberCheck()
+	    })
+		$('body').on('focus','.place_number',function() {
+			$('.appreciate-nbox-1 li').removeClass('on')
+			$('.yuan').remove()
+			if($(this).val() == "手动输入"){
+				$(this).val('').after('<b class="yuan">元</b>')
+				$('.show-money').text('0')
+			}else{
+				$('.show-money').text($(this).val())
+			}
+		})
+		$('body').on('blur','.place_number',function() {
+			if($(this).val() == "手动输入" || $(this).val() == "" ){
+				$(this).val("手动输入")
+				$('.yuan').remove()
+				$('.show-money').text('0')
+			}else{
+				$('.show-money').text($(this).val())
+			}
+			return me.checkMoney();
+		})
+		$('body').on('change','.place_number',function() {
+			$('.appreciate-nbox-1 li').removeClass('on')
+			return me.checkMoney();
+		})
+		$('body').on('click','.appreciate-nbox-2 img',function(){me.getQrcode();})
+		$('body').on('click','.appreciate-nbox .close',function() {
+			$('.mask').remove();
+			me.stopCheckPay();//停止计时器
+		})
+		$('body').on('click','.appreciate-nbox-1 li',function() {
+			me.isShow2($(this), '.appreciate-nbox-1 li', 'on')
+			var text = $('.appreciate-nbox-1 li.on span').text()
+			if(text == ""){
+				$('.show-money').text(0);
+				$('.appreciate-ajax').before('<p class="error-msg">请选择赞赏金额或输入任意金额</p>');
+			}else{
+				$('.place_number').val('手动输入')
+				$('.show-money').text(text)	
+				$('.appreciate-nbox-1 .error-msg').remove();
+			}
+		})
+		$('body').on('click','.appreciate-ajax',function() {
+			if(!me.checkMoney()) {return false;}
+			me.stopCheckPay();
+			me.getQrcode();
+			$('.appreciate-nbox-1').hide();
+			$('.appreciate-nbox-2').show();
+		})
+	}
+	var Appreciate = new Appreciate();
+	var tableTop =0;
+	let hasDirectory = !!$('.detail-content-right .common-content-directory').length
+	if (hasDirectory){
+	 tableTop = $('.detail-content-right .common-content-directory').offset().top
+
+	}
+	$(window).scroll(function(){
+		if (hasDirectory){
+			fixedTable()
+		}
+	})
+	//目录吸顶
+	function fixedTable() {
+		if($(window).scrollTop()>tableTop){
+			$('.detail-content-right .common-content-directory').addClass('fix-table')
+		}else{
+			$('.detail-content-right .common-content-directory').removeClass('fix-table')
+		}
+	}
+
+	//目录
+	function trim(str){ //删除左右两端的空格
+　　     return str.replace(/(^\s*)|(\s*$)/g, "");
+　　 }
+	function getLv(n){return parseInt(n.replace('H',''))}
+	var h1_num = 1;
+	var list = $('.directory-list-left')
+	var ts = []
+	var jts = $(".editor-preview-side").find('h1,h2,h3')
+	  jts = jts?jts:'';
+	if(jts.length==0){
+		$('.common-content-directory').remove()
+	}else{
+		$('.action-aside-left ul').prepend('<li class="directoryBtn"><strong><a href="javascript:;" class="arrowing"><i class="iconblog bloggengduo"></i></span></span></a><span>目录</span></strong></li>')
+	}
+
+	// 滑块
+	var $sliderBlock = $('<div class="arrow"></div>');
+		list.append($sliderBlock)
+	var timer = false;
+    $(window).scroll(function(){
+        jts.each(function(i,e){
+            if($(window).scrollTop()-30 < $(e).offset().top){
+                var ch = list.children().eq(i)
+                ch.addClass('on').siblings().removeClass('on')
+            	if(timer){clearTimeout(timer)}
+            	timer = setTimeout(function(){
+            		// 滑块位置计算
+            		var chTop = ch.position().top;
+            		// 第一个没有上边距，其他的加上20上边距
+            		if (chTop != 0) {
+            			chTop += 18
+            		}
+            		$sliderBlock.animate({top:chTop}, 100)
+            		// 滑块位置结算
+            		$(".directory").animate({
+            			scrollTop: (ch.position().top-list.height()/2)
+            		})
+            	},40)
+                return false;
+            }
+        })
+        if($(window).scrollTop() < 1200){
+    		$('.scrollTop').hide()
+    	}else{
+    		$('.scrollTop').show()
+    	}
+    })
+	
+	$('body').on('click','.directory-list span',function(e){
+		e.preventDefault();
+		var mapid  = $(this).attr('data-id');
+		var scrollTop = $(mapid).offset().top;
+		$(window).scrollTop(scrollTop-100) 
+	})
+	$('body').on('click','.directoryBtn',function(e){
+		$('.detail-content-right,.action-aside-left').fadeOut(300)
+		$('.detail-content-directory').fadeIn(300);
+		$('.detail-content-left').addClass('set-right').removeClass('reset-right')
+		$('#page_center').height($('.detail-content-left').height())
+	})
+	$('body').on('click','#closeDirectory',function(e){
+		$('.detail-content-right,.action-aside-left').fadeIn(300)
+		$('.detail-content-directory').fadeOut(300);
+		$('.detail-content-left').removeClass('set-right').addClass('reset-right')
+	})
+})();
+
+
+
+;
+//寻找所有code标签，加复制按钮鸭！
+$(function () {
+    isCodeCopy=false
+    let copyType = $('.code-toolbar code').length > 0 ? 0 : 1
+    var codes = copyType === 0 ? $('.code-toolbar code') : $('.pre-numbering');
+    if (codes.length) {
+        for (var i = 0; i < codes.length; i++) {
+            $(codes[i]).parent('pre').wrap('<div class="hljs-cto"></div>')
+            var code_id = "code_id_" + i;
+            var btn = document.createElement("button");
+
+            btn.setAttribute("data-clipboard-target", "#" + code_id);
+            codes[i].setAttribute("id", code_id);
+            if (typeof (uid) == 'undefined' || !uid) {
+                btn.innerHTML = '登录后复制';
+                btn.setAttribute("class", "copy_btn disable");
+            } else {
+                btn.innerHTML = '复制';
+                btn.setAttribute("class", "copy_btn  copy" +i);
+                var clipboard = new ClipboardJS('.copy'+i, {
+                    target: function (e) {
+                        isCodeCopy=true
+                        let copyBody = copyType === 0 ? $(e).parent('.hljs-cto').find('pre').find('code') : $(e).parent('.hljs-cto').find('pre').find('.language-');
+                        return copyBody[0]
+                    }
+                })
+                clipboard.on('success', function (e) {
+                    $(e.trigger).html('已复制')
+                    isCodeCopy = false
+                    initText($(e.trigger))
+                    e.clearSelection();
+
+                });
+
+                clipboard.on('error', function (e) {
+                    console.log(e);
+                });
+            }
+            $(codes[i]).parent('pre').before(btn)
+        }
+        $('body').on('click', '.copy_btn', function (e) {
+            // var that = $(this);
+            // let copyBody=copyType===0?$(this).parent('.hljs-cto').find('pre').find('code'):$(this).parent('.hljs-cto').find('pre').find('.language-');
+            try {
+                if(typeof(uid) == 'undefined'||!uid){
+                    Login({scene:'Copycode1'})
+                    return;
+                }
+            }catch (error) {
+                console.log(error, 'error');
+            }
+
+            // var txt = copyBody.html().replace(/<br>/g,'\r\n')
+            // console.log(txt)
+            // navigator.clipboard ? navigator.clipboard.write("text/plain",txt).then(copySuccess(that), function () { o(that) }) : o(that)
+        })
+        function o(e) {
+            var t = document.createElement("textarea");
+            let copyBody = copyType === 0 ? e.parent('.hljs-cto').find('pre').find('code') : e.parent('.hljs-cto').find('pre').find('.language-');
+            t.value = copyBody.text();
+            t.style.top = "0",
+                t.style.left = "0",
+                t.style.position = "fixed",
+                document.body.appendChild(t),
+                t.focus(),
+                t.select();
+            try {
+                var o = document.execCommand("copy");
+                setTimeout(function () { copySuccess(e) }, 1)
+            } catch (t) {
+                setTimeout(function () { copyEorr(e) }, 1)
+            } document.body.removeChild(t)
+        }
+        function copySuccess(e) {
+            e.html('已复制')
+            initText(e)
+        }
+        function copyEorr(e) {
+            e.html('复制失败')
+            initText(e)
+        }
+        function initText(e) {
+            setTimeout(function () {
+                e.html('复制')
+            }, 2000)
+        }
+    }
+});
+
+;
+$(function() {
+    var $data,methods,$onFun;
+    var img_detail = {
+        init: function() {
+            $data = img_detail.data;$methods = img_detail.methods;$onFun = img_detail.onFun;
+            $onFun()
+        },
+        onFun: function() {
+            $(".imgViewDom").on("click", function() {
+                var n = navigator.userAgent.toLowerCase();
+                n.indexOf("windows ") > -1 ? $("body").css({
+                    overflow: "auto",
+                    "margin-left": "0"
+                }) : $("body").css({
+                    overflow: "auto"
+                }),
+                // $(".imgViewDom").fadeOut(500).children("img").attr("src", "")
+                $(".imgViewDom").fadeOut(500).children('.img-content').html("")
+            })
+            $('.artical-content-bak img').bind("click", function(e) {
+                var len = $(this).parents("a[href][href^='http']").length
+                if(len) return
+                var c_height = e.currentTarget.naturalHeight
+                var w_height = $(window).height()
+                var c_img = c_height < w_height ? '<img class="small-img" src="">' : '<img src="">'
+                $(".imgViewDom .img-content").html(c_img)
+                e.currentTarget.src && ($(".imgViewDom").fadeIn(500).children('.img-content').children("img").css({
+                    width: e.currentTarget.naturalWidth,
+                    height: e.currentTarget.naturalHeight
+                }).attr("src", e.currentTarget.src),$methods.controlBodOverflow())
+            })
+            $('.artical-content-bak .cto-mermaid svg').bind("click", function(e) {
+                var svg_height = $(this).attr('height')
+                var w_height = $(window).height()
+                if(svg_height < w_height) $(this).addClass('small-img')
+                var t1 = e.currentTarget.cloneNode(true)
+                $(".imgViewDom .img-content").html(t1)
+                $(".imgViewDom").fadeIn(500)
+                $methods.controlBodOverflow()
+            })
+        },
+        methods: {
+            controlBodOverflow: function() {
+                var n = navigator.userAgent.toLowerCase()
+                n.indexOf("windows ") > -1 ? $("body").css({
+                    overflow: "hidden",
+                    "margin-left": "-17px"
+                }) : $('body').css({
+                    overflow: "hidden"
+                })
+            }
+        },
+    }
+    img_detail.init()
+})
+;
+// QQ分享地址
+function share(type, url, title, pics, desc) {
+    var share = {
+        share_url: url?url:window.location.href,
+        title: title ? title : document.title,
+        pics: pics ? pics : 'https://static2.51cto.com/edu/blog/mobile/images/share_default.jpg',
+        desc: desc ? desc : document.getElementsByName('description')[0].content,
+        appkey: 0
+    };
+    switch (type) {
+        case 'qq':
+            window.open("https://connect.qq.com/widget/shareqq/index.html?url=" + encodeURIComponent(share.share_url) + "&title=" + share.title + "&desc=" + share.desc + "&pics=" + share.pics)
+            break;
+        case 'weibo':
+            window.open("https://service.weibo.com/share/share.php?url=" + encodeURIComponent(share.share_url) + "&title=" + share.title + "&pic=" + share.pics + "&appkey=" + share.appkey + "&searchPic=true");
+            break;
+        case 'weixin':
+            
+            break;
+        default:
+            window.open("https://connect.qq.com/widget/shareqq/index.html?url=" + encodeURIComponent(share.share_url) + "&title=" + share.title + "&desc=" + share.desc + "&pics=" + share.pics)
+            break;
+    }
+}
+$('.bds_tsina').click(function(){
+    share('weibo');
+});
+$('.bds_sqq').click(function(){
+    share('qq');
+});
+$('.bds_tsina_success').click(function(e){
+    share('weibo', $(this).attr('data-url'));
+});
+$('.bds_sqq_success').click(function(e){
+    share('qq', $(this).attr('data-url'));
+});
+;

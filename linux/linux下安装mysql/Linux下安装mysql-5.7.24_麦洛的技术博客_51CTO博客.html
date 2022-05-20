@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://blog.51cto.com/u_15296180/3009491 -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+        <title>Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客</title>
+    <meta name="keywords" content="Linux下安装mysql-5.7.24,Linux博客,51CTO博客">
+<meta name="description" content="Linux下安装mysql-5.7.24，一、安装前须知版本：mysql-5.7.24平台：Linux环境：Centos7二、安装前的必要检查和准备(不要遗漏任何一步骤)2.1、检查系统是否已经安装过mysql[root@localhost/]#rpm-qa|grepmysql例如下图所展示，就存在两个记录[root@localhost/]#rpm-qa|grepmysqlmysql-community-client-5.7.31-1.el7.x86_64mysql57-community-r">    <meta name="applicable-device" content="pc">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="msvalidate.01" content="91C5324FE68C0A46FA65F3FEC225EA65">
+    <link rel="canonical" href="https://blog.51cto.com/u_15296180/3009491">
+    <link type="favicon" rel="shortcut icon" href="https://blog.51cto.com/favicon.ico">
+        <script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/push.js.下载"></script><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/hm.js.下载"></script><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/antidomxss_v640.js.下载"></script><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/interfaceacting211222.js.下载"></script><script type="application/ld+json">{"@context":"https://ziyuan.baidu.com/contexts/cambrian.jsonld","@id":"https://blog.51cto.com/u_15296180/3009491","appid":"1576672126670053","title":"Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客","images":["https://s4.51cto.com/images/blog/202107/07/239edfa40a8d5589d84d09a2c3371116.png?x-oss-process=image/resize,h_70,w_116/ignore-error,1","https://s4.51cto.com/images/blog/202107/07/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image/resize,h_70,w_116/ignore-error,1","https://s4.51cto.com/images/blog/202107/07/13d7aeb1124243dc54736aec0fa3f228.png?x-oss-process=image/resize,h_70,w_116/ignore-error,1"],"description":"一 、安装前须知版本：mysql-5.7.24平台：Linux环境：Centos 7二 、安装前的必要检查和准备(不要遗漏任何一步骤)2.1、检查系统是否已经安装过mysql [root@localhost /]# rpm -qa | gr","pubDate":"2021-07-08T10:53:14","upDate":"2021-07-08T10:53:14"}</script>
+        <link href="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/copybtn.css_v=d1eca929ec" rel="stylesheet">    <script>var userId=""</script>
+    <script async="" src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/googletagmanager.js.下载"></script>
+    <script>
+        var HOME_URL = 'https://home.51cto.com/';
+        var STATICPATH = 'https://static1.51cto.com/edu/';
+    </script>
+    <script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/vip.js_v=13232bead2"></script><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/statisticsdb.js.下载" charset="utf-8"></script><style type="text/css">#waf_nc_block {position: fixed;_position: absolute;width: 100%;height: 100%;top: 0;bottom: 0;left: 0;z-index: 99999;}.waf-nc-mask {background: #f8f8f8;opacity: 0.5;filter:alpha(opacity=50); width: 100%;height: 100%;} .waf-nc-wrapper {width:480px; height:254px; position: absolute; top: 50%; left: 50%; margin-top: -127px; margin-left: -240px; margin-bottom: 16px; background:#ffffff; border:3px solid #00A2CA;} .waf-nc-icon {position: absolute;top: 60px;left: 20px;} .waf-nc-title {margin-top: 23px; margin-left: 47px; font-size:16px; color:#333333; line-height:10px; text-align:left;} .waf-nc-splitter {margin-left: 26px; margin-top: 5px; width:430px; height:0px; border:1px solid #f4f4f4; } .waf-nc-description { margin-top: 70px; margin-left: 170px; font-size:12px; color:#333333; text-align: left; } #nocaptcha { margin-top: 40px; margin-left: 150px; width:300px; height36px;}</style><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/nc.js.下载"></script><style>@charset "utf-8";
+@font-face{font-family:'nc_iconfont';src:url("//at.alicdn.com/t/font_1465353706_4784257.eot");src:url("//at.alicdn.com/t/font_1465353706_4784257.eot?#iefix") format('embedded-opentype'),url("//at.alicdn.com/t/font_1465353706_4784257.woff") format('woff'),url("//at.alicdn.com/t/font_1465353706_4784257.ttf") format('truetype'),url("//at.alicdn.com/t/font_1465353706_4784257.svg#iconfont") format('svg')}@font-face{font-family:'ncpc_iconfont';src:url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.eot");src:url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.eot?#iefix") format('embedded-opentype'),url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.woff") format('woff'),url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.ttf") format('truetype'),url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.svg#ncpc_iconfont") format('svg')}.nc-container div#nc-loading-circle{background:transparent;width:20px;height:20px;display:inline-block;position:relative;vertical-align:middle}.nc-container div#nc-loading-circle .sk-circle{background:transparent;width:100%;height:100%;position:absolute;left:0;top:0}.nc-container #nc-loading-circle .sk-circle:before{content:'';display:block;margin:0 auto;width:15%;height:15%;background-color:#818181;border-radius:100%;-webkit-animation:sk-circleFadeDelay 1.2s infinite ease-in-out both;animation:sk-circleFadeDelay 1.2s infinite ease-in-out both}.nc-container #nc-loading-circle .sk-circle2{-webkit-transform:rotate(30deg);-ms-transform:rotate(30deg);transform:rotate(30deg)}.nc-container #nc-loading-circle .sk-circle3{-webkit-transform:rotate(60deg);-ms-transform:rotate(60deg);transform:rotate(60deg)}.nc-container #nc-loading-circle .sk-circle4{-webkit-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg)}.nc-container #nc-loading-circle .sk-circle5{-webkit-transform:rotate(120deg);-ms-transform:rotate(120deg);transform:rotate(120deg)}.nc-container #nc-loading-circle .sk-circle6{-webkit-transform:rotate(150deg);-ms-transform:rotate(150deg);transform:rotate(150deg)}.nc-container #nc-loading-circle .sk-circle7{-webkit-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg)}.nc-container #nc-loading-circle .sk-circle8{-webkit-transform:rotate(210deg);-ms-transform:rotate(210deg);transform:rotate(210deg)}.nc-container #nc-loading-circle .sk-circle9{-webkit-transform:rotate(240deg);-ms-transform:rotate(240deg);transform:rotate(240deg)}.nc-container #nc-loading-circle .sk-circle10{-webkit-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg)}.nc-container #nc-loading-circle .sk-circle11{-webkit-transform:rotate(300deg);-ms-transform:rotate(300deg);transform:rotate(300deg)}.nc-container #nc-loading-circle .sk-circle12{-webkit-transform:rotate(330deg);-ms-transform:rotate(330deg);transform:rotate(330deg)}.nc-container #nc-loading-circle .sk-circle2:before{-webkit-animation-delay:-1.1s;animation-delay:-1.1s}.nc-container #nc-loading-circle .sk-circle3:before{-webkit-animation-delay:-1s;animation-delay:-1s}.nc-container #nc-loading-circle .sk-circle4:before{-webkit-animation-delay:-.9s;animation-delay:-.9s}.nc-container #nc-loading-circle .sk-circle5:before{-webkit-animation-delay:-.8s;animation-delay:-.8s}.nc-container #nc-loading-circle .sk-circle6:before{-webkit-animation-delay:-.7s;animation-delay:-.7s}.nc-container #nc-loading-circle .sk-circle7:before{-webkit-animation-delay:-.6s;animation-delay:-.6s}.nc-container #nc-loading-circle .sk-circle8:before{-webkit-animation-delay:-.5s;animation-delay:-.5s}.nc-container #nc-loading-circle .sk-circle9:before{-webkit-animation-delay:-.4s;animation-delay:-.4s}.nc-container #nc-loading-circle .sk-circle10:before{-webkit-animation-delay:-.3s;animation-delay:-.3s}.nc-container #nc-loading-circle .sk-circle11:before{-webkit-animation-delay:-.2s;animation-delay:-.2s}.nc-container #nc-loading-circle .sk-circle12:before{-webkit-animation-delay:-.1s;animation-delay:-.1s}@-webkit-keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}@-webkit-keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}@keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}.nc-container .scale_text2 #nc-loading-circle .sk-circle:before{background-color:#fff}.nc_iconfont{font-family:"nc_iconfont";color:#ff3f08;font-size:16px;font-style:normal}.ncpc_iconfont{font-family:"ncpc_iconfont";color:#ff3f08;font-size:16px;font-style:normal}.captcha-error .icon_ban{float:left;font-size:16px;padding-right:5px;line-height:14px}.clickCaptcha_text .btn_refresh{font-style:normal;cursor:pointer;background:#fff;color:#737383}.imgCaptcha .btn_refresh{font-size:20px;cursor:pointer;background:#fff;color:#737383}.nc_voice{display:none;position:relative;margin-top:-34px;z-index:99;width:auto;height:34px;background:#fff}.omeo-code-img,.omeo-code-audio{font-size:0;text-align:left}.omeo-code-audiobox,.omeo-code-img a,.omeo-code-audio a,.omeo-code-state{display:inline-block;*display:inline;zoom:1;height:32px;vertical-align:top;font-size:12px}.omeo-code .omeo-code-refresh{background:transparent;width:32px;height:32px;font-size:20px;color:#888;text-align:center;text-decoration:none;padding-left:4px;line-height:32px}.omeo-code .omeo-switch{display:none;width:32px;height:32px;border-left:1px solid #e1e1e1;background-image:url("//g.alicdn.com/sd/ncpc/images/checkcode.png");background-repeat:no-repeat}.omeo-img-active .omeo-code-img{display:block}.omeo-img-active .omeo-code-audio{display:none}.omeo-code-img img{border:1px solid #cdcdcd;cursor:pointer}.omeo-code-img .omeo-switch{background-position:9px -41px}.omeo-audio-active .omeo-code-audio{display:block}.omeo-audio-active .omeo-code-img{display:none}.omeo-code-refresh{position:relative;left:95px}.omeo-code-audiobox{position:relative;height:30px;line-height:32px;border:1px solid #e1e1e1;text-align:center;overflow:hidden;left:100px;top:1px;width:45%;min-width:80px;background-color:#eee}.omeo-code-audiobox a{display:block;text-decoration:none;color:#06c}.omeo-code-audiobox-playing a{visibility:hidden}.omeo-code-audiobox span,.omeo-code-audiobox b{visibility:hidden;position:absolute;top:0;left:0;height:30px;font-weight:100;overflow:hidden}.omeo-code-audiobox-playing span,.omeo-code-audiobox-playing b{visibility:visible}.omeo-code-audiobox span{z-index:0;width:0;background:#186bca}.omeo-code-audiobox b{width:100%;z-index:1;text-align:left;text-indent:30px;color:#999;background:url("//g.alicdn.com/sd/ncpc/images/checkcode.png") no-repeat 14px -89px}.omeo-code-audio .omeo-switch{background-position:5px 10px}input[type=text]::-ms-clear{display:none}.omeo-box{position:relative;background-color:#fff}.omeo-code-echo{position:absolute;top:2px;left:2px}.omeo-code-echo input{padding:5px;height:18px;line-height:18px;border:1px solid #ddd;width:80px;outline:0}.omeo-code-state{height:30px;line-height:30px;text-indent:25px;white-space:nowrap;background-image:url("//g.alicdn.com/sd/ncpc/images/checkcode.png");background-repeat:no-repeat;background-position:100px 100px}.omeo-code-echo .omeo-code-state-error{width:auto;background-position:7px -193px}.omeo-code-echo .omeo-code-state-success{position:absolute;width:30px;background-position:7px -243px}.omeo-code-state{position:absolute;left:0;top:28px}.nc_voice_close{display:inline-block;position:relative;cursor:pointer;left:95px;top:0;border-left:#ddd 2px solid;padding:0 0 0 7px;background-color:#fff;font-size:20px;color:#888;line-height:32px}.nc_help{position:absolute;width:100%;height:100%;left:0;top:0;z-index:99999}.nc_help .mask{background-color:#000;opacity:.5;filter:alpha(opacity=50);width:100%;height:100%;top:0;left:0}.nc_btn_close{position:absolute;height:20px;left:500px;border-radius:20px;padding:10px 30px;background-color:#aaa;color:#fff;cursor:pointer;z-index:10}.nc_btn_close:hover{background-color:#afafaf}.nc_hand{position:absolute;width:68px;height:53px;background-image:url("//g.alicdn.com/sd/ncpc/images/hand.png");z-index:3}.nc_slide_bg{z-index:3;font-size:12px;text-align:center;color:#fff;line-height:34px}.nc_voicebtn{position:absolute;padding:0;right:-25px;font-size:23px;color:#888;cursor:pointer;line-height:34px}.nc_helpbtn{position:absolute;cursor:pointer;right:-95px;top:4px;font-size:12px;background-color:#ffb668;color:#fff;padding:4px;border-radius:2px;line-height:18px;display:none}.nc_helpbtn:before{width:0;height:0;content:"";position:absolute;left:-2px;top:6px;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:4px solid #ffb668}.nc-container .errloading{border:#faf1d5 1px solid;text-indent:3px;background-image:none;font-size:12px;width:290px;line-height:20px;padding:7px 5px 8px 5px;color:#ef9f06;}.nc-container .errloading a{color:#30a7fc}.nc_captcha_text .nc_err{float:left;text-indent:0}.button_move{transition:left .5s;-moz-transition:left .5s;-webkit-transition:left .5s;-o-transition:left .5s}.bg_move{transition:width .5s;-moz-transition:width .5s;-webkit-transition:width .5s;-o-transition:width .5s}.nc_slide_box{position:absolute}.nc_captcha_text{height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal}.nc-container .nc_captcha_img_text{width:auto;height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal;display:none;padding:0 0 10px 0;background-position:0 0;}.nc-container .nc_captcha_img_text span.nc-lang-cnt{line-height:inherit}.nc-container .imgCaptcha .nc_captcha_img_text{width:auto}.nc_captcha_img_text{height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal;display:none;padding:0 0 10px 3px;background-position:0 0}.nc-container .nc_wrapper{width:auto}.nc_scale{width:auto;height:34px;background:#e8e8e8;position:relative;margin:0;padding:0}.nc_scale.is_audio{margin-right:25px}.nc-container .nc_scale div{height:auto}.nc-container .nc_scale ul{list-style:none}.nc-container .nc_scale .btn_slide{color:#737383;background-image:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.nc-container .nc_scale span{text-align:center;width:40px;height:32px;line-height:32px;border:1px solid #ccc;position:absolute;left:0;cursor:move;background:#fff;z-index:2}.nc-container .nc_scale span.nc-lang-cnt{*line-height:34px;float:none;width:auto;height:auto;*height:34px;border:none;position:static;cursor:inherit;background:none;z-index:0;display:inline}.nc_slide_button{width:40px;height:32px;border:1px solid #ccc;position:absolute;left:0;cursor:move;background:#fff url("//g.alicdn.com/sd/ncpc/images/rt.png") no-repeat center;z-index:2}@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.nc_scale span{height:32px}}.nc-container .nc_scale .btnok{cursor:default;background:#fff url("//g.alicdn.com/sd/ncpc/images/yes.png") no-repeat center;z-index:3}.nc-container .nc_scale .btnok2{cursor:default;font-size:20px;background:#fff url("//g.alicdn.com/sd/ncpc/images/no.png") no-repeat center;z-index:3}.nc-container .nc_scale .btn_warn{cursor:default;color:#ff3f08;line-height:34px;text-align:center;font-size:20px;background:#fff;z-index:3}.nc-container .clickCaptcha_text .btn_refresh{font-size:20px}.nc-container .clickCaptcha_text .icon_close{line-height:30px;margin-left:8px;cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:2px;background:transparent;z-index:3}.nc-container .nc_captcha_img_text .icon_close{cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:4px;background:transparent;z-index:3;line-height:18px}.nc-container .errloading .icon_warn{cursor:default;color:#ff3f08;font-size:18px;float:left;background:transparent;z-index:3}.nc-container .nc_scale .btn_ok{cursor:default;line-height:34px;text-align:center;font-size:20px;background:#fff;z-index:3;color:#76c61d}.nc-container .nc_scale .nc_ok,.nc-container .nc_scale .nc_bg{background:#7ac23c}.nc-container .nc_scale .nc_bg{position:absolute;height:100%;_height:34px;left:0;width:10px}.nc-container .nc_scale div.redbar{background:#fc461e;opacity:.5;filter:alpha(opacity=50)}.nc-container .nc_scale div.orange{background:#f00}.nc-container .nc_scale .scale_text{width:100%;height:100%;text-align:center;position:absolute;z-index:1;background:transparent;color:#9c9c9c;line-height:34px;font-size:12px;cursor:pointer}.nc-container .nc_scale .scale_text2{text-align:left;color:#fff;font-size:12px;text-indent:10px}.nc-container .nc_scale .scale_text2 b{padding-left:0;font-weight:normal}.nc-container .nc_scale .scale_text.scale_loading_text{text-align:center}.nc-container .nc_scale .imgCaptcha,.nc-container .nc_scale .clickCaptcha{display:none;overflow:hidden;border:1px solid #ccc;background:#fff;z-index:20000;}.nc-container .nc_scale .imgCaptcha p.error span,.nc-container .nc_scale .clickCaptcha p.error span{line-height:normal}.nc-container .nc_scale .imgCaptcha{height:auto}.nc-container .nc_scale .clickCaptcha{position:absolute;left:0;top:35px;height:270px;background:#fff;display:none;}.nc-container .nc_scale .clickCaptcha p.error i{color:#ff3f08;font-style:normal}.nc-container .nc_scale .clickCaptcha div{position:static;clear:both;width:100%;background:#fff;height:auto}.nc-container .nc_scale .clickCaptcha .clickCaptcha_text{height:30px;line-height:30px;font-size:12px;color:#999;}.nc-container .nc_scale .clickCaptcha .clickCaptcha_text b{font-weight:normal}.nc_btn_2{position:absolute;right:0;top:0;cursor:pointer;margin:2px 9px 0 0}.nc_iconfont.nc_btn_2{position:absolute;right:0;top:0;cursor:pointer}.nc_iconfont.nc_btn_1{position:absolute;top:10px;right:5px}.nc_btn_1{top:10px;right:10px}.scale_text i{font-style:normal;border:none;position:static;cursor:default;color:#fffc00;background:none;display:inline;width:100%}.nc-container .clickCaptcha .clickCaptcha_img{margin:0 auto;clear:both;position:relative;}.nc-container .clickCaptcha .clickCaptcha_img img{width:230px;height:230px;margin-left:10px;margin-top:5px}.nc-container .clickCaptcha .clickCaptcha_btn{margin:10px 0 0 15px;position:relative;text-align:left;}.nc-container .clickCaptcha .clickCaptcha_btn img{cursor:pointer}.nc-container .imgCaptcha{position:absolute;left:0;top:35px;height:auto;padding-bottom:15px;border:1px solid #ccc;background:#fff;}.nc-container .imgCaptcha div{position:static;width:90%;background-color:#fff}.nc-container .imgCaptcha,.nc-container .clickCaptcha{text-align:left;}.nc-container .imgCaptcha a,.nc-container .clickCaptcha a{color:#ff3f08}.nc-container .imgCaptcha .imgCaptcha_text{height:42px;line-height:42px;width:120px;background:#fff;font-size:14px;text-align:left;color:#747474;float:left;margin-left:10px;}.nc-container .imgCaptcha .imgCaptcha_text input{margin-top:5px;height:30px;line-height:30px;font-size:14px;width:90px;background:#fff}.nc-container .imgCaptcha .imgCaptcha_text input:focus{outline:none;color:#bbb}.nc-container .imgCaptcha .imgCaptcha_btn{margin:0 0 0 12px;*margin-left:0;clear:both;padding-top:5px;width:90%;}.nc-container .imgCaptcha .imgCaptcha_btn img{cursor:pointer}.nc-container .imgCaptcha .nc_scale_submit{margin:0 auto;cursor:pointer;background-color:#fc461e;width:120px;height:32px;line-height:32px;color:#fff;text-align:center}.nc-container .imgCaptcha .imgCaptcha_img{margin:4px 0 0 100px;height:40px;width:130px;overflow:hidden;cursor:pointer;}.nc-container .imgCaptcha .imgCaptcha_img img{width:130px}.nc-container .imgCaptcha .imgCaptcha_img input{border:solid 1px #ccc}.nc-lang-ar_MA,.nc-lang-ar_SA,.nc-lang-iw_HE,.nc-lang-iw_IL{text-align:right;*text-align:left;}.nc-lang-ar_MA .nc_scale .scale_text2,.nc-lang-ar_SA .nc_scale .scale_text2,.nc-lang-iw_HE .nc_scale .scale_text2,.nc-lang-iw_IL .nc_scale .scale_text2{text-align:right;}.nc-lang-ar_MA .nc_scale .scale_text2 span,.nc-lang-ar_SA .nc_scale .scale_text2 span,.nc-lang-iw_HE .nc_scale .scale_text2 span,.nc-lang-iw_IL .nc_scale .scale_text2 span{*display:inline-block;padding:0 56px 0 0}.nc-lang-ar_MA .nc_captcha_img_text,.nc-lang-ar_SA .nc_captcha_img_text,.nc-lang-iw_HE .nc_captcha_img_text,.nc-lang-iw_IL .nc_captcha_img_text{*text-align:right}.nc-lang-ar_MA span.nc-lang-cnt,.nc-lang-ar_SA span.nc-lang-cnt,.nc-lang-iw_HE span.nc-lang-cnt,.nc-lang-iw_IL span.nc-lang-cnt{text-align:right;direction:rtl}.nocaptcha span.nc-lang-cnt{float:none;height:auto;line-height:30px}.nc-container{font-size:12px;-ms-touch-action:none;touch-action:none;}.nc-container p{margin:0;padding:0;display:inline}.nc-container .scale_text.scale_text span[data-nc-lang="_startTEXT"]{display:inline-block;width:100%}.nc-container .scale_text.scale_text.slidetounlock span[data-nc-lang="_startTEXT"]{background:-webkit-gradient(linear,left top,right top,color-stop(0,#4d4d4d),color-stop(.4,#4d4d4d),color-stop(.5,#fff),color-stop(.6,#4d4d4d),color-stop(1,#4d4d4d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-animation:slidetounlock 3s infinite;-webkit-text-size-adjust:none}.nc-container .nc_scale .nc-align-center.scale_text2{text-align:center;text-indent:-42px}@-webkit-keyframes slidetounlock{0%{background-position:-200px 0}100%{background-position:200px 0}}.nc-container.tb-login .clickCaptcha_text .icon_close{line-height:30px;margin-left:0;cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:0;background:transparent;z-index:3}.nc-container.tb-login{position:relative;margin-top:20px;display:none;}.nc-container.tb-login .nc_scale{width:auto;}.nc-container.tb-login .nc_scale .scale_text2{text-indent:-42px;text-align:center;}.nc-container.tb-login .nc_scale .scale_text2 b{padding:0}.nc-container.tb-login .nc_scale.nc_err div.scale_text{background:#f79977}.nc-container.tb-login .errloading{width:auto}.nc-container.tb-login .imgCaptcha,.nc-container.tb-login .clickCaptcha{width:252px;*width:256px;border:0;*height:300px;min-height:300px;max-height:inherit !important;}.nc-container.tb-login .imgCaptcha div.login-msg.error,.nc-container.tb-login .clickCaptcha div.login-msg.error{background:#fff2f2}.nc-container.tb-login .imgCaptcha .captcha-error,.nc-container.tb-login .clickCaptcha .captcha-error{position:absolute;top:0;width:244px;height:auto;margin-bottom:15px;padding:3px;border:solid 1px #ff8e8e;line-height:18px}.nc-container.tb-login .imgCaptcha .captcha-inform,.nc-container.tb-login .clickCaptcha .captcha-inform{font-size:110%;margin-left:20px}.nc-container.tb-login .imgCaptcha{padding-top:66px;}.nc-container.tb-login .imgCaptcha .imgCaptcha_text{width:100px;margin-left:0;}.nc-container.tb-login .imgCaptcha .imgCaptcha_text input:focus{color:#000}.nc-container.tb-login .imgCaptcha .imgCaptcha_img{width:120px;_width:100px}.nc-container.tb-login .imgCaptcha .imgCaptcha_btn{width:100%;margin-left:0}.nc-container.tb-login .imgCaptcha .nc_scale_submit{width:100%;height:36px;line-height:36px;margin-top:20px;margin-left:0;border-radius:3px;font-size:16px;font-family:Tahoma,Helvetica,Arial,sans-serif;background:#ff3f08}.nc-container.tb-login .clickCaptcha{padding-top:40px;}.nc-container.tb-login .clickCaptcha .clickCaptcha_text{text-indent:4px}.nc-container.tb-login .clickCaptcha .clickCaptcha_img img{margin-left:10px}.nc-container.tb-login .nc_btn_1{top:77px;_top:57px}.nc-container.tb-login .nc_btn_2{top:36px}.login .nc-container.tb-login .login-msg p,.login-box .nc-container.tb-login .login-msg p{width:auto;float:left}.nc-container.tb-login.nc-old-login{margin:20px 0 10px 0;width:250px;}.nc-container.tb-login.nc-old-login .nc_wrapper{width:250px}.nc-container.tb-login.nc-old-login .imgCaptcha,.nc-container.tb-login.nc-old-login .clickCaptcha{width:250px;min-height:auto;}.nc-container.tb-login.nc-old-login .imgCaptcha .captcha-error,.nc-container.tb-login.nc-old-login .clickCaptcha .captcha-error{line-height:16px}.nc-container.tb-login.nc-old-login .clickCaptcha{padding-top:28px;}.nc-container.tb-login.nc-old-login .clickCaptcha .clickCaptcha_img img{width:200px;height:200px}.nc-container.nc-old-login.show-click-captcha{padding-bottom:60px}.nc-container.nc-old-login.show-click-captcha.nc-tm-min-fix{padding-bottom:40px}.nc-container.tb-login.nc-tm-min-fix .clickCaptcha{max-height:340px !important}#content .login-box .bd .nc-container.tb-login .login-msg{margin:10px auto 15px auto}#content .login-box .bd .nc-container.tb-login.nc-old-login.show-click-captcha .login-msg{margin:2px 0 0 0}.nc-container .nc_scale .nc-cc{display:none;position:absolute;left:0;top:35px;z-index:20000;width:360px;height:570px;border:1px solid #5eaef1;border-radius:4px;background:#fff;font-size:14px;line-height:18px;color:#333;}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-btn{background-color:#90c1eb}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-refresh,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-refresh{cursor:default}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-refresh,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-refresh{color:#999}.nc-container .nc_scale .nc-cc a{color:#3199f4;text-decoration:none}.nc-container .nc_scale .nc-cc .nc_iconfont{vertical-align:top;margin-right:8px}.nc-container .nc_scale .nc-cc-btn{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;width:100px;line-height:30px;text-align:center;background-color:#3199f4;color:#fff;border-radius:4px;cursor:pointer;}.nc-container .nc_scale .nc-cc-btn.nc-cc-disabled{background-color:#90c1eb;cursor:default}.nc-container .nc_scale .nc-cc-btn .nc-lang-cnt{line-height:18px}.nc-container .nc_scale .nc-cc-header{padding:20px 20px 19px 20px;height:100px;background:#f4f8fa;border-bottom:1px solid #ccc}.nc-container .nc_scale .nc-cc-img1-box{float:left;width:100px;height:100px;margin-right:16px}.nc-container .nc_scale .nc-cc-txt{overflow:hidden;*zoom:1;line-height:30px;padding-top:11px}.nc-container .nc_scale .nc-cc-img2-box{position:relative;padding:0 20px;margin-top:20px}.nc-container .nc_scale .nc-cc-items{position:absolute;left:20px;_left:0;top:0;width:320px;overflow:hidden}.nc-container .nc_scale .nc-cc-items-inner{margin-right:-20px}.nc-container .nc_scale .nc-cc-item{position:relative;display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;margin-right:10px;margin-bottom:10px;border:1px solid #ccc;width:98px;height:98px;background:url("//gtms02.alicdn.com/tps/i2/T1ty2QFNNXXXc6Yc2r-1-1.gif");}.nc-container .nc_scale .nc-cc-item:hover{border-color:#3199f4}.nc-container .nc_scale .nc-cc-item .nc_iconfont{display:none;position:absolute;right:0;bottom:0;color:#3199f4;font-size:22px;margin-right:0}.nc-container .nc_scale .nc-cc-item.nc-cc-selected .nc_iconfont{display:block}.nc-container .nc_scale .nc-cc-tip{display:none;position:absolute;left:0;bottom:60px;width:360px;line-height:18px;text-align:center;color:#eb4f38;}.nc-container .nc_scale .nc-cc-tip span{line-height:normal}.nc-container .nc_scale .nc-cc-footer{position:absolute;left:0;bottom:20px;width:360px;height:30px;line-height:30px;text-align:center;}.nc-container .nc_scale .nc-cc-footer .nc_iconfont{color:#c4cbd0}.nc-container .nc_scale .nc-cc-refresh,.nc-container .nc_scale .nc-cc-wait{position:absolute;left:20px;top:0;color:#3199f4;cursor:pointer}.nc-container .nc_scale .nc-cc-wait{display:none}.nc-container .nc_scale .nc-cc-cancel{position:absolute;right:20px;top:0;color:#3199f4;cursor:pointer;}.nc-container .nc_scale .nc-cc-cancel .nc_iconfont{position:relative;top:-1px}.nc-container .nc_scale .nc-cc-loading{margin-top:247px;text-align:center;line-height:14px}.nc-container .nc_scale .nc-cc-loading-img{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;vertical-align:middle;background:url("//img.alicdn.com/tps/TB1OdxsKpXXXXcgXFXXXXXXXXXX-14-14.gif") no-repeat;width:14px;height:14px;position:relative;top:-1px;margin-right:9px}.nc-container .nc_scale .nc-cc-fail{position:absolute;left:50%;top:50%;width:320px;height:180px;margin-left:-160px;margin-top:-90px;background:#fff;border-radius:4px}.nc-container .nc_scale .nc-cc-fail-inner{text-align:center;padding:55px 10px 10px}.nc-container .nc_scale .nc-cc-fail-action{margin:28px 0 18px;}.nc-container .nc_scale .nc-cc-fail-action a{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;line-height:30px;margin-left:16px}.nc-container .nc_scale .nc-cc-contact{text-align:right;color:#666;padding-right:9px}.nc-container .nc_scale .nc-cc-mask{display:none;position:absolute;left:0;top:0;width:360px;height:570px;background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');}:root .nc-container .nc_scale .nc-cc-mask{-webkit-filter:none;filter:none}.nc-container .nc_scale .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-arrow-2{display:none;position:absolute;top:340px;border:solid transparent;height:0;width:0}.nc-container .nc_scale .nc-cc-arrow-1{border-width:16px;margin-top:-1px}.nc-container .nc_scale .nc-cc-arrow-2{border-width:15px}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-2,.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-2{display:block;_display:none}.nc-container .nc_scale .nc-cc-right{left:180px;top:-339px;}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-1{border-right-color:#5eaef1;left:-32px}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-2{border-right-color:#fff;left:-30px}.nc-container .nc_scale .nc-cc-left{left:-335px;top:-339px;}.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-1{border-left-color:#5eaef1;right:-32px}.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-2{border-left-color:#fff;right:-30px}</style><style></style></head>
+
+<body style=""><script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/bl.js.下载" crossorigin=""></script>
+<img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/share_default.jpg" border="0" style="width:0; height:0; position:absolute;">
+<div class="Content-box" style="min-height: 583px;">
+    
+<div class="Content detail-content-new">
+    <!--关注-->
+    <div class="fixtitle" style="display: none;">
+        <div class="clearfix Page">
+            <h3 class="fl title">Linux下安装mysql-5.7.24</h3>
+            <div class="messbox fr">
+                                                            <a id="checkFollow1_15286180" class="follow-1 checkFollow on">关注</a>
+                                                    <a href="https://blog.51cto.com/u_15296180" class="name" target="_blank" title="爱写Bug的麦洛">爱写Bug的麦洛</a>
+                <strong>
+                    <a href="https://blog.51cto.com/u_15296180" class="avatar" target="_blank">
+                        <img class="is-vip-img is-vip-img-4" data-uid="15286180" src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/6ece0849f80bcf028f9c5703487f9255.jpeg">
+                    </a><i class="vip-icon vip-icon-4" title="51CTO VIP会员"></i>
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <!--左边悬浮操作项-->
+    <aside class="action-aside action-aside-left">
+        <div class="inner">
+            <ul><li class="directoryBtn"><strong><a href="javascript:;" class="arrowing"><i class="iconblog bloggengduo"></i></a><span>目录</span></strong></li>
+                                    <li>
+                        <strong class="appreciate-btn  appreciate-open ">
+                            <a href="javascript:;"><i class="iconblog blogshang"></i></a>
+                            <span>打赏</span>
+                        </strong>
+                    </li>
+                                <li>
+                    <strong class="is-praise  " type="1" blog_id="3009491" userid="15286180">
+                        <a href="javascript:;"><i></i></a>
+                        <span><b class="praise-num"></b>赞</span>
+                    </strong>
+                </li>
+                <li>
+                    <strong class="favorites-opt ">
+                        <a href="javascript:;"><i></i></a>
+                        <span><b class="favorites-num"></b>收藏</span>
+                    </strong>
+                </li>
+                <li>
+                    <strong class="Topraise">
+                        <a href="javascript:;"><i class="iconblog blogpinglun"></i></a>
+                        <span><b class="comments_num"></b>评论</span>
+                    </strong>
+                </li>
+                <li class="share">
+                    <strong class="">
+                        <a href="javascript:;"><i class="iconblog blogfen"></i></a>
+                        <span>分享</span>
+                    </strong>
+                    <div class="bdsharebuttonbox">
+                        <div class="ins">
+                            <a class="bds_tsina" data-cmd="tsina" rel="nofollow"><i class="iconblog blogfenxiangweibo"></i>微博</a>
+                            <a class="bds_sqq" data-cmd="sqq" rel="nofollow"><i class="iconblog blogfenxiangqq"></i>QQ</a>
+                            <a class="bds_weixin" data-cmd="weixin" rel="nofollow"><i class="iconblog blogfenxiangweixin"></i>微信</a>
+                            <img src="https://blog.51cto.com/u_15296180/3009491">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!--大模块引入-->
+    <div class="clearfix Page" id="page_center" style="position:relative;">
+                
+<aside class="detail-content-directory common-content-directory">
+     <!-- 文章目录 -->
+     <section class="common-section common-spacing table-contents" style="background:none">
+        <div class="clearfix common-sub-title">
+            <strong title="文章目录">文章目录</strong>
+            <i class="iconblog blogquxiao18" id="closeDirectory"></i>
+        </div>
+        <div class="directory">
+            <ul class="directory-list directory-list-left">
+                                                                   <li class="lv1">
+                            <div class="title" title="
+一 、安装前须知">
+                                <span data-id="#h0">
+                                                                        
+一 、安装前须知                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+二 、安装前的必要检查和准备(不要遗漏任何一步骤)">
+                                <span data-id="#h1">
+                                                                        
+二 、安装前的必要检查和准备(不要遗漏任何一步骤)                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.1、检查系统是否已经安装过mysql">
+                                <span data-id="#h2">
+                                                                        
+2.1、检查系统是否已经安装过mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.2 、执行删除命令，一 一 删除">
+                                <span data-id="#h3">
+                                                                        
+2.2 、执行删除命令，一 一 删除                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.3 、删除之后，再检查一次">
+                                <span data-id="#h4">
+                                                                        
+2.3 、删除之后，再检查一次                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.4、查询所有mysql对应的文件夹">
+                                <span data-id="#h5">
+                                                                        
+2.4、查询所有mysql对应的文件夹                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.5、删除相关文件">
+                                <span data-id="#h6">
+                                                                        
+2.5、删除相关文件                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.6 、验证是否删除完毕（有的话，继续删除）">
+                                <span data-id="#h7">
+                                                                        
+2.6 、验证是否删除完毕（有的话，继续删除）                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建">
+                                <span data-id="#h8">
+                                                                        
+2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**">
+                                <span data-id="#h9">
+                                                                        
+三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+四、安装mysql">
+                                <span data-id="#h10">
+                                                                        
+四、安装mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.1、找到你的安装包，进行解压">
+                                <span data-id="#h11">
+                                                                        
+4.1、找到你的安装包，进行解压                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.2、解压后会多出一个解压文件">
+                                <span data-id="#h12">
+                                                                        
+4.2、解压后会多出一个解压文件                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4,3、移动该文件至/user/local/下并将文件名改为mysql">
+                                <span data-id="#h13">
+                                                                        
+4,3、移动该文件至/user/local/下并将文件名改为mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.4、在/user/local/mysql目录下创建data文件夹，用于存放数据库">
+                                <span data-id="#h14">
+                                                                        
+4.4、在/user/local/mysql目录下创建data文件夹，用于存放数据库                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.5 、更改mysql目录下所属的用户组、用户和权限">
+                                <span data-id="#h15">
+                                                                        
+4.5 、更改mysql目录下所属的用户组、用户和权限                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.6、编译并安装mysql">
+                                <span data-id="#h16">
+                                                                        
+4.6、编译并安装mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.7 、编辑配置文件my.cnf">
+                                <span data-id="#h17">
+                                                                        
+4.7 、编辑配置文件my.cnf                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.8、测试启动mysql服务器">
+                                <span data-id="#h18">
+                                                                        
+4.8、测试启动mysql服务器                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3 on">
+                            <div class="title" title="
+4.9、设置软连接，重启mysql服务">
+                                <span data-id="#h19">
+                                                                        
+4.9、设置软连接，重启mysql服务                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+五、登录mysql，修改自定义密码，登录密码是之前复制那份">
+                                <span data-id="#h20">
+                                                                        
+五、登录mysql，修改自定义密码，登录密码是之前复制那份                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+六、开放远程连接">
+                                <span data-id="#h21">
+                                                                        
+六、开放远程连接                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+七、可设可不设置（开机自启动）">
+                                <span data-id="#h22">
+                                                                        
+七、可设可不设置（开机自启动）                                </span>
+                            </div>
+                        </li>
+                                                        <div class="arrow" style="top: 3818px;"></div></ul>
+        </div>
+    </section>
+</aside>                <section class="detail-content-left">
+    <style>
+    .hljs-center{
+        text-align: center;
+    }
+    .hljs-right{
+        text-align: right;
+    }
+    #result{
+        overflow: auto;
+    }
+    .detail-content-left s{
+        text-decoration: line-through;
+    }
+    .cto-mermaid{
+        text-align: center;
+    }
+    .cto-mermaid svg{
+        max-width: 100%;
+    }
+    #result img{
+        height: auto;
+    }
+</style>
+
+<article class="common-section common-spacing mb30 article-detail">
+    <div class="title">
+        <h1>Linux下安装mysql-5.7.24</h1>
+                                <span class="original">原创</span>
+    </div>
+    <div class="messbox">
+        <p class="clearfix mess-line1">
+            <a class="fl" href="https://blog.51cto.com/u_15296180">爱写Bug的麦洛</a>
+            <time class="fl" pubdate="2021-07-08 10:53:14">2021-07-08 10:53:14</time>
+                        <span class="fr" id="copyright-btn">©著作权</span>
+        </p>
+        <p class="clearfix mess-tag">
+                        <strong class="fl">
+                <em class="fl">文章标签</em>
+                                    <a href="https://blog.51cto.com/topic/mysql.html" class="fl" target="_blank"># MySQL</a>
+                                    <a href="https://blog.51cto.com/topic/linux.html" class="fl" target="_blank"># Linux</a>
+                                    <a href="https://blog.51cto.com/topic/linux-2.html" class="fl" target="_blank">linux</a>
+                                    <a href="https://blog.51cto.com/topic/mysql-2.html" class="fl" target="_blank">mysql</a>
+                                    <a href="https://blog.51cto.com/topic/the-database-1.html" class="fl" target="_blank">数据库</a>
+                            </strong>
+                                    <strong class="fl">
+                <em class="fl">文章分类</em>
+                                <a href="https://blog.51cto.com/nav/linux" class="fl" target="_blank">Linux</a>
+                                <a href="https://blog.51cto.com/nav/ops" class="fl" target="_blank">系统/运维</a>
+                            </strong>
+                    <strong class="fl"><em class="fl">阅读数</em><b class="fl">598</b></strong></p>
+    </div>
+        <div class="copytext" id="copytext">
+        ©著作权归作者所有：来自51CTO博客作者爱写Bug的麦洛的原创作品，请联系作者获取转载授权，否则将追究法律责任<br><a href="https://blog.51cto.com/u_15296180/3009491">Linux下安装mysql-5.7.24</a><br><a href="https://blog.51cto.com/u_15296180/3009491">https://blog.51cto.com/u_15296180/3009491</a>    </div>
+    <div class="article-content-wrap">
+                    <div class="artical-content-bak main-content editor-side-new">
+                <div class="con editor-preview-side" id="result"><div>
+                    <h2>
+<a></a>一 、安装前须知</h2> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_0" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_0">版本：mysql-5.7.24
+平台：Linux
+环境：Centos 7
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h2>
+<a></a>二 、安装前的必要检查和准备(不要遗漏任何一步骤)</h2> 
+<h3>
+<a></a>2.1、检查系统是否已经安装过mysql</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_1" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_1"> [root@localhost /]# rpm -qa | grep mysql
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<hr><p>例如下图所展示，就存在两个记录</p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_2" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_2">[root@localhost/]# rpm -qa | grep mysql
+mysql-community-client-5.7.31-1.el7.x86_64
+mysql57-community-release-el7-8.noarch
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<hr><h3>
+<a></a>2.2 、执行删除命令，一 一 删除</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_3" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_3">[root@localhost/]#  rpm -e --nodeps mysql-community-client-5.7.31-1.el7.x86_64
+[root@localhost/]#  rpm -e --nodeps mysql57-community-release-el7-8.noarch
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>2.3 、删除之后，再检查一次</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_4" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_4">[root@localhost/]# rpm -qa | grep mysql
+[root@localhost/]#
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>2.4、查询所有mysql对应的文件夹</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_5" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_5">[root@localhost/]# whereis mysql
+mysql: /usr/local/mysql /usr/share/mysql
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>2.5、删除相关文件</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_6" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_6">[root@localhost/]# rm -rf /usr/local/mysql /usr/share/mysql
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>2.6 、验证是否删除完毕（有的话，继续删除）</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_7" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_7">[root@iZwz9cngn5wj3ba82mwx3zZ /]# whereis mysql
+mysql:[root@iZwz9cngn5wj3ba82mwx3zZ /]# 
+[root@iZwz9cngn5wj3ba82mwx3zZ /]# find / -name mysql
+/run/lock/subsys/mysql
+/etc/rc.d/init.d/mysql
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li><li>5.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_8" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_8">[root@localhost /]# cat /etc/group | grep mysql
+[root@localhost /]# cat /etc/passwd |grep mysql
+[root@localhost /]# groupadd mysql
+[root@localhost /]# useradd -r -g mysql mysql
+[root@localhost /]#
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li><li>5.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h2>
+<a></a>三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**</h2> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_9" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_9">[root@localhost /]#  wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h2>
+<a></a>四、安装mysql</h2> 
+<h3>
+<a></a>4.1、找到你的安装包，进行解压</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_10" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_10">[root@localhost /]#  tar xzvf mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz
+[root@localhost /]# ls
+mysql-5.7.24-linux-glibc2.12-x86_64
+mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.2、解压后会多出一个解压文件</h3> 
+<h3>
+<a></a>4,3、移动该文件至/user/local/下并将文件名改为mysql</h3> 
+<p>注意点:如果目录下存在mysql的文件名，请改为其他的名称，否则后续无法继续进行操作</p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_11" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_11">[root@localhost /]# mv mysql-5.7.24-linux-glibc2.12-x86_64 /usr/local/
+[root@localhost /]# cd /usr/local/
+[root@localhost /]# mv mysql-5.7.24-linux-glibc2.12-x86_64 mysql
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.4、在/user/local/mysql目录下创建data文件夹，用于存放数据库</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_12" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_12">[root@localhost /]# mkdir /usr/local/mysql/data
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.5 、更改mysql目录下所属的用户组、用户和权限</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_13" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_13">[root@localhost /]# chown -R mysql:mysql /usr/local/mysql
+[root@localhost /]# chmod -R 755 /usr/local/mysql
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.6、编译并安装mysql</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_14" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_14">[root@localhost /]# cd /usr/local/mysql/bin
+[root@localhost bin]# ./mysqld --initialize --user=mysql --datadir=/usr/local/mysql/data --basedir=/usr/local/mysql
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<p><strong>注意点：红色圈出的部分是临时密码，需提前保存，用来登录mysql，修改密码</strong></p> 
+<p><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/239edfa40a8d5589d84d09a2c3371116.png" alt="Linux下安装mysql-5.7.24_linux"></p> 
+<p>注意点：此处可能发生的错误，有些依赖没安装</p> 
+<p><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/7ce89c17499c06f58caf226c420cbe6e.png" alt="Linux下安装mysql-5.7.24_# MySQL_02"></p> 
+<p><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/7ce89c17499c06f58caf226c420cbe6e.png" alt="Linux下安装mysql-5.7.24_# MySQL_02"></p> 
+<p><strong>执行命令（命令都执行完毕之后，还有问题，请百度。）</strong></p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_15" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_15">[root@localhost bin]#  yum install  libaio-devel.x86_64
+[root@localhost bin]#  yum -y install numactl
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<p>执行命令完毕，在重新进行编译安装，执行(6)此处命令</p> 
+<h3>
+<a></a>4.7 、编辑配置文件my.cnf</h3> 
+<p><strong>注意点：清空里头的内容，直接复制下图的代码。后续有需要可自行补充</strong></p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_16" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_16">[root@localhost bin]#  vi /etc/my.cnf
+#复制以下代码[mysqld]datadir=/usr/local/mysql/data
+port=3306
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+symbolic-links=0
+max_connections=600
+innodb_file_per_table=1
+lower_case_table_names=1
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li><li>5.</li><li>6.</li><li>7.</li><li>8.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.8、测试启动mysql服务器</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_17" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_17">[root@localhost /]# /usr/local/mysql/support-files/mysql.server start
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<p>当你看到<strong>OK</strong>标识时，标识已经启动成功了，恭喜你</p> 
+<p><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/13d7aeb1124243dc54736aec0fa3f228.png" alt="Linux下安装mysql-5.7.24_# MySQL_04"></p> 
+<p>注意点：当你看到这个时，意味着有可能此方法不适用你，对不起，继续百度去吧</p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_18" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-html" tabindex="0"><code class=" has-numbering language-html" id="code_id_18">Starting MySQL... ERROR! The server quit without updating PID file
+</code><ul class="pre-numbering" style=""><li>1.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<hr><p>可能能解决的办法：</p> 
+<p>​ 查看mysql进行并且kill掉它（如果没有可Kill的进程，百度去吧，此方法不适用）</p> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_19" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-html" tabindex="0"><code class=" has-numbering language-html" id="code_id_19">#查询服务
+root@localhost /]#ps -ef|grep mysql
+root@localhost /]#ps -ef|grep mysqld
+#结束进程
+kill -9 PID
+#再重新启动服务 
+/usr/local/mysql/support-files/mysql.server start
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li><li>5.</li><li>6.</li><li>7.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h3>
+<a></a>4.9、设置软连接，重启mysql服务</h3> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_20" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-html" tabindex="0"><code class=" has-numbering language-html" id="code_id_20">[root@localhost /]#  ln -s /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql 
+[root@localhost /]#  ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
+[root@localhost /]#  service mysql restart
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<p><strong>至此，安装完毕。</strong></p> 
+<h2>
+<a></a>五、登录mysql，修改自定义密码，登录密码是之前复制那份</h2> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_21" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_21">[root@localhost /]#  mysql -u root -p
+Enter password:输入安装时的临时密码
+mysql&gt;set password for root@localhost = password('自定义密码');
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h2>
+<a></a>六、开放远程连接</h2> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_22" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_22">mysql&gt;use mysql;msyql&gt;update user set user.Host='%' where user.User='root';
+mysql&gt;flush privileges;
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div> 
+<h2>
+<a></a>七、可设可不设置（开机自启动）</h2> 
+<div class="code-toolbar"><div class="hljs-cto"><button data-clipboard-target="#code_id_23" class="copy_btn disable">登录后复制</button><div class="code-toolbar"><pre class=" prettyprint language-mysql" tabindex="0"><code class="prism has-numbering language-mysql" id="code_id_23">1、将服务文件拷贝到init.d下，并重命名为mysql
+[root@localhost /]# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+2、赋予可执行权限
+[root@localhost /]# chmod +x /etc/init.d/mysqld
+3、添加服务
+[root@localhost /]# chkconfig --add mysqld
+4、显示服务列表
+[root@localhost /]# chkconfig --list
+</code><ul class="pre-numbering" style=""><li>1.</li><li>2.</li><li>3.</li><li>4.</li><li>5.</li><li>6.</li><li>7.</li><li>8.</li></ul></pre><div class="toolbar"></div></div></div><div class="toolbar"></div></div>
+                </div>
+                </div>
+            </div>
+		
+        <div id="asideoffset"></div>
+        <div class="clearfix label-list">
+
+<!--            <span>本文包含：</span>-->
+<!--          -->
+<!--            <a href="" target="_blank"></a>-->
+
+        </div>
+    </div>
+    <div class="action-box">
+        <ul>
+                        <li>
+                <strong class="appreciate-btn  appreciate-open ">
+                    <a href="javascript:;"><i class="iconblog blogshang"></i></a>
+                    <span>打赏</span>
+                </strong>
+            </li>
+                        <li>
+                <strong class="is-praise  " type="1" blog_id="3009491" userid="15286180">
+                    <a href="javascript:;"><i></i></a>
+                    <span><b class="praise-num"></b>赞</span>
+                </strong>
+            </li>
+            <li>
+                <strong class="favorites-opt ">
+                    <a href="javascript:;"><i></i></a>
+                    <span><b class="favorites-num"></b>收藏</span>
+                </strong>
+            </li>
+            <li>
+                <strong class="Topraise">
+                    <a href="javascript:;"><i class="iconblog blogpinglun"></i></a>
+                    <span><b class="comments_num"></b>评论</span>
+                </strong>
+            </li>
+            <li class="share">
+                <strong class="">
+                    <a href="javascript:;"><i class="iconblog blogfen"></i></a>
+                    <span>分享</span>
+                </strong>
+                <div class="bdsharebuttonbox">
+                    <div class="ins">
+                        <a class="bds_tsina" data-cmd="tsina" rel="nofollow"><i class="iconblog blogfenxiangweibo"></i>微博</a>
+                        <a class="bds_sqq" data-cmd="sqq" rel="nofollow"><i class="iconblog blogfenxiangqq"></i>QQ</a>
+                        <a class="bds_weixin" data-cmd="weixin" rel="nofollow"><i class="iconblog blogfenxiangweixin"></i>微信</a>
+                        <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/qr-url">
+                    </div>
+                </div>
+            </li>
+                        <li>
+                <strong class="article-report">
+                    <a href="javascript:;"><i class="iconblog blogjubaobeifen report-icon" style="font-size: 23px"></i></a>
+                    <span>举报</span>
+                </strong>
+            </li>
+                    </ul>
+    </div>
+    <div class="clearfix lists">
+                 <p class="fl"><span>上一篇：</span><a href="https://blog.51cto.com/u_15296180/3009490">Linux下安装jdk</a></p>
+                            <p class="fr"><span>下一篇：</span><a href="https://blog.51cto.com/u_15296180/3009492">Linux下安装Redis</a></p>
+                
+    </div>
+    <div class="text-aticle">
+
+    </div>
+</article>
+<!-- 蒙层 -->
+<div class="Mask"></div>
+
+<div class="report-dialog-root">
+    <div class="report-dialog-container">
+        <p class="report-dialog-title">举报文章</p>
+        <div class="report-type-container model-split_top" data-type="0" id="report-specific-type">
+            <p class="report-type-tit">请选择举报类型</p>
+            <div class="report-type-enmu">
+                <span class="report-type-item type-item_first" data-type="1">内容侵权</span>
+                <span class="report-type-item type-item_first item-split" data-type="2">涉嫌营销</span>
+                <span class="report-type-item type-item_first item-split" data-type="3">内容抄袭</span>
+                <span class="report-type-item type-item_first item-split" data-type="4">违法信息</span>
+                <span class="report-type-item type-item_first item-split" data-type="5">其他</span>
+            </div>
+        </div>
+        <div class="report-type-container model-split_top report-hide-model" id="report-specific-reasons" data-type="0">
+            <p class="report-type-tit">具体原因</p>
+            <div class="report-type-enmu">
+                <span class="report-type-item type-item_second" data-type="1">包含不真实信息</span>
+                <span class="report-type-item type-item_second item-split" data-type="2">涉及个人隐私</span>
+            </div>
+        </div>
+        <div class="report-type-container model-split_top report-hide-model" id="report-original-link">
+            <p class="report-type-tit">原文链接（必填）</p>
+            <input type="text" placeholder="请输入被侵权的原文链接" class="report-orgin_input">
+        </div>
+        <div class="report-type-container model-split_top textarea-content">
+            <p class="report-type-tit">补充说明</p>
+            <textarea maxlength="200" class="report-reason_textarea" placeholder="请详细描述您的举报内容" id="report-more-info"></textarea>
+            <p class="report-textarea-tip"><span class="tip-left">0</span><span>/200</span></p>
+        </div>
+        <div class="report-type-container">
+            <p class="report-type-tit">上传截图</p>
+            <div class="report-img-container">
+                <i class="iconblog blogtianjiabeifen report-add-icon"></i>
+                <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" class="repot-btn-select" onchange="selectImg(this)">
+            </div>
+            <p class="report-img_rule">格式支持JPEG/PNG/JPG，图片不超过1.9M</p>
+            <div class="report-img-show">
+                <img src="https://blog.51cto.com/u_15296180/3009491" alt="" id="report-img">
+                <div class="report-img-close">
+                    <i class="iconblog bloga-shanchutupian report-close-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="report-btn-container">
+            <button class="report-btn-cancel">取消</button>
+            <button class="report-btn-concert">确认</button>
+        </div>
+        <div class="report-warm-tip report-hide-model">
+            已经收到您得举报信息，我们会尽快审核
+        </div>
+    </div>
+</div>
+<script>
+  var writeMessage= "©著作权归作者所有：来自51CTO博客作者爱写Bug的麦洛的原创作品，请联系作者获取转载授权，否则将追究法律责任\r\nLinux下安装mysql-5.7.24\r\nhttps:\/\/blog.51cto.com\/u_15296180\/3009491";
+  var copyData='\r\n-----------------------------------\r\n'+writeMessage
+
+ function copy(value, cb) {
+  // 动态创建 textarea 标签
+  const textarea = document.createElement('textarea')
+  // 将该 textarea 设为 readonly 防止 iOS 下自动唤起键盘，同时将 textarea 移出可视区域
+  textarea.readOnly = 'readonly'
+  textarea.style.position = 'absolute'
+  textarea.style.left = '-9999px'
+  // 将要 copy 的值赋给 textarea 标签的 value 属性
+  textarea.value = value
+  // 将 textarea 插入到 body 中
+  document.body.appendChild(textarea)
+  // 选中值并复制
+  textarea.select()
+  textarea.setSelectionRange(0, textarea.value.length)
+  document.execCommand('Copy')
+  document.body.removeChild(textarea)
+  if (cb && Object.prototype.toString.call(cb) === '[object Function]') {
+    cb()
+  }
+  
+}
+
+
+  $('#result').on('copy', function (event) {
+    if (!window.getSelection) {
+      return
+    }
+    let copyString = window.getSelection().toString()
+    if(isCodeCopy){
+        return
+    }
+    if (copyString.length < 200) {
+       copy(copyString)
+      return
+    }
+    copyString=copyString+copyData
+    copy(copyString)
+
+  })
+  $('#markdownContent').on('copy', function (event) {
+    if (!window.getSelection) {
+      return
+    }
+  
+    let copyString = window.getSelection().toString()
+     if(isCodeCopy){
+        return
+    }
+    if (copyString.length < 200) {
+      copy(copyString)
+      return
+    }
+    copyString=copyString+copyData
+    copy(copyString)
+    
+
+  })
+    var is_old = "1"
+    if(is_old == 0) {
+        var reg=/<(h[1-4])([^>]*)>/g;
+        var htmlData = CtoEditor.ctoEditor.mixins[0].data().markdownIt.render("\u003Cdiv\u003E\n                    \u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E一 、安装前须知\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E版本：mysql-5.7.24\n平台：Linux\n环境：Centos 7\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E二 、安装前的必要检查和准备(不要遗漏任何一步骤)\u003C\/h2\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.1、检查系统是否已经安装过mysql\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E [root@localhost \/]# rpm -qa | grep mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Cp\u003E例如下图所展示，就存在两个记录\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rpm -qa | grep mysql\nmysql-community-client-5.7.31-1.el7.x86_64\nmysql57-community-release-el7-8.noarch\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.2 、执行删除命令，一 一 删除\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]#  rpm -e --nodeps mysql-community-client-5.7.31-1.el7.x86_64\n[root@localhost\/]#  rpm -e --nodeps mysql57-community-release-el7-8.noarch\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.3 、删除之后，再检查一次\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rpm -qa | grep mysql\n[root@localhost\/]#\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.4、查询所有mysql对应的文件夹\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# whereis mysql\nmysql: \/usr\/local\/mysql \/usr\/share\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.5、删除相关文件\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rm -rf \/usr\/local\/mysql \/usr\/share\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.6 、验证是否删除完毕（有的话，继续删除）\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@iZwz9cngn5wj3ba82mwx3zZ \/]# whereis mysql\nmysql:[root@iZwz9cngn5wj3ba82mwx3zZ \/]# \n[root@iZwz9cngn5wj3ba82mwx3zZ \/]# find \/ -name mysql\n\/run\/lock\/subsys\/mysql\n\/etc\/rc.d\/init.d\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# cat \/etc\/group | grep mysql\n[root@localhost \/]# cat \/etc\/passwd |grep mysql\n[root@localhost \/]# groupadd mysql\n[root@localhost \/]# useradd -r -g mysql mysql\n[root@localhost \/]#\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  wget https:\/\/dev.mysql.com\/get\/Downloads\/MySQL-5.7\/mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E四、安装mysql\u003C\/h2\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.1、找到你的安装包，进行解压\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  tar xzvf mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n[root@localhost \/]# ls\nmysql-5.7.24-linux-glibc2.12-x86_64\nmysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.2、解压后会多出一个解压文件\u003C\/h3\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4,3、移动该文件至\/user\/local\/下并将文件名改为mysql\u003C\/h3\u003E \n\u003Cp\u003E注意点:如果目录下存在mysql的文件名，请改为其他的名称，否则后续无法继续进行操作\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 \/usr\/local\/\n[root@localhost \/]# cd \/usr\/local\/\n[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.4、在\/user\/local\/mysql目录下创建data文件夹，用于存放数据库\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# mkdir \/usr\/local\/mysql\/data\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.5 、更改mysql目录下所属的用户组、用户和权限\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# chown -R mysql:mysql \/usr\/local\/mysql\n[root@localhost \/]# chmod -R 755 \/usr\/local\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.6、编译并安装mysql\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# cd \/usr\/local\/mysql\/bin\n[root@localhost bin]# .\/mysqld --initialize --user=mysql --datadir=\/usr\/local\/mysql\/data --basedir=\/usr\/local\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E\u003Cstrong\u003E注意点：红色圈出的部分是临时密码，需提前保存，用来登录mysql，修改密码\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s9.51cto.com\/images\/blog\/202107\/07\/239edfa40a8d5589d84d09a2c3371116.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_linux\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E注意点：此处可能发生的错误，有些依赖没安装\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_02\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_02\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cstrong\u003E执行命令（命令都执行完毕之后，还有问题，请百度。）\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost bin]#  yum install  libaio-devel.x86_64\n[root@localhost bin]#  yum -y install numactl\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E执行命令完毕，在重新进行编译安装，执行(6)此处命令\u003C\/p\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.7 、编辑配置文件my.cnf\u003C\/h3\u003E \n\u003Cp\u003E\u003Cstrong\u003E注意点：清空里头的内容，直接复制下图的代码。后续有需要可自行补充\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost bin]#  vi \/etc\/my.cnf\n#复制以下代码[mysqld]datadir=\/usr\/local\/mysql\/data\nport=3306\nsql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES\nsymbolic-links=0\nmax_connections=600\ninnodb_file_per_table=1\nlower_case_table_names=1\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.8、测试启动mysql服务器\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# \/usr\/local\/mysql\/support-files\/mysql.server start\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E当你看到\u003Cstrong\u003EOK\u003C\/strong\u003E标识时，标识已经启动成功了，恭喜你\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/13d7aeb1124243dc54736aec0fa3f228.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_04\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E注意点：当你看到这个时，意味着有可能此方法不适用你，对不起，继续百度去吧\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode\u003EStarting MySQL... ERROR! The server quit without updating PID file\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Cp\u003E可能能解决的办法：\u003C\/p\u003E \n\u003Cp\u003E​ 查看mysql进行并且kill掉它（如果没有可Kill的进程，百度去吧，此方法不适用）\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode\u003E#查询服务\nroot@localhost \/]#ps -ef|grep mysql\nroot@localhost \/]#ps -ef|grep mysqld\n#结束进程\nkill -9 PID\n#再重新启动服务 \n\/usr\/local\/mysql\/support-files\/mysql.server start\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.9、设置软连接，重启mysql服务\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode\u003E[root@localhost \/]#  ln -s \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysql \n[root@localhost \/]#  ln -s \/usr\/local\/mysql\/bin\/mysql \/usr\/bin\/mysql\n[root@localhost \/]#  service mysql restart\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E\u003Cstrong\u003E至此，安装完毕。\u003C\/strong\u003E\u003C\/p\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E五、登录mysql，修改自定义密码，登录密码是之前复制那份\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  mysql -u root -p\nEnter password:输入安装时的临时密码\nmysql\u0026gt;set password for root@localhost = password(\u0027自定义密码\u0027);\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E六、开放远程连接\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003Emysql\u0026gt;use mysql;msyql\u0026gt;update user set user.Host=\u0027%\u0027 where user.User=\u0027root\u0027;\nmysql\u0026gt;flush privileges;\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E七、可设可不设置（开机自启动）\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E1、将服务文件拷贝到init.d下，并重命名为mysql\n[root@localhost \/]# cp \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysqld\n2、赋予可执行权限\n[root@localhost \/]# chmod +x \/etc\/init.d\/mysqld\n3、添加服务\n[root@localhost \/]# chkconfig --add mysqld\n4、显示服务列表\n[root@localhost \/]# chkconfig --list\n\u003C\/code\u003E\u003C\/pre\u003E\n                \u003C\/div\u003E\n                ");
+        var num=0
+        htmlData= htmlData.replace(reg,function(val){
+                var userData=' id="h'+Number(num++)+'" '
+                val=val=val.replace(/”/,'"').replace(/“/,'"')
+                if(/<(h[1-4]) [^>]{0,}id=[^>]+>/.test(val)){
+                    var text=val.match(/\sid=(["\']).*?\1/)[0]
+                    val=val.replace(text,userData)  
+                }else{
+                    var text = val.match(/<(h[1-4])/)[0]
+                    val = val.replace(/<(h[1-4])/,text+' '+userData)
+                }
+                return val
+        })
+        $('#markdownContent').html(htmlData)
+        // $('#markdownContent').html(CtoEditor.ctoEditor.mixins[0].data().markdownIt.render("\u003Cdiv\u003E\n                    \u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E一 、安装前须知\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E版本：mysql-5.7.24\n平台：Linux\n环境：Centos 7\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E二 、安装前的必要检查和准备(不要遗漏任何一步骤)\u003C\/h2\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.1、检查系统是否已经安装过mysql\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E [root@localhost \/]# rpm -qa | grep mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Cp\u003E例如下图所展示，就存在两个记录\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rpm -qa | grep mysql\nmysql-community-client-5.7.31-1.el7.x86_64\nmysql57-community-release-el7-8.noarch\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.2 、执行删除命令，一 一 删除\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]#  rpm -e --nodeps mysql-community-client-5.7.31-1.el7.x86_64\n[root@localhost\/]#  rpm -e --nodeps mysql57-community-release-el7-8.noarch\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.3 、删除之后，再检查一次\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rpm -qa | grep mysql\n[root@localhost\/]#\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.4、查询所有mysql对应的文件夹\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# whereis mysql\nmysql: \/usr\/local\/mysql \/usr\/share\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.5、删除相关文件\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost\/]# rm -rf \/usr\/local\/mysql \/usr\/share\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.6 、验证是否删除完毕（有的话，继续删除）\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@iZwz9cngn5wj3ba82mwx3zZ \/]# whereis mysql\nmysql:[root@iZwz9cngn5wj3ba82mwx3zZ \/]# \n[root@iZwz9cngn5wj3ba82mwx3zZ \/]# find \/ -name mysql\n\/run\/lock\/subsys\/mysql\n\/etc\/rc.d\/init.d\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# cat \/etc\/group | grep mysql\n[root@localhost \/]# cat \/etc\/passwd |grep mysql\n[root@localhost \/]# groupadd mysql\n[root@localhost \/]# useradd -r -g mysql mysql\n[root@localhost \/]#\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  wget https:\/\/dev.mysql.com\/get\/Downloads\/MySQL-5.7\/mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E四、安装mysql\u003C\/h2\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.1、找到你的安装包，进行解压\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  tar xzvf mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n[root@localhost \/]# ls\nmysql-5.7.24-linux-glibc2.12-x86_64\nmysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.2、解压后会多出一个解压文件\u003C\/h3\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4,3、移动该文件至\/user\/local\/下并将文件名改为mysql\u003C\/h3\u003E \n\u003Cp\u003E注意点:如果目录下存在mysql的文件名，请改为其他的名称，否则后续无法继续进行操作\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 \/usr\/local\/\n[root@localhost \/]# cd \/usr\/local\/\n[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.4、在\/user\/local\/mysql目录下创建data文件夹，用于存放数据库\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# mkdir \/usr\/local\/mysql\/data\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.5 、更改mysql目录下所属的用户组、用户和权限\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# chown -R mysql:mysql \/usr\/local\/mysql\n[root@localhost \/]# chmod -R 755 \/usr\/local\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.6、编译并安装mysql\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# cd \/usr\/local\/mysql\/bin\n[root@localhost bin]# .\/mysqld --initialize --user=mysql --datadir=\/usr\/local\/mysql\/data --basedir=\/usr\/local\/mysql\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E\u003Cstrong\u003E注意点：红色圈出的部分是临时密码，需提前保存，用来登录mysql，修改密码\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s9.51cto.com\/images\/blog\/202107\/07\/239edfa40a8d5589d84d09a2c3371116.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_linux\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E注意点：此处可能发生的错误，有些依赖没安装\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_02\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_02\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E\u003Cstrong\u003E执行命令（命令都执行完毕之后，还有问题，请百度。）\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost bin]#  yum install  libaio-devel.x86_64\n[root@localhost bin]#  yum -y install numactl\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E执行命令完毕，在重新进行编译安装，执行(6)此处命令\u003C\/p\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.7 、编辑配置文件my.cnf\u003C\/h3\u003E \n\u003Cp\u003E\u003Cstrong\u003E注意点：清空里头的内容，直接复制下图的代码。后续有需要可自行补充\u003C\/strong\u003E\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost bin]#  vi \/etc\/my.cnf\n#复制以下代码[mysqld]datadir=\/usr\/local\/mysql\/data\nport=3306\nsql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES\nsymbolic-links=0\nmax_connections=600\ninnodb_file_per_table=1\nlower_case_table_names=1\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.8、测试启动mysql服务器\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]# \/usr\/local\/mysql\/support-files\/mysql.server start\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E当你看到\u003Cstrong\u003EOK\u003C\/strong\u003E标识时，标识已经启动成功了，恭喜你\u003C\/p\u003E \n\u003Cp\u003E\u003Cimg src=\u0022https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/13d7aeb1124243dc54736aec0fa3f228.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\u0022 alt=\u0027Linux下安装mysql-5.7.24_# MySQL_04\u0027 \/\u003E\u003C\/p\u003E \n\u003Cp\u003E注意点：当你看到这个时，意味着有可能此方法不适用你，对不起，继续百度去吧\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode\u003EStarting MySQL... ERROR! The server quit without updating PID file\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Chr \/\u003E\u003Cp\u003E可能能解决的办法：\u003C\/p\u003E \n\u003Cp\u003E​ 查看mysql进行并且kill掉它（如果没有可Kill的进程，百度去吧，此方法不适用）\u003C\/p\u003E \n\u003Cpre\u003E\u003Ccode\u003E#查询服务\nroot@localhost \/]#ps -ef|grep mysql\nroot@localhost \/]#ps -ef|grep mysqld\n#结束进程\nkill -9 PID\n#再重新启动服务 \n\/usr\/local\/mysql\/support-files\/mysql.server start\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch3\u003E\n\u003Ca\u003E\u003C\/a\u003E4.9、设置软连接，重启mysql服务\u003C\/h3\u003E \n\u003Cpre\u003E\u003Ccode\u003E[root@localhost \/]#  ln -s \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysql \n[root@localhost \/]#  ln -s \/usr\/local\/mysql\/bin\/mysql \/usr\/bin\/mysql\n[root@localhost \/]#  service mysql restart\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Cp\u003E\u003Cstrong\u003E至此，安装完毕。\u003C\/strong\u003E\u003C\/p\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E五、登录mysql，修改自定义密码，登录密码是之前复制那份\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E[root@localhost \/]#  mysql -u root -p\nEnter password:输入安装时的临时密码\nmysql\u0026gt;set password for root@localhost = password(\u0027自定义密码\u0027);\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E六、开放远程连接\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003Emysql\u0026gt;use mysql;msyql\u0026gt;update user set user.Host=\u0027%\u0027 where user.User=\u0027root\u0027;\nmysql\u0026gt;flush privileges;\n\u003C\/code\u003E\u003C\/pre\u003E \n\u003Ch2\u003E\n\u003Ca\u003E\u003C\/a\u003E七、可设可不设置（开机自启动）\u003C\/h2\u003E \n\u003Cpre\u003E\u003Ccode class=\u0022prism language-mysql\u0022\u003E1、将服务文件拷贝到init.d下，并重命名为mysql\n[root@localhost \/]# cp \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysqld\n2、赋予可执行权限\n[root@localhost \/]# chmod +x \/etc\/init.d\/mysqld\n3、添加服务\n[root@localhost \/]# chkconfig --add mysqld\n4、显示服务列表\n[root@localhost \/]# chkconfig --list\n\u003C\/code\u003E\u003C\/pre\u003E\n                \u003C\/div\u003E\n                "))
+        var bucketObj = CtoEditor.analysisChart
+        bucketObj.searchChartDom()
+    }
+</script>
+<!-- <script id="MathJax-script" async src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script> -->
+      
+    
+
+<article class="common-section common-spacing mb30 comment-box" id="comment">
+    <div class="comment-textarea clearfix">
+        <div class="avatar">
+            <a href="https://blog.51cto.com/" class="header-img" target="_blank">
+                <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/noavatar_middle.gif">
+            </a>
+        </div>
+        <div class="textarea-box">
+            <div class="textarea-show clearfix">
+                <span>提问和评论都可以，用心的回复会被更多人看到</span>
+                <strong>评论</strong>
+            </div>
+            <div class="textarea-hide">
+                <div class="top">
+                    <textarea class="textareadiv textareadiv-publish" name="" id="textareadiv-publish" placeholder="提问和评论都可以，用心的回复会被更多人看到和认可" maxlength="500"></textarea>
+                </div>
+                <div class="bot clearfix">
+                    <strong class="fr publish-btn" flag="1" id="publish-btn">发布评论</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-num" style="display:none;">
+        <strong>全部评论</strong>
+        <span>(<b id="CommentNum"></b>)</span>
+        <span class="fr sort" type="up_num" order="0"><i class="iconblog blogzuire"></i>最热</span>
+        <span class="fr sort on" type="create_time" order="0"><i class="iconblog blogzuixinblogzuixin"></i>最新</span>
+    </div>
+    <div class="comment-List-box"></div>   
+    <script id="commentListScript" type="text/html">
+        {{each list value index}}
+        <div class="floor-1">       
+            <div class="comment-List clearfix" id="{{value.id}}">
+                <div class="avatar">
+                    <a href="{{value.location_url}}"><img src="{{value.avatar}}" alt=""></a>
+                    {{if value.is_vip == 1}}
+                    <i class="vip-icon vip-icon-4" title="51CTO VIP会员"></i>
+                    {{/if}}
+                </div>
+                <div class="comment-detail">
+                    <h3 class="clearfix">
+                        <a href="{{value.location_url}}" class="fl">{{value.nickname}}</a>
+                        {{if value.is_author == 1}}
+                        <span class="tag fl">博主</span>
+                        {{/if}}
+                        <span class="time fr">{{value.create_time}}</span></h3>
+                    <div class="content">{{value.content}}</div>
+                    <div class="action clearfix">
+                        {{if value.is_reply == 1}}
+                        <span class="reply"><i class="iconblog blogpinglun2"></i>回复</span>
+                        {{/if}}
+                        <span class="vote {{value.is_praise ==1 ? 'on' : ''}}"><i class="iconblog blogzan2"></i>点赞<b num="{{value.up_num}}">{{value.up_num>0 ? value.up_num : ''}}</b></span>
+                        {{if value.is_delete == 1}}
+                        <span class="delete"><i class="iconblog blogshan"></i>删除</span>
+                        {{/if}}
+                    </div>
+                </div>
+                <input type="hidden"  class="first_pid" value="{{value.id}}">
+                <input type="hidden"  class="parent_id" value="{{value.id}}">
+                <input type="hidden"  class="reply_uid" value="{{value.user_id}}">
+            </div>
+            <div class="floor-2">
+                {{if value.children.total > 0}}
+                    {{each value.children.list item key}}               
+                    <div class="comment-List clearfix" id="{{item.id}}" {{if key>3}}style="display:none;"{{/if}}>
+                        <div class="avatar">
+                            <a href=""><img src="{{item.avatar}}" alt=""></a>
+                            {{if item.is_vip == 1}}
+                            <i class="vip-icon vip-icon-4" title="51CTO VIP会员"></i>
+                            {{/if}}
+                        </div>
+                        <div class="comment-detail">
+                            <h3 class="clearfix">
+                                <a href="" class="fl">{{item.nickname}}</a>
+                                {{if item.is_author == 1}}
+                                <span class="tag fl">博主</span>
+                                {{/if}}
+                                <i class="fl">回复了</i>
+                                <b class="other fl">{{item.reply_nickname}}</b>
+                                
+                                <span class="time fr">{{item.create_time}}</span>
+                            </h3>                                                
+                            {{if item.is_reply_content>0}}
+                            <div class="reply-content">{{item.reply_content}}</div>
+                            {{/if}}
+                            <div class="content">{{item.content}}</div>
+                            <div class="action clearfix">
+                                {{if item.is_reply == 1}}
+                                <span class="reply"><i class="iconblog blogpinglun2"></i>回复</span>
+                                {{/if}}
+                                <span class="vote {{item.is_praise ==1 ? 'on' : ''}}"><i class="iconblog blogzan2"></i>点赞<b num="{{item.up_num}}">{{item.up_num>0 ? item.up_num : ''}}</b></span>
+                                {{if item.is_delete == 1}}
+                                <span class="delete"><i class="iconblog blogshan"></i>删除</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <input type="hidden"  class="first_pid" value="{{item.first_pid}}">
+                        <input type="hidden"  class="parent_id" value="{{item.id}}">
+                        <input type="hidden"  class="reply_uid" value="{{item.user_id}}">
+                    </div>
+                    {{if key == 3}}
+                    <div class="more-toggle">查看更多回复<i class="iconblog blogchuangzuolanhufan"></i></div>
+                    {{/if}}
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        {{/each}} 
+        {{if total>0}} 
+        {{@pagination}} 
+        {{/if}}          
+    </script>
+</article>
+<script>
+    var cid = '0';
+    var fid = '0';
+    var page = '1';
+</script>
+      
+    
+    <section class="common-section common-spacing mb30">
+        <div class="clearfix common-sub-title">
+            <h2>相关文章</h2>
+        </div>
+        <ul class="recommend-about">
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/u_15418847/4583650?b=totalstatistic" data-report-query="xiangguantuijian&amp;01" target="_blank">
+                                                            <div class="pic">
+                                    <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/1636702169645830.png" alt="">
+                                    <!-- 此处是什么意思？ -->
+                                                                    </div>
+                                                        <h3>Centos 安装mysql-5.7.24</h3>
+                            <p> ### 服务器版本：CentOS Linux release 7.6.1810 (Core)### mysql版本：mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz***## 一、准备工作1.上传软件包到服务器/usr/local/software路径（路径可自定义）2.关闭防...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         linux                                    </span>
+                                                                    <span class="tag-item">
+                                         数据库                                    </span>
+                                                                    <span class="tag-item">
+                                         数据                                    </span>
+                                                                    <span class="tag-item">
+                                         sed                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/u_15152248/2680758?b=totalstatistic" data-report-query="xiangguantuijian&amp;02" target="_blank">
+                                                        <h3>Linux下设置mysql-5.7.24自动备份</h3>
+                            <p> Linux下设置mysql-5.7.24自动备份检查是否已经安装过mysql，执行命令ln&nbsp;-fs&nbsp;/usr/local/mysql/bin/mysqldump&nbsp;/usr/bin新建备份目录mkdir&nbsp;/home/sql_backup创建自动备份bash脚本cd&nbsp;/home/sql_backupvim&nbsp;mysql_...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         Linux                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/kaiyuandiantang/2322568?b=totalstatistic" data-report-query="xiangguantuijian&amp;03" target="_blank">
+                                                        <h3>47、CentOS7源码安装mysql-5.7.24</h3>
+                            <p> find / -name mariadb*yum -y remove mariadb-libs-5.5.44find / -name mariadb*yum -y groupinstall "Development tools" "Server Platform Development"yum -y install https://mirrors.aliyu...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         47                                    </span>
+                                                                    <span class="tag-item">
+                                         CentOS7                                    </span>
+                                                                    <span class="tag-item">
+                                         源码装                                    </span>
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/crushlinux/2327771?b=totalstatistic" data-report-query="xiangguantuijian&amp;04" target="_blank">
+                                                        <h3>基于通用二进制方式安装MySQL-5.7.24</h3>
+                            <p> 1.确保系统中有依赖的libaio软件，使用如下命令[root@localhost&nbsp;~]#&nbsp;yum&nbsp;-y&nbsp;install&nbsp;libaio[root@localhost&nbsp;~]#&nbsp;rpm&nbsp;-q&nbsp;libaiolibaio-0.3.109-13.el7.x86_642.使用wget命令下载mysql-5.7.24 软件包[root@...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         5.7                                    </span>
+                                                                    <span class="tag-item">
+                                         glibc                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/StarBigData/3643624?b=totalstatistic" data-report-query="xiangguantuijian&amp;05" target="_blank">
+                                                            <div class="pic">
+                                    <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/d7e74138fcc2683a32b02953b59b3ace.png" alt="">
+                                    <!-- 此处是什么意思？ -->
+                                                                    </div>
+                                                        <h3>Linux离线安装MySQL5.7.24</h3>
+                            <p> 目录 一、下载安装包 二、卸载mariadb 三、安装MySQL 四、配置MySQL 五、初始化数据库 六、修改密码策略 七、允许防火墙通行 八、设置开机自启 九、MySQL卸载 十、yum在线安装 一、...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         linux                                    </span>
+                                                                    <span class="tag-item">
+                                         修改密码                                    </span>
+                                                                    <span class="tag-item">
+                                         数据库                                    </span>
+                                                                    <span class="tag-item">
+                                         初始化                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/u_14602625/3026781?b=totalstatistic" data-report-query="xiangguantuijian&amp;06" target="_blank">
+                                                            <div class="pic">
+                                    <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/5672c678af408df14650615ca26bbae6.png" alt="">
+                                    <!-- 此处是什么意思？ -->
+                                                                    </div>
+                                                        <h3>MySQL5.7.24解压版安装</h3>
+                            <p> 今天拷贝正式环境数据库到本地的时候突然报错了，原因是前几日正式环境的数据库版本进行了升级，本地版本太低导致数据库不兼容，遂连夜整理出此篇文章供大家参考使用 1. 链接下载mysql5.7.24...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         MySQL                                    </span>
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/lengff/4580238?b=totalstatistic" data-report-query="xiangguantuijian&amp;07" target="_blank">
+                                                            <div class="pic">
+                                    <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/11104120_618c82d0e028948764.png" alt="">
+                                    <!-- 此处是什么意思？ -->
+                                                                    </div>
+                                                        <h3>windows10下 mysql5.7.24 免安装版 安装笔记</h3>
+                            <p> 我再安装mysql的免安装版遇到过特别多的问题,经常是装成功了,但是服务起不来,所以这里就总结一下mysql的安装笔记,供自己学习1.先去官网下载mysql 免安包&nbsp;​2.解压安装包 到指定的目录3.在mysq...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         初始化                                    </span>
+                                                                    <span class="tag-item">
+                                         修改密码                                    </span>
+                                                                    <span class="tag-item">
+                                         启动服务                                    </span>
+                                                                    <span class="tag-item">
+                                         配置文件                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/u_14286115/5178452?b=totalstatistic" data-report-query="xiangguantuijian&amp;08" target="_blank">
+                                                        <h3>mysql-5.7.24-winx64配置安装</h3>
+                            <p> 1、去mysql官网下载安装包https://dev.mysql.com/downloads/mysql/5.7.html#downloads2、解压安装包把安装包解压到此目录：D:\Program Files\mysql-5.7.24-winx64（我习惯把所有程序安装在 d:\Program Files 或 d:\P...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         mysql                                    </span>
+                                                                    <span class="tag-item">
+                                         安装包                                    </span>
+                                                                    <span class="tag-item">
+                                         修改密码                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/u_14602625/2964905?b=totalstatistic" data-report-query="xiangguantuijian&amp;09" target="_blank">
+                                                            <div class="pic">
+                                    <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/965ffa630447e7dd330b16697320d754.jpeg" alt="">
+                                    <!-- 此处是什么意思？ -->
+                                                                    </div>
+                                                        <h3>MySQL5.7.24解压版安装详细步骤</h3>
+                            <p> &nbsp;&nbsp;今天拷贝正式环境数据库到本地的时候突然报错了，原因是前几日正式环境的数据库版本进行了升级，本地版本太低导致数据库不兼容，遂连夜整理出此篇文章供大家参考使用1. 链接下载mysql5.7.24压缩包&nbsp;我的百度...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         应用                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/angie/1282592?b=totalstatistic" data-report-query="xiangguantuijian&amp;10" target="_blank">
+                                                        <h3>linux下安装Mysql</h3>
+                            <p> 1.系统和软件版本 系统：Red Hat Linux Enterprise server 6.3 Mysql:5.6.4-m7(tar.gz包)2.安装前检查： 1）是否安装gcc,gcc++,cmake,若已安装可直接做步骤3，否则按如下顺序安装： 2）安装gcc(本过程使用系统盘进行...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         操作系统                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                            <li>
+                    <div class="about-aticle-list">
+                        <a href="https://blog.51cto.com/wusongyuanxing1/2437375?b=totalstatistic" data-report-query="" target="_blank">
+                                                        <h3>linux 下mysql安装</h3>
+                            <p> 在centos 7.6 上安装mysql 5.71: 在/etc/yum.repos.d 目录下先下载mysql5.7的yum 源的rpm包：			Wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 2:在/etc/yum.repos.d 目录下安装yu...</p>
+                        </a>
+                        <!-- 标签页 -->
+                                                    <div class="tag-box">
+                                                                    <span class="tag-item">
+                                         linux 下mysql安装                                    </span>
+                                                            </div>
+                                                                    </div>
+
+                </li>
+                    </ul>
+    </section>
+
+   
+</section>        
+<aside class="detail-content-right">
+    <!--右上角统计-->
+    <section class="common-section common-spacing mb24 user-intr">
+    <div class="user-content">
+				<div class="top">
+					<div class="avatar">
+						<div class="avatar-img">
+							<a href="https://blog.51cto.com/u_15296180" target="_blank">
+								<img class="is-vip-img is-vip-img-4" data-uid="15286180" src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/6ece0849f80bcf028f9c5703487f9255.jpeg">
+							</a><i class="vip-icon vip-icon-4" title="51CTO VIP会员"></i>
+						</div>
+					</div>
+					<div class="clearfix username">
+						<a href="https://blog.51cto.com/u_15296180" target="_blank"><span class="blog-user" title="爱写Bug的麦洛" style="max-width: 272px;">爱写Bug的麦洛</span></a>
+						<div class="icon">
+							<ul class="clearfix detail-list">
+                                                                								                                																                                							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="bottom" id="userStat">
+					<div class="num-name num-top">
+						<ul class="first-num">                           
+                                <li>
+                                    <div class="num"><a href="https://blog.51cto.com/u_15296180/original" target="_blank">211</a></div>
+                                    <div class="label-name"><a href="https://blog.51cto.com/u_15296180/original" target="_blank">原创</a></div>
+                                </li>
+                                <li>
+                                    <div class="num">13.4<span>万</span></div>
+                                    <div class="label-name">人气</div>
+                                </li>
+                                <li>
+                                    <div class="num"><a href="https://blog.51cto.com/u_15296180/followers" target="_blank">2<span></span></a></div>
+                                    <div class="label-name"><a href="https://blog.51cto.com/u_15296180/followers" target="_blank">粉丝</a></div>
+                                </li>
+                                <li>
+                                    <div class="num">0<span></span></div>
+                                    <div class="label-name">评论</div>
+                                </li>
+                            
+						</ul>
+					</div>
+                    <div class="lines"></div>
+					<div class="num-name num-bottom">
+						<ul>
+                            <li>
+								<div class="num"><a href="https://blog.51cto.com/u_15296180/translate" target="_blank">4</a></div>
+								<div class="label-name"><a href="https://blog.51cto.com/u_15296180/translate" target="_blank">翻译</a></div>
+							</li>
+							<li>
+								<div class="num"><a href="https://blog.51cto.com/u_15296180/reproduce" target="_blank">31</a></div>
+								<div class="label-name"><a href="https://blog.51cto.com/u_15296180/reproduce" target="_blank">转载</a></div>
+							</li>
+							<li>
+								<div class="num"><a href="https://blog.51cto.com/u_15296180/following" target="_blank">1</a></div>
+								<div class="label-name"><a href="https://blog.51cto.com/u_15296180/following" target="_blank">关注</a></div>
+							</li>
+							<li>
+								<div class="num">2</div>
+								<div class="label-name">收藏</div>
+							</li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+                    </div>
+                 
+                <div class="xunzhang clearfix">
+                                            <a class="xunzhang_wukong" title="悟空编辑器勋章"></a>
+                                                                <a class="xunzhang_1024" title="1024专属勋章"></a>
+                                                                            </div>
+                                <div class="operating clearfix ">
+                                                                        <a id="checkFollow2_15286180" class="follow-1 checkFollow on">关注</a>
+                                                                <button class="sx" data="https://home.51cto.com/space?uid=15286180" id="ToSx"><a href="javascript:;" rel="nofollow"><i class="iconblog blogsixin"></i>私信</a></button>
+                </div>
+			</div>
+    </section>
+
+    <!-- 其他近期文章 -->
+    
+    <!-- 近期评论 -->
+    
+    <!-- 近期文章 -->
+    <section class="common-section common-spacing mb24">
+        <div class="clearfix common-sub-title">
+            <h2 title="近期文章">近期文章</h2>
+        </div>
+        <ul class="common-list">
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/3002923" target="_blank" title="Cordova项目使用Android Studio真机调试">1.Cordova项目使用Android Studio真机调试</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/3002927" target="_blank" title="AndroidStudio真机调试 - Waiting for Debugger">2.AndroidStudio真机调试 - Waiting for Debugger</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/3009483" target="_blank" title="Linux系统下安装jdk1.8">3.Linux系统下安装jdk1.8</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/3009485" target="_blank" title="Linux终端查看最消耗CPU内存的进程">4.Linux终端查看最消耗CPU内存的进程</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/3009488" target="_blank" title="查看Linux是Ubuntu还是CentOS">5.查看Linux是Ubuntu还是CentOS</a>
+            </li>
+                    </ul>
+        <div id="Datelist">
+            <div class="common-list-lines"></div>
+            
+            <div class="nowYear">
+                <div class="years">
+                    2022年
+                </div>
+                <div class="clearfix months">
+                    
+                        <a href="https://blog.51cto.com/u_15296180/article/year2022/month3" target="_blank">
+                            <span>03月</span>
+                            <strong>2篇</strong>
+                        </a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="otherYear">
+                <div class="clearfix years">
+                    
+                        <a href="https://blog.51cto.com/u_15296180/article/year2021">2021年   244篇</a>
+                    
+                </div>
+            </div>
+            
+            </div>
+    </section>
+
+    <!-- 热门文章 -->
+        <section class="common-section common-spacing mb24">
+        <div class="clearfix common-sub-title">
+            <h2 title="热门文章">热门文章</h2>
+        </div>
+        <ul class="common-list common-list-dot">
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/5157222" target="_blank" title="SpringCloud Sleuth+Zipkin的入门介绍" class="title">SpringCloud Sleuth+Zipkin的入门介绍</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/u_15296180/5157224" target="_blank" title="Vuex在uniapp项目中应用案例" class="title">Vuex在uniapp项目中应用案例</a>
+            </li>
+                    </ul>
+    </section>
+    
+    <!-- 热评好文 -->
+    
+    <!--七日热门-->
+        <section class="common-section common-spacing mb24">
+        <div class="clearfix common-sub-title">
+            <h2 title="七日热门">七日热门</h2>
+        </div>
+        <ul class="common-list common-list-dot">
+                        <li>
+                <a href="https://blog.51cto.com/15127521/4536069" target="_blank" title="Linux - Linux简介" class="title">Linux - Linux简介</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/4528728/3799252" target="_blank" title="ftp  linux to linux" class="title">ftp  linux to linux</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/dlican/5093320" target="_blank" title="【Linux基础】Linux简史" class="title">【Linux基础】Linux简史</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/14375700/2427465" target="_blank" title="nfs（linux+linux）" class="title">nfs（linux+linux）</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/professor/1572571" target="_blank" title="【Linux基础】Linux文件" class="title">【Linux基础】Linux文件</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/3826415/4914173" target="_blank" title="【Linux】常用linux操作" class="title">【Linux】常用linux操作</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/15064641/3954029" target="_blank" title="【Linux】linux命令大全" class="title">【Linux】linux命令大全</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/4611628/1328586" target="_blank" title="linux 安装linux  作业" class="title">linux 安装linux  作业</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/15057848/4773641" target="_blank" title="linux-LINUX试题" class="title">linux-LINUX试题</a>
+            </li>
+                        <li>
+                <a href="https://blog.51cto.com/15127585/2782737" target="_blank" title="【Linux】 Linux网络编程" class="title">【Linux】 Linux网络编程</a>
+            </li>
+                    </ul>
+    </section>
+    
+    <!-- 分类列表 -->
+    
+    <!--相关标签-->
+        <section class="common-section common-spacing mb24">
+        <div class="clearfix common-sub-title">
+            <h2 title="相关标签">相关标签</h2>
+            <a href="https://blog.51cto.com/topic/all" target="_blank" class="fr more">全部</a>
+        </div>
+        <div class="label-list">
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24-rpm.html" class="tag-text" target="_blank">mysql 5.7.24 rpm</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24anzhuang-1.html" class="tag-text" target="_blank">mysql-5.7.24安装</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24deanzhuangbuzhou.html" class="tag-text" target="_blank">mysql 5.7.24的安装步骤</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24bianyianzhuang.html" class="tag-text" target="_blank">mysql 5.7.24编译安装</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24jieyabananzhuangtujie.html" class="tag-text" target="_blank">mysql 5.7.24解压版安装图解</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24ruhepeizhizhuku.html" class="tag-text" target="_blank">mysql-5.7.24如何配置主库</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24zenyangshezhimima.html" class="tag-text" target="_blank">mysql-5.7.24怎样设置密码</a>
+                            <a href="https://blog.51cto.com/topic/mysql-5.7.24decnfwenjian.html" class="tag-text" target="_blank">mysql-5.7.24的cnf文件</a>
+                            <a href="https://blog.51cto.com/topic/mysql5.7.24.msianzhuangjiaocheng.html" class="tag-text" target="_blank">mysql5.7.24.msi安装教程</a>
+                            <a href="https://blog.51cto.com/topic/mysql5.7.24zipanzhuang.html" class="tag-text" target="_blank">mysql5.7.24zip安装</a>
+                    </div>
+    </section>
+    
+    <!-- 文章目录 -->
+            <section class="common-section common-spacing table-contents common-content-directory fix-table">
+            <div class="clearfix common-sub-title">
+                <strong title="文章目录">文章目录</strong>
+            </div>
+            <div class="directory">
+                <ul class="directory-list">
+                                                                    <li class="lv1">
+                            <div class="title" title="
+一 、安装前须知">
+                                <span data-id="#h0">
+                                                                        
+一 、安装前须知                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+二 、安装前的必要检查和准备(不要遗漏任何一步骤)">
+                                <span data-id="#h1">
+                                                                        
+二 、安装前的必要检查和准备(不要遗漏任何一步骤)                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.1、检查系统是否已经安装过mysql">
+                                <span data-id="#h2">
+                                                                        
+2.1、检查系统是否已经安装过mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.2 、执行删除命令，一 一 删除">
+                                <span data-id="#h3">
+                                                                        
+2.2 、执行删除命令，一 一 删除                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.3 、删除之后，再检查一次">
+                                <span data-id="#h4">
+                                                                        
+2.3 、删除之后，再检查一次                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.4、查询所有mysql对应的文件夹">
+                                <span data-id="#h5">
+                                                                        
+2.4、查询所有mysql对应的文件夹                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.5、删除相关文件">
+                                <span data-id="#h6">
+                                                                        
+2.5、删除相关文件                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.6 、验证是否删除完毕（有的话，继续删除）">
+                                <span data-id="#h7">
+                                                                        
+2.6 、验证是否删除完毕（有的话，继续删除）                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建">
+                                <span data-id="#h8">
+                                                                        
+2.7、检查mysql用户组和用户是否存在，如果没有，则进行创建                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**">
+                                <span data-id="#h9">
+                                                                        
+三、下载安装包（网络不好的可直接去官网对应的版本进行下载）**                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+四、安装mysql">
+                                <span data-id="#h10">
+                                                                        
+四、安装mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.1、找到你的安装包，进行解压">
+                                <span data-id="#h11">
+                                                                        
+4.1、找到你的安装包，进行解压                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.2、解压后会多出一个解压文件">
+                                <span data-id="#h12">
+                                                                        
+4.2、解压后会多出一个解压文件                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4,3、移动该文件至/user/local/下并将文件名改为mysql">
+                                <span data-id="#h13">
+                                                                        
+4,3、移动该文件至/user/local/下并将文件名改为mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.4、在/user/local/mysql目录下创建data文件夹，用于存放数据库">
+                                <span data-id="#h14">
+                                                                        
+4.4、在/user/local/mysql目录下创建data文件夹，用于存放数据库                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.5 、更改mysql目录下所属的用户组、用户和权限">
+                                <span data-id="#h15">
+                                                                        
+4.5 、更改mysql目录下所属的用户组、用户和权限                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.6、编译并安装mysql">
+                                <span data-id="#h16">
+                                                                        
+4.6、编译并安装mysql                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.7 、编辑配置文件my.cnf">
+                                <span data-id="#h17">
+                                                                        
+4.7 、编辑配置文件my.cnf                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.8、测试启动mysql服务器">
+                                <span data-id="#h18">
+                                                                        
+4.8、测试启动mysql服务器                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv3">
+                            <div class="title" title="
+4.9、设置软连接，重启mysql服务">
+                                <span data-id="#h19">
+                                                                        
+4.9、设置软连接，重启mysql服务                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+五、登录mysql，修改自定义密码，登录密码是之前复制那份">
+                                <span data-id="#h20">
+                                                                        
+五、登录mysql，修改自定义密码，登录密码是之前复制那份                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+六、开放远程连接">
+                                <span data-id="#h21">
+                                                                        
+六、开放远程连接                                </span>
+                            </div>
+                        </li>
+                                                                                            <li class="lv1">
+                            <div class="title" title="
+七、可设可不设置（开机自启动）">
+                                <span data-id="#h22">
+                                                                        
+七、可设可不设置（开机自启动）                                </span>
+                            </div>
+                        </li>
+                                                            </ul>
+            </div>
+            <div class="table-contents">
+
+            </div>
+        </section>
+    </aside>
+    </div>
+
+    <!--返回顶部-->
+    <aside class="action-aside action-aside-right">
+        <ul>
+            <li class="scrollTop" style="display: list-item;">
+                <strong class="ScrollWindowTop">
+                    <a href="javascript:;"><i class="iconblog blogzhi"></i></a>
+                    <span>返回顶部</span>
+                </strong>
+            </li>
+        </ul>
+    </aside>
+</div>
+
+<div class="imgViewDom disnone" style="display: none;">
+    <div class="img-content"></div>
+</div>
+
+<div class="zhiCustomBtn" style="display:none;" id="hide-zhiCustomBtn"></div>
+
+    <script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/shCores.js.下载"></script>
+
+<script>
+    var codeArr = $('.editor-preview-side pre code')
+    if(codeArr.length > 0) {
+        $.each(codeArr, function(index, item) {
+            var parent = $(this).parent('pre')
+            var classStr = $(this).attr('class') || parent.attr('class')
+            if(classStr && classStr.indexOf('language-') != -1) return
+            $(this).addClass('language-html') && parent.addClass('language-html')
+        })
+    }
+
+
+    $(document).ready(function() {
+        addPreNumber()
+        //  代码高亮
+        mdPrism.highlightAll();
+        // 代码添加行号
+        // prenumber(['hljs-cto', 'code-toolbar'])
+        if(is_old != 0) {
+            prenumber(['code-toolbar'])
+        }
+    })
+    var tipStatus = '1'
+    if( tipStatus == '1') {
+        $('#zanTip').show()
+    } else {
+        $('#zanTip').hide()
+    }
+    var totalWidth = $('.detail-list').outerWidth(true)+$('.dbk').outerWidth(true)
+    var usernameWidth = $('.username').outerWidth(true)
+    var cha = usernameWidth-totalWidth-10+'px'
+    $('.blog-user').css('max-width', cha)
+    var BLOG_URL = 'https://blog.51cto.com/';
+    var praise_url = 'https://blog.51cto.com/praise/praise'
+    addReply_url = 'https://blog.51cto.com/addBlogComment'
+    removeUrl = 'https://blog.51cto.com/delBlogComment'
+    blog_id = '3009491'
+    pv_log_info = {
+        'pv_type':'blog',
+        'user_id':'15286180',
+        'blog_id':'3009491'
+    };
+    is_comment = '0'
+    comment_list = 'https://blog.51cto.com/getBlogCommentList'
+    index_url = 'https://blog.51cto.com/u_15296180';
+    uc_url = 'https://ucenter.51cto.com/'
+    blog_url = 'https://blog.51cto.com/'
+    img_url = 'https://static1.51cto.com/edu/blog/'
+    i_user_id = ''
+    c_user_id ='15286180'
+    collect_url = 'https://blog.51cto.com/addUserCollect'
+    is_old = '1'
+    nicknameurl = 'https://blog.51cto.com/u_15296180'
+    nickname = '爱写Bug的麦洛'
+    myself = window.location.href,
+    shareimgUrl = 'https://blog.51cto.com/qr/qr-url?url=https%3A%2F%2Fblog.51cto.com%2Fu_15296180%2F3009491';
+        function FollowBtnSucc(e){//1:未关注,2:已关注,3:互相关注
+        if(e==2||e==3){
+            $('#zanTip').hide()
+            boxProxy()
+        } else if(e == 1) {
+            $('#zanTip').show()
+        }
+    }
+    FollowBtn = new Follow($('#checkFollow1_15286180'),'15286180','1',['on','in','mutual','off']);
+    FollowBtn.success=FollowBtnSucc;
+    FollowBtn = new Follow($('#checkFollow2_15286180'),'15286180','1',['on','in','mutual','off']);
+    FollowBtn.success=FollowBtnSucc;
+        if(is_old==1 || is_old==2){
+        // SyntaxHighlighter.all();
+        insertCodeElement("<div>\n                    <h2>\n<a><\/a>\u4e00 \u3001\u5b89\u88c5\u524d\u987b\u77e5<\/h2> \n<pre><code class=\"prism language-mysql\">\u7248\u672c\uff1amysql-5.7.24\n\u5e73\u53f0\uff1aLinux\n\u73af\u5883\uff1aCentos 7\n<\/code><\/pre> \n<h2>\n<a><\/a>\u4e8c \u3001\u5b89\u88c5\u524d\u7684\u5fc5\u8981\u68c0\u67e5\u548c\u51c6\u5907(\u4e0d\u8981\u9057\u6f0f\u4efb\u4f55\u4e00\u6b65\u9aa4)<\/h2> \n<h3>\n<a><\/a>2.1\u3001\u68c0\u67e5\u7cfb\u7edf\u662f\u5426\u5df2\u7ecf\u5b89\u88c5\u8fc7mysql<\/h3> \n<pre><code class=\"prism language-mysql\"> [root@localhost \/]# rpm -qa | grep mysql\n<\/code><\/pre> \n<hr \/><p>\u4f8b\u5982\u4e0b\u56fe\u6240\u5c55\u793a\uff0c\u5c31\u5b58\u5728\u4e24\u4e2a\u8bb0\u5f55<\/p> \n<pre><code class=\"prism language-mysql\">[root@localhost\/]# rpm -qa | grep mysql\nmysql-community-client-5.7.31-1.el7.x86_64\nmysql57-community-release-el7-8.noarch\n<\/code><\/pre> \n<hr \/><h3>\n<a><\/a>2.2 \u3001\u6267\u884c\u5220\u9664\u547d\u4ee4\uff0c\u4e00 \u4e00 \u5220\u9664<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost\/]#  rpm -e --nodeps mysql-community-client-5.7.31-1.el7.x86_64\n[root@localhost\/]#  rpm -e --nodeps mysql57-community-release-el7-8.noarch\n<\/code><\/pre> \n<h3>\n<a><\/a>2.3 \u3001\u5220\u9664\u4e4b\u540e\uff0c\u518d\u68c0\u67e5\u4e00\u6b21<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost\/]# rpm -qa | grep mysql\n[root@localhost\/]#\n<\/code><\/pre> \n<h3>\n<a><\/a>2.4\u3001\u67e5\u8be2\u6240\u6709mysql\u5bf9\u5e94\u7684\u6587\u4ef6\u5939<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost\/]# whereis mysql\nmysql: \/usr\/local\/mysql \/usr\/share\/mysql\n<\/code><\/pre> \n<h3>\n<a><\/a>2.5\u3001\u5220\u9664\u76f8\u5173\u6587\u4ef6<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost\/]# rm -rf \/usr\/local\/mysql \/usr\/share\/mysql\n<\/code><\/pre> \n<h3>\n<a><\/a>2.6 \u3001\u9a8c\u8bc1\u662f\u5426\u5220\u9664\u5b8c\u6bd5\uff08\u6709\u7684\u8bdd\uff0c\u7ee7\u7eed\u5220\u9664\uff09<\/h3> \n<pre><code class=\"prism language-mysql\">[root@iZwz9cngn5wj3ba82mwx3zZ \/]# whereis mysql\nmysql:[root@iZwz9cngn5wj3ba82mwx3zZ \/]# \n[root@iZwz9cngn5wj3ba82mwx3zZ \/]# find \/ -name mysql\n\/run\/lock\/subsys\/mysql\n\/etc\/rc.d\/init.d\/mysql\n<\/code><\/pre> \n<h3>\n<a><\/a>2.7\u3001\u68c0\u67e5mysql\u7528\u6237\u7ec4\u548c\u7528\u6237\u662f\u5426\u5b58\u5728\uff0c\u5982\u679c\u6ca1\u6709\uff0c\u5219\u8fdb\u884c\u521b\u5efa<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# cat \/etc\/group | grep mysql\n[root@localhost \/]# cat \/etc\/passwd |grep mysql\n[root@localhost \/]# groupadd mysql\n[root@localhost \/]# useradd -r -g mysql mysql\n[root@localhost \/]#\n<\/code><\/pre> \n<h2>\n<a><\/a>\u4e09\u3001\u4e0b\u8f7d\u5b89\u88c5\u5305\uff08\u7f51\u7edc\u4e0d\u597d\u7684\u53ef\u76f4\u63a5\u53bb\u5b98\u7f51\u5bf9\u5e94\u7684\u7248\u672c\u8fdb\u884c\u4e0b\u8f7d\uff09**<\/h2> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]#  wget https:\/\/dev.mysql.com\/get\/Downloads\/MySQL-5.7\/mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n<\/code><\/pre> \n<h2>\n<a><\/a>\u56db\u3001\u5b89\u88c5mysql<\/h2> \n<h3>\n<a><\/a>4.1\u3001\u627e\u5230\u4f60\u7684\u5b89\u88c5\u5305\uff0c\u8fdb\u884c\u89e3\u538b<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]#  tar xzvf mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n[root@localhost \/]# ls\nmysql-5.7.24-linux-glibc2.12-x86_64\nmysql-5.7.24-linux-glibc2.12-x86_64.tar.gz\n<\/code><\/pre> \n<h3>\n<a><\/a>4.2\u3001\u89e3\u538b\u540e\u4f1a\u591a\u51fa\u4e00\u4e2a\u89e3\u538b\u6587\u4ef6<\/h3> \n<h3>\n<a><\/a>4,3\u3001\u79fb\u52a8\u8be5\u6587\u4ef6\u81f3\/user\/local\/\u4e0b\u5e76\u5c06\u6587\u4ef6\u540d\u6539\u4e3amysql<\/h3> \n<p>\u6ce8\u610f\u70b9:\u5982\u679c\u76ee\u5f55\u4e0b\u5b58\u5728mysql\u7684\u6587\u4ef6\u540d\uff0c\u8bf7\u6539\u4e3a\u5176\u4ed6\u7684\u540d\u79f0\uff0c\u5426\u5219\u540e\u7eed\u65e0\u6cd5\u7ee7\u7eed\u8fdb\u884c\u64cd\u4f5c<\/p> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 \/usr\/local\/\n[root@localhost \/]# cd \/usr\/local\/\n[root@localhost \/]# mv mysql-5.7.24-linux-glibc2.12-x86_64 mysql\n<\/code><\/pre> \n<h3>\n<a><\/a>4.4\u3001\u5728\/user\/local\/mysql\u76ee\u5f55\u4e0b\u521b\u5efadata\u6587\u4ef6\u5939\uff0c\u7528\u4e8e\u5b58\u653e\u6570\u636e\u5e93<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# mkdir \/usr\/local\/mysql\/data\n<\/code><\/pre> \n<h3>\n<a><\/a>4.5 \u3001\u66f4\u6539mysql\u76ee\u5f55\u4e0b\u6240\u5c5e\u7684\u7528\u6237\u7ec4\u3001\u7528\u6237\u548c\u6743\u9650<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# chown -R mysql:mysql \/usr\/local\/mysql\n[root@localhost \/]# chmod -R 755 \/usr\/local\/mysql\n<\/code><\/pre> \n<h3>\n<a><\/a>4.6\u3001\u7f16\u8bd1\u5e76\u5b89\u88c5mysql<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# cd \/usr\/local\/mysql\/bin\n[root@localhost bin]# .\/mysqld --initialize --user=mysql --datadir=\/usr\/local\/mysql\/data --basedir=\/usr\/local\/mysql\n<\/code><\/pre> \n<p><strong>\u6ce8\u610f\u70b9\uff1a\u7ea2\u8272\u5708\u51fa\u7684\u90e8\u5206\u662f\u4e34\u65f6\u5bc6\u7801\uff0c\u9700\u63d0\u524d\u4fdd\u5b58\uff0c\u7528\u6765\u767b\u5f55mysql\uff0c\u4fee\u6539\u5bc6\u7801<\/strong><\/p> \n<p><img src=\"https:\/\/s9.51cto.com\/images\/blog\/202107\/07\/239edfa40a8d5589d84d09a2c3371116.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\" alt='Linux\u4e0b\u5b89\u88c5mysql-5.7.24_linux' \/><\/p> \n<p>\u6ce8\u610f\u70b9\uff1a\u6b64\u5904\u53ef\u80fd\u53d1\u751f\u7684\u9519\u8bef\uff0c\u6709\u4e9b\u4f9d\u8d56\u6ca1\u5b89\u88c5<\/p> \n<p><img src=\"https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\" alt='Linux\u4e0b\u5b89\u88c5mysql-5.7.24_# MySQL_02' \/><\/p> \n<p><img src=\"https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/7ce89c17499c06f58caf226c420cbe6e.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\" alt='Linux\u4e0b\u5b89\u88c5mysql-5.7.24_# MySQL_02' \/><\/p> \n<p><strong>\u6267\u884c\u547d\u4ee4\uff08\u547d\u4ee4\u90fd\u6267\u884c\u5b8c\u6bd5\u4e4b\u540e\uff0c\u8fd8\u6709\u95ee\u9898\uff0c\u8bf7\u767e\u5ea6\u3002\uff09<\/strong><\/p> \n<pre><code class=\"prism language-mysql\">[root@localhost bin]#  yum install  libaio-devel.x86_64\n[root@localhost bin]#  yum -y install numactl\n<\/code><\/pre> \n<p>\u6267\u884c\u547d\u4ee4\u5b8c\u6bd5\uff0c\u5728\u91cd\u65b0\u8fdb\u884c\u7f16\u8bd1\u5b89\u88c5\uff0c\u6267\u884c(6)\u6b64\u5904\u547d\u4ee4<\/p> \n<h3>\n<a><\/a>4.7 \u3001\u7f16\u8f91\u914d\u7f6e\u6587\u4ef6my.cnf<\/h3> \n<p><strong>\u6ce8\u610f\u70b9\uff1a\u6e05\u7a7a\u91cc\u5934\u7684\u5185\u5bb9\uff0c\u76f4\u63a5\u590d\u5236\u4e0b\u56fe\u7684\u4ee3\u7801\u3002\u540e\u7eed\u6709\u9700\u8981\u53ef\u81ea\u884c\u8865\u5145<\/strong><\/p> \n<pre><code class=\"prism language-mysql\">[root@localhost bin]#  vi \/etc\/my.cnf\n#\u590d\u5236\u4ee5\u4e0b\u4ee3\u7801[mysqld]datadir=\/usr\/local\/mysql\/data\nport=3306\nsql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES\nsymbolic-links=0\nmax_connections=600\ninnodb_file_per_table=1\nlower_case_table_names=1\n<\/code><\/pre> \n<h3>\n<a><\/a>4.8\u3001\u6d4b\u8bd5\u542f\u52a8mysql\u670d\u52a1\u5668<\/h3> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]# \/usr\/local\/mysql\/support-files\/mysql.server start\n<\/code><\/pre> \n<p>\u5f53\u4f60\u770b\u5230<strong>OK<\/strong>\u6807\u8bc6\u65f6\uff0c\u6807\u8bc6\u5df2\u7ecf\u542f\u52a8\u6210\u529f\u4e86\uff0c\u606d\u559c\u4f60<\/p> \n<p><img src=\"https:\/\/s8.51cto.com\/images\/blog\/202107\/07\/13d7aeb1124243dc54736aec0fa3f228.png?x-oss-process=image\/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=\" alt='Linux\u4e0b\u5b89\u88c5mysql-5.7.24_# MySQL_04' \/><\/p> \n<p>\u6ce8\u610f\u70b9\uff1a\u5f53\u4f60\u770b\u5230\u8fd9\u4e2a\u65f6\uff0c\u610f\u5473\u7740\u6709\u53ef\u80fd\u6b64\u65b9\u6cd5\u4e0d\u9002\u7528\u4f60\uff0c\u5bf9\u4e0d\u8d77\uff0c\u7ee7\u7eed\u767e\u5ea6\u53bb\u5427<\/p> \n<pre><code>Starting MySQL... ERROR! The server quit without updating PID file\n<\/code><\/pre> \n<hr \/><p>\u53ef\u80fd\u80fd\u89e3\u51b3\u7684\u529e\u6cd5\uff1a<\/p> \n<p>\u200b \u67e5\u770bmysql\u8fdb\u884c\u5e76\u4e14kill\u6389\u5b83\uff08\u5982\u679c\u6ca1\u6709\u53efKill\u7684\u8fdb\u7a0b\uff0c\u767e\u5ea6\u53bb\u5427\uff0c\u6b64\u65b9\u6cd5\u4e0d\u9002\u7528\uff09<\/p> \n<pre><code>#\u67e5\u8be2\u670d\u52a1\nroot@localhost \/]#ps -ef|grep mysql\nroot@localhost \/]#ps -ef|grep mysqld\n#\u7ed3\u675f\u8fdb\u7a0b\nkill -9 PID\n#\u518d\u91cd\u65b0\u542f\u52a8\u670d\u52a1 \n\/usr\/local\/mysql\/support-files\/mysql.server start\n<\/code><\/pre> \n<h3>\n<a><\/a>4.9\u3001\u8bbe\u7f6e\u8f6f\u8fde\u63a5\uff0c\u91cd\u542fmysql\u670d\u52a1<\/h3> \n<pre><code>[root@localhost \/]#  ln -s \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysql \n[root@localhost \/]#  ln -s \/usr\/local\/mysql\/bin\/mysql \/usr\/bin\/mysql\n[root@localhost \/]#  service mysql restart\n<\/code><\/pre> \n<p><strong>\u81f3\u6b64\uff0c\u5b89\u88c5\u5b8c\u6bd5\u3002<\/strong><\/p> \n<h2>\n<a><\/a>\u4e94\u3001\u767b\u5f55mysql\uff0c\u4fee\u6539\u81ea\u5b9a\u4e49\u5bc6\u7801\uff0c\u767b\u5f55\u5bc6\u7801\u662f\u4e4b\u524d\u590d\u5236\u90a3\u4efd<\/h2> \n<pre><code class=\"prism language-mysql\">[root@localhost \/]#  mysql -u root -p\nEnter password:\u8f93\u5165\u5b89\u88c5\u65f6\u7684\u4e34\u65f6\u5bc6\u7801\nmysql&gt;set password for root@localhost = password('\u81ea\u5b9a\u4e49\u5bc6\u7801');\n<\/code><\/pre> \n<h2>\n<a><\/a>\u516d\u3001\u5f00\u653e\u8fdc\u7a0b\u8fde\u63a5<\/h2> \n<pre><code class=\"prism language-mysql\">mysql&gt;use mysql;msyql&gt;update user set user.Host='%' where user.User='root';\nmysql&gt;flush privileges;\n<\/code><\/pre> \n<h2>\n<a><\/a>\u4e03\u3001\u53ef\u8bbe\u53ef\u4e0d\u8bbe\u7f6e\uff08\u5f00\u673a\u81ea\u542f\u52a8\uff09<\/h2> \n<pre><code class=\"prism language-mysql\">1\u3001\u5c06\u670d\u52a1\u6587\u4ef6\u62f7\u8d1d\u5230init.d\u4e0b\uff0c\u5e76\u91cd\u547d\u540d\u4e3amysql\n[root@localhost \/]# cp \/usr\/local\/mysql\/support-files\/mysql.server \/etc\/init.d\/mysqld\n2\u3001\u8d4b\u4e88\u53ef\u6267\u884c\u6743\u9650\n[root@localhost \/]# chmod +x \/etc\/init.d\/mysqld\n3\u3001\u6dfb\u52a0\u670d\u52a1\n[root@localhost \/]# chkconfig --add mysqld\n4\u3001\u663e\u793a\u670d\u52a1\u5217\u8868\n[root@localhost \/]# chkconfig --list\n<\/code><\/pre>\n                <\/div>\n                ", '#result');
+    }
+
+  function insertCodeElement(content, container){
+    if(content.indexOf('<code>') != -1) return
+    container = container || document;
+    // 创建一个 div 来放置获取到的内容，这样就可以把 content 字符串内容转换成 dom
+    // 方便我们对这个 dom 进行操作（只是创建 div，并没有插入到文档，他只存在于内存中）
+    var parent = document.createElement('div');
+    parent.innerHTML = content;
+    if($('.am-engine').length===0){
+        // 找到 parent 中的所有 pre 标签，并遍历
+       var $pres = $(parent).find('pre');
+       $pres.each(function(index, el) {
+            var $el = $(el),
+            html = $el.html(),
+            code = document.createElement('code'),
+            elClass = $el.attr('class');
+            if(!elClass) {return};
+            // 获取 pre 标签中，class 属性中包含的本段代码所有的编程语言
+            var language = elClass.substring(6, elClass.indexOf(';'));
+            code.className = 'language-' + language;
+            code.innerHTML = html;
+            $el.html(code);
+        });
+        }else{
+        var $pres = $(parent).find('pre');
+        let cardData=$(parent).find('.card-activated')
+        $pres.each(function(index,el){
+            var  $el = $(el),
+            html = $el.html(),
+            code = document.createElement('div');
+            code.className = 'language-';
+            code.innerHTML = html;
+            $el.html(code);
+            $(el).css("padding",'15px 0 17px 0')     
+            })
+        }
+        
+        $(container).html(parent.innerHTML);
+
+        // 最后，调用 Prism 的方法来高亮代码
+        // Prism.highlightAll();
+    }
+</script>
+
+</div><div style="background: url(&quot;https://static1.51cto.com/edu/blog/images/bg50.png&quot;) repeat; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 10000000; display: none;"><div style="z-index:10000001;width:50px;height:50px;background:url(https://static1.51cto.com/edu/blog/images/loading2.gif) no-repeat center;background-size:50px 50px;position:absolute;left:50%;top:50%;margin-left:-25px;margin-top:-25px;"></div></div>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+<header class="home-top" style="display: none;">
+    <div class="Page">
+        <div class="top-box">
+            <div class="item-lf"><a class="top" href="https://www.51cto.com/" target="_blank" rel="nofollow">51CTO首页</a></div>
+            <div class="item-lf">
+                <a href="https://blog.51cto.com/" target="_blank">博客</a>
+            </div>
+            <div class="item-lf">
+                <a class="subweb" href="https://edu.51cto.com/?utm_source=hometop" data-id="2" target="_blank" rel="nofollow">学堂</a>
+            </div>
+            <div class="item-lf">
+                <a class="subweb" href="https://e.51cto.com/?utm_platform=pc&amp;utm_medi-um=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar" data-id="3" target="_blank" rel="nofollow">精培</a>
+            </div>
+            <div class="item-lf">
+                <a class="subweb" href="https://b.51cto.com/index?utm_source=hometop" data-id="4" target="_blank" rel="nofollow">企业培训</a>
+            </div>
+            <div class="item-lf">
+                <a class="subweb" href="https://x.51cto.com/?www" data-id="5" target="_blank" rel="nofollow">CTO训练营</a>
+            </div>
+            <div class="item-lf">
+                <a class="subweb" href="https://ost.51cto.com/openharmony?utm_source=hometop" data-id="6" target="_blank" rel="nofollow">鸿蒙技术社区</a>
+            </div>
+            <div class="item-lf">
+                <a href="http://wot.51cto.com/act/wot2021/dev?www1" target="_blank" rel="nofollow">WOT技术大会</a>
+            </div>
+            <div class="item-lf hot">
+                <a href="https://metacon.51cto.com/?utm_source=blogtop" target="_blank" rel="nofollow">元宇宙大会   </a><div class="hot-div" style="left:60px">
+                      <span>HOT</span>
+                  </div>
+            </div>
+
+            <div class="top-right">
+                <div class="item-rt"><span class="subweb" data-id="8">移动端</span></div>
+                <div class="item-rt"><span class="subweb" data-id="7">公众号矩阵</span></div>
+                <div class="item-rt collection">收藏本站</div>
+                <div class="item-rt"><a href="http://so.51cto.com/?keywords=&amp;sort=time" target="_blank" class="search-top" rel="nofollow"><i class="iconblog blogsou"></i></a></div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-more-container" style="height: 0px;">
+        <div class="Page nav-contant-box" style="height: 0px; z-index: 0;">
+            <div class="nav-contant nav-contant1" data-id="1" style="height: 0px; z-index: 0;">
+                <a href="https://blog.51cto.com/" target="_blank">博客</a>
+            </div>
+            <div class="nav-contant nav-contant2" data-id="2" style="height: 0px; z-index: 0;">
+                <a href="https://edu.51cto.com/courselist/index-zh5.html?utm_source=hometop" target="_blank" rel="nofollow">免费课程</a>
+                <a href="https://edu.51cto.com/ranking/index.html?utm_source=hometop" target="_blank" rel="nofollow">课程排行</a>
+                <a href="https://e.51cto.com/ncamp/list?utm_platform=pc&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=13" target="_blank" rel="nofollow">直播课</a>
+                <a href="https://e.51cto.com/rk/?utm_platform=pc&amp;utm_medi-um=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=14" target="_blank" rel="nofollow">软考学堂</a>
+            </div>
+            <div class="nav-contant nav-contant3" data-id="3" style="height: 0px; z-index: 0;">
+                <a href="https://e.51cto.com/?utm_platform=pc&amp;utm_medi-um=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar" target="_blank" rel="nofollow">精品班</a>
+                <a href="https://e.51cto.com/wejob/list?pid=5&amp;utm_platform=pc&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=41" target="_blank" rel="nofollow">厂商认证</a>
+                <a href="https://e.51cto.com/wejob/list?pid=1&amp;utm_platform=pc&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=42" target="_blank" rel="nofollow">IT技术</a>
+                <a href="https://e.51cto.com/rk/?utm_platform=pc&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_xyzq_rightwzl&amp;rtm_frd=07&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=43" target="_blank" rel="nofollow">2022年软考</a>
+                <a href="https://e.51cto.com/wejob/list?pid=33&amp;utm_platform=pc&amp;utm_medium=51cto&amp;utm_source=zhuzhan&amp;utm_content=sy_topbar&amp;rtm_frd=44" target="_blank" rel="nofollow">PMP项目管理</a>
+            </div>
+            <div class="nav-contant nav-contant4" data-id="4" style="height: 0px; z-index: 0;">
+                <a href="https://b.51cto.com/index?utm_source=hometop" target="_blank" rel="nofollow">在线学习</a>
+                <a href="https://b.edu.51cto.com/site/home" target="_blank" rel="nofollow">企业服务</a>
+            </div>
+            <div class="nav-contant nav-contant5" data-id="5" style="height: 0px; z-index: 0;">
+                <a href="https://x.51cto.com/?www" target="_blank" rel="nofollow">CTO训练营</a>
+                <a href="https://x.51cto.com/act/cto/tl" target="_blank" rel="nofollow">技术经理研习营</a>
+                <a href="https://x.51cto.com/act/cto/leatech2021?www1" target="_blank" rel="nofollow">LeaTech峰会</a>
+            </div>
+            <div class="nav-contant nav-contant6" data-id="6" style="height: 0px; z-index: 0;">
+                <a href="https://ost.51cto.com/postlist" target="_blank" rel="nofollow">文章</a>
+                <a href="https://ost.51cto.com/resource" target="_blank" rel="nofollow">资源</a>
+                <a href="https://ost.51cto.com/answerlist" target="_blank" rel="nofollow">问答</a>
+                <a href="https://ost.51cto.com/study" target="_blank" rel="nofollow">鸿蒙课堂</a>
+                <a href="https://ost.51cto.com/column" target="_blank" rel="nofollow">专栏</a>
+                <a href="https://ost.51cto.com/activity" target="_blank" rel="nofollow">直播</a>
+            </div>
+            <div class="nav-contant nav-contant7" data-id="7" style="height: 0px; z-index: 0;">
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_4.jpeg" alt=""></div>
+                    <span class="txt">51CTO</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_1.png" alt=""></div>
+                    <span class="txt">51CTO鸿蒙技术社区</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_2.jpeg" alt=""></div>
+                    <span class="txt">51CTO技术栈</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_3.jpeg" alt=""></div>
+                    <span class="txt">51CTO官微</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_5.jpeg" alt=""></div>
+                    <span class="txt">51CTO学堂</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/blog.jpg" alt=""></div>
+                    <span class="txt">51CTO博客</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_10.jpg" alt=""></div>
+                    <span class="txt">CTO训练营</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_6.jpg" alt=""></div>
+                    <span class="txt">鸿蒙技术社区订阅号</span>
+                </div>
+            </div>
+            <div class="nav-contant nav-contant8" data-id="8" style="height: 0px; z-index: 0;">
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_8.jpg" alt=""></div>
+                    <span class="txt">51CTO学堂APP</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/ewm_qy.png" alt=""></div>
+                    <span class="txt">51CTO学堂企业版APP</span>
+                </div>
+                <div class="ewmbox">
+                    <div class="imgbox"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/video.png" alt=""></div>
+                    <span class="txt">鸿蒙技术社区视频号</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="Header" style="height: 61px; top: 0px; display: block;">
+  <div class="Page clearfix ">
+      <div class="Logo"><a href="https://blog.51cto.com/"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/logonew5.png" alt="51CTO博客" width="202" title="51CTO博客"><h2>51CTO博客</h2></a></div>
+      <ul class="Navigates fl commonhide">
+      <li><a href="https://blog.51cto.com/">首页</a>
+        <div class="spam-classifications" style="display:none;">
+          <div class="spam-classifications-content">
+          <div class="classification-ipc" id="classification-ipc"></div> <div class="classification-primary-list-box" id="classification-primary-list-box"></div>
+
+          </div>
+        </div>
+      </li>
+      <li><a href="https://blog.51cto.com/nav/following">关注</a></li>
+        <li><a href="https://blog.51cto.com/ranking">热榜</a></li>
+      <li class="">
+        <a href="https://blog.51cto.com/cloumn/index" target="_blank">订阅专栏</a>
+      </li>
+      
+                  </ul>
+    <ul class="Navigates Navigates-right fr">
+      <li class="more maps">
+        <a href="javascript:void(0);" class="menu"></a>
+        <div>
+          <div class="ins">
+
+            <a href="https://edu.51cto.com/" target="_blank">学堂</a>
+            <a href="https://e.51cto.com/" target="_blank" rel="nofollow">精培</a>           
+            <a href="https://ost.51cto.com/?utm_source=blognav" target="_blank">鸿蒙社区</a>       
+            <a href="http://x.51cto.com/" target="_blank" rel="nofollow">CTO训练营</a>           
+            <a href="http://www.51cto.com/" target="_blank">51CTO</a>
+              <a href="https://blog.51cto.com/class-blog/index" target="_blank">班级博客</a>
+          </div>
+        </div>
+      </li>
+              <li class="logins">
+			    <a href="https://home.51cto.com/index?from_service=blog&amp;scene=login1&amp;reback=https://blog.51cto.com/u_15296180/3009491" target="_self" class="clearfix" rel="nofollow"><span class="fl">登录</span><b class="fgline fl"></b><span class="fl">注册</span></a>
+        </li>
+                        <li class="mRead commonhide">
+            <a href="javascript:;" rel="nofollow"></a>
+            <div>
+              <div class="ins">
+                  <div class="towD-box">
+                      <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/blog_qr.png">
+                      <p>手机随时阅读</p>
+                  </div>
+                  <div class="towD-box">
+                      <img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/5a45016915218bb53e32af17b14a8822.jpg">
+                      <p>新人专享大礼包￥24</p>
+                  </div>
+                </div>
+            </div>
+        </li>
+                  <li class="write commonhide"><a href="javascript:;" id="toPublish" onclick="Login({scene:&#39;write1&#39;})" rel="nofollow">写文章</a></li>
+                <li class="search commonhide">
+
+          <form class="fr form-search" method="get" action="https://blog.51cto.com/search/result" target="_blank">
+            <input type="text" name="q" placeholder="大家都在搜索..." id="TopSearchInput" autocomplete="off">
+            <button id="TopSearchBtn"></button>
+          </form>
+                    <div class="focusSelect focusSelect_his" style="display: none;">
+
+              <div class="searchHistoryList" style="display: none;">
+                <div class="clearfix hishead">搜索历史
+                  <span class="clearhis"><i class="iconblog blogshanchu18 "></i>清空</span>
+                </div>
+                <div class="hisitem-wrap"></div>
+              </div>
+
+              <div class="hotList" style="display: none;">
+                <div class="clearfix hishead">热门搜索</div>
+                <div class="hot-wrap"></div>
+              </div>
+
+          </div>
+
+          <div class="focusSelect focusSelect_key" style="display: none;">
+            <div class="keyitem-wrap">
+
+            </div>
+            <div class="clearfix checkSearchResult">
+              <span>查看【</span>
+              <span class="checkKey"></span>
+              <span>】的结果</span></div>
+          </div>
+
+
+        </li>
+          </ul>
+    <div class="clear"></div>
+  </div>
+<div class="search-mask" style="display: none;"></div></div>
+<script>
+    var isLogin = '0';
+    var userId = '';
+    var imgpath = 'https://s4.51cto.com/';
+    var BLOG_URL = 'https://blog.51cto.com/';
+    var YII_ENV = 'prod';
+    var router = 'blog/index'
+    localStorage.removeItem('userDraft')
+    $('.want-write').click(function(){
+        localStorage.removeItem('userDraft')
+    })
+
+</script>
+   <style type="text/css">
+  .Header{
+    top:30px;
+  }
+  </style>
+<script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/share.js_v=c369668739"></script>
+<script type="text/javascript" src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/count_v2.php"></script>
+<!-- if publish show -->
+<div class="Footer">
+  <div class="Page ">
+    <div class="fl">
+      <a href="https://blog.51cto.com/" class="Logo"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/logonew4.png" alt="51CTO博客" width="214" title="51CTO博客"></a>
+      <p class="copy">Copyright © 2005-2022 <a href="http://www.51cto.com/" target="_blank">51CTO.COM</a>
+          版权所有 京ICP证060544号</p>
+    </div>
+
+    <dl class="foot_ab fr">
+      <dt>关于我们</dt>
+      <dd>
+        <table class="aboutList">
+              <tbody><tr>
+                  <td><a href="https://blog.51cto.com/51ctoblog" target="_blank">官方博客</a></td>
+                  <td><a href="https://blog.51cto.com/51ctoblog/2643377" target="_blank">意见反馈</a></td>
+                  <td><a href="http://www.51cto.com/about/aboutus.html" target="_blank">了解我们</a></td>
+                  <td><a href="https://blog.51cto.com/nav" target="_blank">全部文章</a></td>
+              </tr>
+              <tr>
+                  <td><a href="javascript:;" class="zhiCustomBtn">在线客服</a></td>
+                  <td><a href="http://www.51cto.com/about/map.html" target="_blank">网站地图</a></td>
+                  <td><a href="https://blog.51cto.com/topic/all" target="_blank">热门标签</a></td>
+              </tr>
+          </tbody></table>
+      </dd>
+    </dl>
+
+
+    <dl class="foot_link fr">
+      <dt>友情链接</dt>
+      <dd>
+
+        <table class="aboutList-2">
+            <tbody><tr>
+                <td><a href="https://ost.51cto.com/?utm_source=blogsitemap" target="_blank">51CTO鸿蒙社区</a></td>
+                <td><a href="https://edu.51cto.com/" target="_blank">51CTO学堂</a></td>
+            </tr>
+            <tr>
+              <td><a href="http://www.51cto.com/" target="_blank">51CTO</a></td>
+
+            </tr>
+        </tbody></table>
+      </dd>
+    </dl>
+
+  </div>
+</div>
+<div class="right-fixadv"><div class="ins"><span></span><a href="https://blog.51cto.com/51ctoblog/5193676#niu" target="_blank"><img src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/an6.png" alt=""></a></div></div>
+
+<script>
+  var uid = '';
+  var BLOG_URL = 'https://blog.51cto.com/';
+</script>
+
+<script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/time-on-page.js.下载" charset="utf-8"></script>
+  <script src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/entrance.js.下载" id="zhichiScript" class="zhiCustomBtn" data-args="manual=true"></script>
+  <script>
+      var zhiManager = (getzhiSDKInstance());
+      zhiManager.on("load", function() {
+          zhiManager.initBtnDOM();
+      });
+      zhiManager.set('title','欢迎咨询');
+      zhiManager.set('powered',false);
+      zhiManager.set('color','4285f4');
+      zhiManager.set('customBtn', 'true');
+      zhiManager.set('size',{'width':360,'height':500});
+      zhiManager.set('userinfo', {'partnerId':'','uname':'','params':{'用户名':''}});
+      zhiManager.set('customMargin', 20);
+      zhiManager.set('preVisitArgs',{'preVisitUrl': document.referrer?document.referrer:''});
+      zhiManager.set('curVisitArgs',{'curVisitUrl': location.href,curVisitTitle:document.title,});
+  </script>
+
+
+
+
+<script>
+    !(function(c,b,d,a){c[a]||(c[a]={});c[a].config={
+        pid:"b5hfowf5rl@95fdd72b343c07d",
+        appType:"web",
+        imgUrl:"https://arms-retcode.aliyuncs.com/r.png?",
+        sendResource:true,
+        enableLinkTrace:true,
+        behavior:true,
+        useFmp:true,
+        environment:'prod',
+        release:'PC'
+    };
+        with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)
+    })(window,document,"https://retcode.alicdn.com/retcode/bl.js","__bl");
+        window.addEventListener('load', function (e) {
+        __bl.setConfig({
+            ignore: {
+                ignoreResErrors: [
+                    /https:\/\/gg.51cto.com/,
+                    /hm.baidu.com\/hm.js/,
+                    function (str) {
+                        if (str && str.indexOf('hm.baidu.com/hm.js') >= 0) return true;
+                        return false;
+                    }]
+            }
+        });
+    });
+</script><script>
+    (function(){
+        var wh=$(window).height(),fh=$('.Footer').outerHeight(true),hh=$('.Header').outerHeight(true)
+        $('.Content-box').css({'min-height': wh-fh-hh})
+    })()
+</script>
+    <div class="zhiCustomBtn" style="display:none;" id="hide-zhiCustomBtn"></div>
+
+
+<div id="waf_nc_block" style="display: none;"><div class="waf-nc-mask"></div><div id="WAF_NC_WRAPPER" class="waf-nc-wrapper"><img class="waf-nc-icon" src="./Linux下安装mysql-5.7.24_麦洛的技术博客_51CTO博客_files/robot.png" alt="" height="111" width="150"><p class="waf-nc-description">为保证您的正常访问，请进行如下验证：</p><div id="nocaptcha"></div></div></div><div id="zhichiBtnBox" style="position: fixed; z-index: 2147483583; box-shadow: rgba(15, 66, 76, 0.25) 0px 0px 14px 0px; width: 60px; height: 60px; border-radius: 50%; background-color: rgb(66, 133, 244); background-image: url(&quot;//www.sobot.com/chat/frame/imgs/icon.png&quot;); background-repeat: no-repeat; background-position: 18px -58px; right: 40px; bottom: 20px; display: none;"><a hidefocus="" id="zhichiBtn" style="position:relative;text-decoration: none; outline: none; font-family: Microsoft Yahei, Arial, Helvetica; color: #fff; font-size: 16px; display: inline-block; margin: 0; padding: 0; border: none; line-height:43px; float:none;width:100%;height:100%;border-radius:50%;"><span class="zc-advice-icon-btn-title" style="box-shadow: rgba(107, 113, 114, 0.15) 0px 2px 4px 0px; border: 1px solid rgb(235, 239, 240); font-family: &quot;Microsoft Yahei&quot;, Arial, Helvetica; color: rgb(85, 85, 86); font-size: 13px; margin: 0px; text-align: right; background: rgb(255, 255, 255); position: absolute; top: 15px; right: 70px; text-overflow: ellipsis; white-space: nowrap; word-break: normal; display: none; border-radius: 3px; padding: 0px 5px; height: 30px; line-height: 30px;">欢迎咨询</span></a><i style="position:absolute;top:0px;right:0px;padding:1px;line-height:20px;text-align:center;color:#fff;font-weight:bold;height:18px;min-width:18px;background-color:#ed5c5c;border-radius:18px;font-size:12px;display:none;font-style:normal;" id="zhichiCount"></i></div></body><div id="saladict-saladbowl-root" class="saladict-div saladict-external"><div class="saladict-external"></div></div></html>
