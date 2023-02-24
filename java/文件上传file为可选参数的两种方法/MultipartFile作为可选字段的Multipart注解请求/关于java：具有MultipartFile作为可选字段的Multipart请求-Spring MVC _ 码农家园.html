@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://www.codenong.com/24746380/ -->
+<html lang="zh-CN" nighteye="disabled" class="cye-disabled cye-lm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="360-site-verification" content="e343ac8439d15b8393d3ced719a965ee">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f.txt"></script><script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(1).txt"></script><script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(2).txt" id="google_shimpl"></script><script type="text/javascript" async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/analytics.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-86041274-3');
+</script>
+<meta name="applicable-device" content="pc,mobile">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<title>关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC | 码农家园</title>
+<meta name="description" content="Multipart Request with MultipartFile as Optional Field - Spring MVC我在J2EE Web应用程序上使用Spring MVC。我创建了一种方法，将请求主体限制为与上述模...">
+<meta name="keywords" content="关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC">
+<link rel="shortcut icon" href="https://www.codenong.com/wp-content/themes/Nana/images/favicon.ico">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.codenong.com/wp-content/themes/Nana/images/favicon.png">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.codenong.com/xmlrpc.php">
+<!--[if lt IE 9]><script src="https://www.codenong.com/wp-content/themes/Nana/js/html5-css3.js"></script><![endif]-->
+<link rel="stylesheet" id="nfgc-main-style-css" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/jquery.min.js.下载"></script><style id="nightModeStyle">
+html.cye-enabled.cye-nm:not(*:-webkit-full-screen) body,
+ html.cye-enabled.cye-nm:not(*:-webkit-full-screen) #cye-workaround-body {-webkit-filter:contrast(91%) brightness(84%) invert(1);}</style><style id="cyebody">html.cye-enabled.cye-lm body{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyediv">html.cye-enabled.cye-lm div{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetable">html.cye-enabled.cye-lm th{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm td{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetextInput">html.cye-enabled.cye-lm input[type=text]{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm textarea{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeselect">html.cye-enabled.cye-lm select{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeul">html.cye-enabled.cye-lm ul{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeChangeByClick">html.cye-enabled.cye-lm .cye-lm-tag,html.cye-enabled.cye-lm.cye-lm-tag{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/scrollmonitor.js.下载"></script>
+	<script>jQuery(document).ready(
+	function(jQuery){
+	jQuery('.collapseButton').click(function(){
+		jQuery(this).parent().parent().find('.xContent').slideToggle('slow');
+	});
+});</script>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/gg.js.下载"></script>
+<!--[if IE]>
+<div class="tixing"><strong>温馨提示：感谢您访问本站，经检测您使用的浏览器为IE浏览器，为了获得更好的浏览体验，请使用极速模式或Chrome、Firefox等其他浏览器。</strong>
+</div>
+<![endif]-->
+<link rel="stylesheet" id="font-awesome-four-css" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="stylesheet" id="highlight-css" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/highlight.css" type="text/css" media="all">
+<link rel="stylesheet" id="codecolorer-css" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/codecolorer.css" type="text/css" media="screen">
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpl_ajax_url = "https:\/\/www.codenong.com\/wp-admin\/admin-ajax.php";
+/* ]]> */
+</script>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/script.js.下载"></script>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/fancybox.js.下载"></script>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/comments-ajax.js.下载"></script>
+<link rel="canonical" href="https://www.codenong.com/24746380/">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<style type="text/css">.fancybox-margin{margin-right:0px;}</style><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><link rel="preload" href="https://adservice.google.com.ph/adsid/integrator.js?domain=www.codenong.com" as="script"><script type="text/javascript" src="https://adservice.google.com.ph/adsid/integrator.js?domain=www.codenong.com"></script><link rel="preload" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(3).txt" as="script"><script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(3).txt"></script><link rel="preload" href="https://adservice.google.com.ph/adsid/integrator.js?domain=www.codenong.com" as="script"><script type="text/javascript" src="https://adservice.google.com.ph/adsid/integrator.js?domain=www.codenong.com"></script><link rel="preload" href="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(3).txt" as="script"><script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(3).txt"></script></head><div id="cyeBlackMaskLayer" style="background-color: rgb(19, 19, 19); position: fixed; width: 1980px; height: 1080px; z-index: -2147483648;"></div>
+<body class="post-template-default single single-post postid-2423079 single-format-standard" style="" aria-hidden="false">
+<div id="page" class="hfeed site" style="height: auto !important;">
+	<header id="masthead" class="site-header">
+	<nav id="top-header">
+		<div class="top-nav">
+			
+				</div>
+	</nav><!-- #top-header -->
+<div id="middle-header">
+
+</div>
+	<div id="menu-box" class="">
+		<div id="top-menu">
+			
+				<hgroup class="logo-site">
+				<h1 class="site-title">
+					<a href="https://www.codenong.com/">
+						码农家园
+					</a>
+				</h1>
+			</hgroup><!-- .logo-site -->			<div id="site-nav-wrap">
+				<div id="sidr-close"><a href="https://www.codenong.com/#sidr-close" class="toggle-sidr-close">关闭</a>
+			</div>
+			
+			<nav id="site-nav" class="main-nav">
+				<a href="https://www.codenong.com/24746380/#sidr-main" id="navigation-toggle" class="bars">导航</a>	
+									
+								
+			</nav>	
+			</div><!-- #site-nav-wrap -->
+		</div><!-- #top-menu -->
+	</div><!-- #menu-box -->
+</header><!-- #masthead -->
+
+<div id="content" class="site-content">	
+	<div class="clear"></div>
+	<div id="primary" class="content-area" style="height: auto !important;">
+		<main id="main" class="site-main" role="main" style="height: auto !important;">
+							<article id="post-2423079" class="post-2423079 post type-post status-publish format-standard hentry category-uncategorized tag-file-upload tag-java tag-multipartform-data tag-spring-mvc" style="height: auto !important;">
+					<header class="entry-header">
+						<h1 class="entry-title">关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC</h1>
+						<div class="single_info">
+							
+							<br>
+<span class="archive-tag"><i class="fa fa-tag"></i><span class="new-label"><a href="https://www.codenong.com/tag/file-upload/" rel="tag">file-upload</a></span><span class="new-label"><a href="https://www.codenong.com/tag/java/" rel="tag">java</a></span><span class="new-label"><a href="https://www.codenong.com/tag/multipartform-data/" rel="tag">multipartform-data</a></span><span class="new-label"><a href="https://www.codenong.com/tag/spring-mvc/" rel="tag">spring-mvc</a></span></span>
+							<span class="views"></span>
+							
+								
+					
+					
+					
+							<span class="edit"></span>
+						</div>		
+					</header><!-- .entry-header -->
+
+					<div id="ad_sg" class="ad-pc">
+</div>										<div class="entry-content" style="height: auto !important;">
+						<div class="single-content" style="height: auto !important;">			
+							<h2>Multipart Request with MultipartFile as Optional Field - Spring MVC</h2>
+<div id="fc" style="height: auto !important;">
+<p></p><center> <script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/c1.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(4).txt" crossorigin="anonymous" data-checked-head="true"></script>
+<!-- auto -->
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-1776224780566592" data-ad-slot="9509745083" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_1_host" style="border: none; height: 280px; width: 748px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:748px;height:280px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="748" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads.html" data-google-container-id="a!2" data-google-query-id="CMHh5resjPwCFV9EwgUdlJkM_w" data-load-complete="true"></iframe></div></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center><p></p>
+<p>
+我在J2EE Web应用程序上使用Spring MVC。<br>
+我创建了一种方法，将请求主体限制为与上述模型相同的模型
+</p>
+<div class="codecolorer-container java dawn" style="overflow:auto;white-space:nowrap;width:100%;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br>2<br>3<br>4<br></div></td><td><div class="java codecolorer">@RequestMapping<span class="br0">(</span>value <span class="sy0">=</span><span class="st0">"/"</span>, method <span class="sy0">=</span> RequestMethod.<span class="me1">POST</span>, produces <span class="sy0">=</span><span class="st0">"application/json"</span><span class="br0">)</span><br>
+<span class="kw1">public</span> AModel createEntity<span class="br0">(</span>@Valid @ModelAttribute MyInsertForm myInsertForm<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="co1">// coding..</span><br>
+<span class="br0">}</span></div></td></tr></tbody></table></div>
+<p>
+一切工作正常，当我在MyEntityForm中包含MultipartFile类型的属性时，我必须以内容类型" multipart / form-data"发出请求。<br>
+同样，在这种情况下，一切都工作得很好。
+</p>
+<p></p><center> <script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/c2.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(4).txt" crossorigin="anonymous" data-checked-head="true"></script>
+<ins class="adsbygoogle" style="display: block; text-align: center; height: 0px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1776224780566592" data-ad-slot="3590016480" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_2_host" style="border: none; height: 0px; width: 748px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden; opacity: 0;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_2" name="aswift_2" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 748px; height: 0px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="748" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(1).html" data-google-container-id="a!3" data-google-query-id="CPP55resjPwCFRMFXAodYFkPxw" data-load-complete="true"></iframe></div></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center><p></p>
+<p>
+我面临的问题是我希望将MultipartFile属性设置为可选。<br>
+当客户端请求包含文件时，我的方法很好用，但是当客户端请求不包含文件时，spring抛出
+</p>
+<blockquote>
+<p>
+HTTP Status 500 - Request processing failed; nested exception is org.springframework.web.multipart.MultipartException: Could not parse multipart servlet request; nested exception is org.apache.commons.fileupload.FileUploadException: Stream ended unexpectedly
+</p>
+</blockquote>
+<p>
+有什么方法可以解决此问题而无需在控制器上创建两个方法(一个方法带有MultipartFile，另一个方法则没有)？
+</p>
+<hr>
+<p>
+我有同样的问题，只是添加<wyn>required=false</wyn>对我有用。 请在下面找到示例代码，
+</p>
+<div class="codecolorer-container java dawn" style="overflow:auto;white-space:nowrap;width:100%;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br>2<br>3<br>4<br></div></td><td><div class="java codecolorer">@RequestMapping<span class="br0">(</span>value <span class="sy0">=</span><span class="st0">"/"</span>, method <span class="sy0">=</span> RequestMethod.<span class="me1">POST</span>, produces <span class="sy0">=</span><span class="st0">"application/json"</span><span class="br0">)</span><br>
+<span class="kw1">public</span> AModel createEntity<span class="br0">(</span>@Valid @ModelAttribute MyInsertForm myInsertForm, @RequestParam<span class="br0">(</span>value <span class="sy0">=</span><span class="st0">"file"</span>, required<span class="sy0">=</span><span class="kw2">false</span><span class="br0">)</span> MultipartFile file<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="co1">// coding..</span><br>
+<span class="br0">}</span></div></td></tr></tbody></table></div>
+<div class="suo-content"><div style="text-align: right;">
+		<div class="xControl"><i class="fa fa-caret-right"></i>
+			<span class="xTitle"></span> 
+			<a href="javascript:void(0)" class="collapseButton xButton">相关讨论</a>
+			<div style="clear: both;"></div>
+		</div>
+		<div class="xContent" style=""><p></p>
+<ul>
+<li>
+你知道如何为@PutMapping实现相同的功能吗？</li>
+</ul>
+<p></p></div>
+	</div><p></p></div>
+<hr>
+<p></p><center> <script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/c3.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt"></script>
+<!-- auto -->
+<ins class="adsbygoogle" style="display: block; height: 345px;" data-ad-client="ca-pub-1776224780566592" data-ad-slot="9509745083" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_3_host" style="border: none; height: 345px; width: 748px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_3" name="aswift_3" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 748px; height: 345px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="748" height="345" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(2).html" data-google-container-id="a!4" data-google-query-id="CMv95resjPwCFZQGXAodu0cOAA" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center><p></p>
+<p>
+通过添加尝试
+</p>
+<div class="codecolorer-container java dawn" style="overflow:auto;white-space:nowrap;width:100%;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br></div></td><td><div class="java codecolorer"><span class="br0">(</span>required<span class="sy0">=</span><span class="kw2">false</span><span class="br0">)</span></div></td></tr></tbody></table></div>
+<p>
+方法签名中的多部分属性。
+</p>
+<hr>
+<p>
+当您希望使用HTTP发送一个或多个文件时，必须使用多部分请求。 这意味着请求的内容将与上面类似，
+</p>
+<blockquote>
+<p>
+-----------------------------9051914041544843365972754266<br>
+  Content-Disposition: form-data; name="text"
+</p>
+<p>
+text default<br>
+  -----------------------------9051914041544843365972754266<br>
+  Content-Disposition: form-data; name="file1"; filename="a.txt"<br>
+  Content-Type: text/plain
+</p>
+<p>
+Content of a.txt.
+</p>
+<p>
+-----------------------------9051914041544843365972754266<br>
+  Content-Disposition: form-data; name="file2"; filename="a.html"<br>
+  Content-Type: text/html
+</p>
+</blockquote>
+<p>
+当您只想发送数据(而不是文件)时，可以将它们作为json，键值对等发送。
+</p>
+<p>
+当您希望将多部分请求映射到一个对象时，Spring框架将使用@ModelAttribute批注。<br>
+当您有正常的键值请求时，可以使用@RequestBody批注。<br>
+因此，您将没有MultipartFile可选，因为您必须使用不同的注释。 使用两种不同的方法(一种针对每种请求类型)可以解决此问题。 例，
+</p>
+<div class="codecolorer-container java dawn" style="overflow:auto;white-space:nowrap;width:100%;"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="line-numbers"><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br></div></td><td><div class="java codecolorer">@RequestMapping<span class="br0">(</span>value <span class="sy0">=</span><span class="st0">"/withFile"</span>, method <span class="sy0">=</span> RequestMethod.<span class="me1">POST</span>, produces <span class="sy0">=</span><span class="st0">"application/json"</span><span class="br0">)</span><br>
+<span class="kw1">public</span> ReturnModel updateFile<span class="br0">(</span>@ModelAttribute RequestModel rm<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="co1">// do something.</span><br>
+<span class="br0">}</span><br>
+<br>
+@RequestMapping<span class="br0">(</span>value <span class="sy0">=</span><span class="st0">"/noFile"</span>, method <span class="sy0">=</span> RequestMethod.<span class="me1">PUT</span>, produces <span class="sy0">=</span><span class="st0">"application/json"</span><span class="br0">)</span><br>
+<span class="kw1">public</span> ReturnModel updateJson<span class="br0">(</span>@RequestBody RequestModel rm<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="co1">// do something else.</span><br>
+<span class="br0">}</span></div></td></tr></tbody></table></div>
+<p></p><center> <script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/c4.js.下载"></script></center><p></p>
+<hr></div>
+																								
+						</div>
+						<script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ce.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt"></script>
+<!-- auto -->
+<ins class="adsbygoogle" style="display: block; height: 345px;" data-ad-client="ca-pub-1776224780566592" data-ad-slot="9509745083" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_4_host" style="border: none; height: 345px; width: 748px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_4" name="aswift_4" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 748px; height: 345px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="748" height="345" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(3).html" data-google-container-id="a!5" data-google-query-id="CMeysbisjPwCFdIHXAodn6cLbw" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script data-ad-client="ca-pub-1776224780566592" async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt" data-checked-head="true"></script>
+
+						<div class="clear"></div>
+						
+						<div class="social-main">
+					<div class="clear"></div>
+</div>												<div class="clear"></div>
+					</div><!-- .entry-content -->
+				</article><!-- #post -->
+														
+					<div class="ad-pc ad-site">
+			</div>					
+				
+												
+					</main><!-- .site-main -->
+	</div><!-- .content-area -->
+	<div id="sidebar" class="widget-area" style="height: auto !important;">			
+	<div class="sidebar-roll"></div>
+						<aside id="text-3" class="widget widget_text" style="height: auto !important;">			<div class="textwidget" style="height: auto !important;"><p><script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ce.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt"></script>
+<!-- auto -->
+<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-1776224780566592" data-ad-slot="9509745083" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_5_host" style="border: none; height: 600px; width: 257px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_5" name="aswift_5" style="left:0;position:absolute;top:0;border:0;width:257px;height:600px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="257" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(4).html" data-google-container-id="a!6" data-google-query-id="CKbl5resjPwCFUYFXAodQmYGLA" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script data-ad-client="ca-pub-1776224780566592" async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt" data-checked-head="true"></script>
+</p>
+</div>
+		<div class="clear"></div></aside>				<div class="sidebar-roll" style="height: auto !important;">
+				<aside id="text-2" class="widget widget_text" style="height: auto !important;">			<div class="textwidget" style="height: auto !important;"><p><script src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/auto.js.下载"></script><script async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt"></script>
+<!-- auto -->
+<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-1776224780566592" data-ad-slot="9509745083" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_6_host" style="border: none; height: 600px; width: 257px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_6" name="aswift_6" style="left:0;position:absolute;top:0;border:0;width:257px;height:600px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="257" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(5).html" data-google-container-id="a!7" data-google-query-id="CLXo5resjPwCFVQGXAodBJUGZQ" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script data-ad-client="ca-pub-1776224780566592" async="" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/f(5).txt" data-checked-head="true"></script>
+</p>
+</div>
+		<div class="clear"></div></aside>				</div>
+			</div>
+</div>	<div class="clear"></div>
+</div><!-- .site-content -->
+<div id="footer" alog-group="log-footer">
+<div class="foot">
+	
+<div class="ps">
+<div class="p p2">
+
+<div class="clear"></div>
+<div class="site-info">			
+			Copyright ©&nbsp; 码农家园 联系：ddyu2x@gmail.com
+		</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+<div class="tools">
+    <a class="tools_top" title="返回顶部"></a>
+            
+    </div>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/superfish.js.下载"></script>
+<script type="text/javascript" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/wp-embed.min.js.下载"></script>
+
+
+
+
+<div id="sidr-main" class="sidr left"><div class="sidr-inner"><a href="https://www.codenong.com/#sidr-close" class="sidr-class-toggle-sidr-close">关闭</a>
+			</div><div class="sidr-inner">
+				<a href="https://www.codenong.com/24746380/#sidr-main" id="sidr-id-navigation-toggle" class="sidr-class-bars">导航</a>	
+									
+								
+			</div></div><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_0_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/ads(6).html" data-google-container-id="a!1" data-load-complete="true"></iframe></div></ins><iframe src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/widget.html" style="overflow: hidden; position: fixed; height: 155px; width: 400px; bottom: 20px; right: 20px; background: none; border: none; z-index: 2147483646; visibility: hidden; user-select: none;"></iframe></body><div id="cye-workaround-body" style="position: absolute; left: 0px; top: 0px; z-index: -2147483646; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(242, 242, 242); height: 3531px; width: 1349px;"></div><div id="cye-workaround-body-image" style="position: absolute; left: 0px; top: 0px; z-index: -2147483645; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0); height: 3531px; width: 1349px;"></div><iframe id="google_esf" name="google_esf" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/zrt_lookup.html" style="display: none;"></iframe><iframe name="goog_topics_frame" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/topics_frame.html" style="display: none;"></iframe><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;" aria-hidden="true" data-ad-status="filled" data-vignette-loaded="true"><div id="aswift_7_host" style="border: none !important; height: 100vh !important; width: 100vw !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_7" name="aswift_7" style="width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; position: absolute !important; clear: none !important; display: inline !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; vertical-align: baseline !important; visibility: visible !important; z-index: auto !important;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="" height="" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting" src="./关于java：具有MultipartFile作为可选字段的Multipart请求-Spring MVC _ 码农家园_files/zrt_lookup(1).html" data-google-container-id="a!8" data-google-query-id="CIXF8LesjPwCFYq0vAodUX0ARA" data-load-complete="true"></iframe></div></ins><div id="saladict-saladbowl-root" class="saladict-div saladict-external"><div class="saladict-external"></div></div></html>

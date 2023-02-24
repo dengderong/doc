@@ -1,4 +1,4 @@
-有六种属性可以设置在容器算上，它们分别是：
+﻿有六种属性可以设置在容器算上，它们分别是：
 1. flex-direction : 决定打横排列还是打竖排列 决定倒叙还是顺序
 2. flex-wrap : 它的作用是确定是否可以换行
 3. flex-flow : 它的作用是 与flex-dirextion 和 flex-warp结合使用
@@ -14,4 +14,5 @@
 4. flex-basis: 用于设置子项的值
 5. flex= flex-grow flex-shrink flex-basis的缩写
 6. align-self: 允许单个子项与其他子项不一样的对齐方式
- 
+
+

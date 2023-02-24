@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://www.hangge.com/blog/cache/detail_2826.html -->
+<html nighteye="disabled" class="cye-disabled cye-lm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="applicable-device" content="pc">
+<title>SpringBoot - 日志的配置和使用详解（SLF4j、Logback）</title>
+<meta name="keywords" content="java,spring,spring boot,spring cloud,开发,编程,hangge,航歌">
+<meta name="description" content="1，基本介绍 （1）市面上常见的日志框架有很多。通常情况下，日志是由一个抽象层+实现层的组合来搭建的，而用户通常来说不应该直接使用具体的日志实现类，应该使用日志的抽象层。 抽象层：JCL（Jakarta Commons Logging）、SLF4j（Simple Logging Facade for Java......">
+<link rel="shortcut icon" href="https://www.hangge.com/favicon.ico">
+<link href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/template_css.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/shCoreDefault.css">
+<script type="text/javascript" async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/auto_dup"></script><script src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(6).txt"></script><script src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(7).txt"></script><script type="text/javascript" async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ucim"></script><script src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(8).txt" id="google_shimpl"></script><script type="text/javascript" async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/analytics.js.下载"></script><script src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/hm.js.下载"></script><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/jquery-1.11.1.js.下载"></script><style id="nightModeStyle">
+html.cye-enabled.cye-nm:not(*:-webkit-full-screen) body,
+ html.cye-enabled.cye-nm:not(*:-webkit-full-screen) #cye-workaround-body {-webkit-filter:contrast(91%) brightness(84%) invert(1);}</style><style id="cyebody">html.cye-enabled.cye-lm body{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyediv">html.cye-enabled.cye-lm div{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetable">html.cye-enabled.cye-lm th{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm td{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetextInput">html.cye-enabled.cye-lm input[type=text]{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm textarea{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeselect">html.cye-enabled.cye-lm select{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeul">html.cye-enabled.cye-lm ul{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeChangeByClick">html.cye-enabled.cye-lm .cye-lm-tag,html.cye-enabled.cye-lm.cye-lm-tag{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style>
+<!--[if lt IE 9]>
+<script src="../include/ie8/html5.js"></script>
+<link rel="stylesheet" href="../include/ie8/iconmoon.css" type="text/css" />
+<![endif]-->
+<!-- 自动广告 -->
+<script data-ad-client="ca-pub-1033034437703838" async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(9).txt" data-checked-head="true"></script>
+<meta http-equiv="origin-trial" content="A+cA2PUOfIOKAdSDJOW5CP9ZlxONy1yu+hqAq72zUtKw4rLdihqRp6Nui/jUyCyegr+BUtH+C+Elv0ufn05yBQEAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+zsdH3aNZT/bkjT8U/o5ACzyaeNYzTvtoVmwf/KOilfv39pxY2AIsOwhQJv+YnXp98i3TqrQibIVtMWs5UHjgoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxceVEhIegcDEHqLXFQ2+vPKqzCppoJYsRCZ/BdfVnbM/sUUF2BXV8lwNosyYjvoxnTh2FC8cOlAnA5uULr/zAUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+cA2PUOfIOKAdSDJOW5CP9ZlxONy1yu+hqAq72zUtKw4rLdihqRp6Nui/jUyCyegr+BUtH+C+Elv0ufn05yBQEAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+zsdH3aNZT/bkjT8U/o5ACzyaeNYzTvtoVmwf/KOilfv39pxY2AIsOwhQJv+YnXp98i3TqrQibIVtMWs5UHjgoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxceVEhIegcDEHqLXFQ2+vPKqzCppoJYsRCZ/BdfVnbM/sUUF2BXV8lwNosyYjvoxnTh2FC8cOlAnA5uULr/zAUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+cA2PUOfIOKAdSDJOW5CP9ZlxONy1yu+hqAq72zUtKw4rLdihqRp6Nui/jUyCyegr+BUtH+C+Elv0ufn05yBQEAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+zsdH3aNZT/bkjT8U/o5ACzyaeNYzTvtoVmwf/KOilfv39pxY2AIsOwhQJv+YnXp98i3TqrQibIVtMWs5UHjgoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxceVEhIegcDEHqLXFQ2+vPKqzCppoJYsRCZ/BdfVnbM/sUUF2BXV8lwNosyYjvoxnTh2FC8cOlAnA5uULr/zAUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script><link rel="preload" href="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt" as="script"><script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(10).txt"></script></head><div id="cyeBlackMaskLayer" style="background-color: rgb(19, 19, 19); position: fixed; width: 1980px; height: 1080px; z-index: -2147483648;"></div>
+<body style="padding: 32px 0px 0px;" aria-hidden="false">
+<!--header-->
+<header>
+<!--navBarWrap-->
+<div class="navBarWrap">
+<!--navBar-->
+<div class="navBar">
+	<nav>
+		<a href="https://www.hangge.com/">航歌 - 做最好的开发者知识平台</a>
+	</nav>
+	<!--loginArea-->
+	<div class="loginArea">
+        <a class="rFloat" href="https://www.hangge.com/blog/cache/leaveword_1.html">留言</a><a class="rFloat" href="https://www.hangge.com/index.html">首页</a>             
+	</div>
+	<!--loginArea end-->
+	<div class="clear"></div>
+</div>
+<!--navBar end-->
+</div>
+<!--navBarWrap end-->
+<!--headerWrap-->
+<div class="headerWrap">
+	<div class="logo_search">    
+        <div class="logo"><a href="https://www.hangge.com/"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/logo.png" alt="航歌" width="260" height="55"></a></div>
+        <form class="form_search" action="https://www.hangge.com/blog/cache/search.php" id="searchform" method="get" onsubmit="return $.trim($(&#39;#search&#39;).val())!=&#39;&#39;">
+			<button type="submit" class="btn_search icon-search"><!--[if lt IE 8]>Go<![endif]--></button>
+			<input id="search" name="key" type="search" class="text_search" value="" style="color: rgb(153, 153, 153);" placeholder="swift 枚举  （多关键字搜索更精确）" onclick="this.placeholder=&#39;&#39;">
+		</form>
+		<div class="clear"></div>
+	</div>
+</div>
+<!--headerWrap end-->
+
+</header>
+<!--header end--><!-- section -->
+<section class="wrap" style="height: auto !important;">
+    <!-- leftWrap-->
+    <div class="leftWrap" style="height: auto !important;">
+        <!-- crumbs-->
+        <div class="crumbs">
+            当前位置：
+            <div class="crumbsCate">
+                <a href="https://www.hangge.com/">
+                    <span>首页</span>
+                </a>
+            </div>
+            <span class="arrow">&gt;</span>
+            <div class="crumbsCate">
+                <a href="https://www.hangge.com/blog/cache/section_25_1.html">
+                    <span>编程社区</span>
+                </a>
+            </div><span class="arrow">&gt;</span>
+            <div class="crumbsCate">
+                <a href="https://www.hangge.com/blog/cache/category_80_1.html">
+                    <span>SpringBoot / Cloud</span>
+                </a>
+            </div><span class="arrow">&gt;</span> SpringBoot - 日志的配置和使用详解（SLF4j、Logback）
+        </div>
+        <!-- crumbs end-->
+        <!-- article -->
+        <article style="height: auto !important;">
+            <h1 class="article_title">SpringBoot - 日志的配置和使用详解（SLF4j、Logback）</h1>
+            <div class="article_meta article_meta_nowrap">
+                <span class="lrTime">2020-03-08</span>                                
+                <span class="lFloat">发布：hangge</span>
+                <span class="lFloat">阅读：9030</span>				
+				<div class="clear"></div>
+            </div>
+            <div class="news_content" style="height: auto !important;">  
+				<h3>1，基本介绍
+</h3><div>
+<div>（1）市面上常见的日志框架有很多。通常情况下，日志是由一个抽象层+实现层的组合来搭建的，而用户通常来说不应该直接使用具体的日志实现类，应该使用日志的抽象层。</div>
+</div>
+<div style="font-size:0.8em;border: 1px Dotted #CCCCCC; TABLE-LAYOUT: fixed;background-color:#FDFDDF;padding:5px 15px 5px 15px;margin:10px 20px 10px 20px;">
+<div><span style="font-weight: bold;">抽象层</span>：<span style="color: rgb(0, 128, 128); font-weight: bold;">JCL</span>（<span style="color: rgb(0, 128, 128); font-weight: bold;">Jakarta Commons Logging</span>）、<span style="color: rgb(0, 128, 128); font-weight: bold;">SLF4j</span>（<span style="color: rgb(0, 128, 128); font-weight: bold;">Simple Logging Facade for Java</span>）、<span style="color: rgb(0, 128, 128); font-weight: bold;">jboss-logging</span></div>
+<div><span style="font-weight: bold;">实现层</span>：<span style="color: rgb(0, 128, 128); font-weight: bold;">Log4j </span>、<span style="color: rgb(0, 128, 128); font-weight: bold;">JUL</span>（<span style="color: rgb(0, 128, 128); font-weight: bold;">java.util.logging</span>）、<span style="color: rgb(0, 128, 128); font-weight: bold;">Log4j2</span>、<span style="color: rgb(0, 128, 128); font-weight: bold;">Logback</span></div>
+</div>
+<div><br>
+</div>
+<div>（2）<span style="color: rgb(0, 128, 128); font-weight: bold;">SpringBoot</span> 默认选择的是 <span style="color: rgb(0, 128, 128); font-weight: bold;">SLF4J </span>+ <span style="color: rgb(0, 128, 128); font-weight: bold;">Logback </span>的组合，如果不需要更改为其他日志系统（如 <span style="color: rgb(0, 128, 128); font-weight: bold;">Log4j2 </span>等），则无需多余的配置，<span style="color: rgb(0, 128, 128); font-weight: bold;">LogBack </span>默认会将日志打印到控制台上。</div>
+<div style="font-size:0.8em;border: 1px Dotted #CCCCCC; TABLE-LAYOUT: fixed;background-color:#FDFDDF;padding:5px 15px 5px 15px;margin:10px 20px 10px 20px;">&nbsp; &nbsp; 由于新建的<span style="color: rgb(0, 128, 128); font-weight: bold;"> Spring Boot</span> 项目一般都会引用<span style="color: rgb(0, 128, 128); font-weight: bold;"> spring-boot-starter</span> 或者 <span style="color: rgb(0, 128, 128); font-weight: bold;">spring-boot-starter-web</span>，而这两个起步依赖中都已经包含了对于<span style="color: rgb(0, 128, 128); font-weight: bold;"> spring-boot-starter-logging</span> 的依赖，所以，我们无需额外添加依赖。</div>
+<br><h3>
+2，基本用法
+</h3><div>（1）这里我们打印出 <span style="color: rgb(0, 128, 128); font-weight: bold;">5 </span>种不同级别的日志，可以看到控制台会输出相关日志信息：</div>
+<div><div id="highlighter_433818" class="syntaxhighlighter  java "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1 highlighted">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1 highlighted">8</div><div class="line number9 index8 alt2 highlighted">9</div><div class="line number10 index9 alt1 highlighted">10</div><div class="line number11 index10 alt2 highlighted">11</div><div class="line number12 index11 alt1 highlighted">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java color1">@RestController</code></div><div class="line number2 index1 alt1"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">HelloController {</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Logger logger = LoggerFactory.getLogger(getClass());</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@GetMapping</code><code class="java plain">(</code><code class="java string">"/test"</code><code class="java plain">)</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java keyword">void</code> <code class="java plain">test(){</code></div><div class="line number8 index7 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">logger.trace(</code><code class="java string">"Trace 日志..."</code><code class="java plain">);</code></div><div class="line number9 index8 alt2 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">logger.debug(</code><code class="java string">"Debug 日志..."</code><code class="java plain">);</code></div><div class="line number10 index9 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">logger.info(</code><code class="java string">"Info 日志..."</code><code class="java plain">);</code></div><div class="line number11 index10 alt2 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">logger.warn(</code><code class="java string">"Warn 日志..."</code><code class="java plain">);</code></div><div class="line number12 index11 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">logger.error(</code><code class="java string">"Error 日志..."</code><code class="java plain">);</code></div><div class="line number13 index12 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number14 index13 alt1"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030610190217293.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div><br>
+<div>
+（2）如果项目有使用&nbsp;<span style="color: rgb(0, 128, 128); font-weight: bold;">Lombok </span>的话，直接使用 <span style="color: rgb(0, 128, 128); font-weight: bold;">@Slf4j </span>注解可以省去从日志工厂生成日志对象这一步，直接进行日志记录。下面代码的效果同上面是一样的：
+<div><div id="highlighter_349268" class="syntaxhighlighter  java"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1 highlighted">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2 highlighted">7</div><div class="line number8 index7 alt1 highlighted">8</div><div class="line number9 index8 alt2 highlighted">9</div><div class="line number10 index9 alt1 highlighted">10</div><div class="line number11 index10 alt2 highlighted">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java color1">@RestController</code></div><div class="line number2 index1 alt1 highlighted"><code class="java color1">@Slf4j</code></div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">HelloController {</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@GetMapping</code><code class="java plain">(</code><code class="java string">"/test"</code><code class="java plain">)</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java keyword">void</code> <code class="java plain">test(){</code></div><div class="line number7 index6 alt2 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">log.trace(</code><code class="java string">"Trace 日志..."</code><code class="java plain">);</code></div><div class="line number8 index7 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">log.debug(</code><code class="java string">"Debug 日志..."</code><code class="java plain">);</code></div><div class="line number9 index8 alt2 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">log.info(</code><code class="java string">"Info 日志..."</code><code class="java plain">);</code></div><div class="line number10 index9 alt1 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">log.warn(</code><code class="java string">"Warn 日志..."</code><code class="java plain">);</code></div><div class="line number11 index10 alt2 highlighted"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">log.error(</code><code class="java string">"Error 日志..."</code><code class="java plain">);</code></div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number13 index12 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<br><h3>
+3，设置日志级别</h3></div>
+<div>（1）日志级别从小到大为 <span style="color: rgb(0, 128, 128); font-weight: bold;">trace </span>&lt; <span style="color: rgb(0, 128, 128); font-weight: bold;">debug </span>&lt; <span style="color: rgb(0, 128, 128); font-weight: bold;">info </span>&lt; <span style="color: rgb(0, 128, 128); font-weight: bold;">warn </span>&lt; <span style="color: rgb(0, 128, 128); font-weight: bold;">error </span>&lt; <span style="color: rgb(0, 128, 128); font-weight: bold;">fatal</span>，由于默认日志级别设置为 <span style="color: rgb(0, 128, 128); font-weight: bold;">INFO</span>，因此上面样例 <span style="color: rgb(0, 128, 128); font-weight: bold;">trace </span>和 <span style="color: rgb(0, 128, 128); font-weight: bold;">debug </span>级别的日志都看不到。</div><div class="google-auto-placed ap_container" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-1033034437703838" data-adsbygoogle-status="done" style="display: block; margin: auto; background-color: transparent; height: 280px;" data-ad-status="filled"><div id="aswift_3_host" style="border: none; height: 280px; width: 785px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:785px;height:280px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="785" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads.html" data-google-container-id="a!4" data-google-query-id="CL2WoqarwfoCFSmFfwQd1g0GqA" data-load-complete="true"></iframe></div></ins></div>
+<div>（2）我们可以在 <span style="color: rgb(0, 128, 128); font-weight: bold;">applicaition.properties</span>&nbsp;文件中修改日志级别。比如下面将全局日志级别都改成 <span style="color: rgb(0, 128, 128); font-weight: bold;">trace</span>，因此系统所有的日志都能看到：</div>
+<div><div id="highlighter_519941" class="syntaxhighlighter  php"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain">logging.level.root=trace</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030610421742137.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div><br>
+（3）我们也可以只设置某个包的日志级别，这样能够更方便准确地定位问题。比如下面配置，只对所有<span style="color: rgb(0, 128, 128); font-weight: bold;"> com.example </span>包下面产生的日志级别改成 <span style="color: rgb(0, 128, 128); font-weight: bold;">trace</span>：
+<div><div id="highlighter_608065" class="syntaxhighlighter  php "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain">logging.level.com.example=trace</code></div></div></td></tr></tbody></table></div></div>
+<div><div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030610262736137.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div><br></div>
+<h3>4，生成日志文件</h3>
+<div>（1）除了将日志打印到控制台中，项目上线后通常还需要将日志输出到文件。我们只需要通过<span style="color: rgb(0, 128, 128); font-weight: bold;"> logging.file.path</span> 配置文件存放路径即可：</div>
+<div><div id="highlighter_672798" class="syntaxhighlighter  php "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain">logging.file.path=/Volumes/BOOTCAMP/log</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030610474672631.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div>
+<div><br>
+</div>
+<div>（2）通过<span style="color: rgb(0, 128, 128); font-weight: bold;"> logging.file.path </span>生成的日志文件名字为 <span style="color: rgb(0, 128, 128); font-weight: bold;">spring.log</span>，如果需要自定义文件名字，则通过 <span style="color: rgb(0, 128, 128); font-weight: bold;">logging.file.name </span>属性进行配置（此时不需要再配置<span style="color: rgb(0, 128, 128); font-weight: bold;"> logging.file.path</span>）：</div>
+<div><div id="highlighter_599410" class="syntaxhighlighter  php"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain">logging.file.name=/Volumes/BOOTCAMP/log/my.log</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030610533454600.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div>
+<div><br>
+</div>
+<div>（3）无论何种设置，<span style="color: rgb(0, 128, 128); font-weight: bold;">Spring Boot</span> 都会自动按天分割日志文件，也就是说每天都会自动生成一个新的 <span style="color: rgb(0, 128, 128); font-weight: bold;">log </span>文件，而之前的会自动打成 <span style="color: rgb(0, 128, 128); font-weight: bold;">GZ </span>压缩包。</div>
+<div><div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030611012484305.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div><br></div>
+<div>（4）除此之外，我们还可以设置日志文件的保留时间，以及单个文件的大小：&nbsp;</div>
+<div><div id="highlighter_336507" class="syntaxhighlighter  php"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain"># 日志文件大小</code></div><div class="line number2 index1 alt1"><code class="php plain">logging.file.max-size=10MB</code></div><div class="line number3 index2 alt2"><code class="php plain"># 保留的日志时间</code></div><div class="line number4 index3 alt1"><code class="php plain">logging.file.max-history=10</code></div></div></td></tr></tbody></table></div></div>
+<br><h3>
+5，日志输出格式配置
+</h3><div>（1）我们可以分别修改在控制台输出的日志格式，以及文件中日志输出的格式：</div>
+<div style="font-size:0.8em;border: 1px Dotted #CCCCCC; TABLE-LAYOUT: fixed;background-color:#FDFDDF;padding:5px 15px 5px 15px;margin:10px 20px 10px 20px;"><span style="font-weight: bold;">符号说明：</span><br>
+<ul>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %d{HH:mm:ss.SSS}</span>：日志输出时间</li>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %-5level</span>：日志级别，并且使用 <span style="color: rgb(0, 128, 128); font-weight: bold;">5 </span>个字符靠左对齐</li>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %thread</span>：输出日志的进程名字，这在 <span style="color: rgb(0, 128, 128); font-weight: bold;">Web </span>应用以及异步任务处理中很有用</li>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %logger</span>：日志输出者的名字</li>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %msg</span>：日志消息</li>
+  <li><span style="color: rgb(0, 128, 128); font-weight: bold;">
+  %n</span>：平台的换行符</li>
+</ul>
+</div>
+<div><div id="highlighter_668874" class="syntaxhighlighter  php "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain"># 修改在控制台输出的日志格式</code></div><div class="line number2 index1 alt1"><code class="php plain">logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger : %msg%n</code></div><div class="line number3 index2 alt2"><code class="php plain"># 修改输出到文件的日志格式</code></div><div class="line number4 index3 alt1"><code class="php plain">logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger : %msg%n</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030611373136327.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div>
+<br>
+（2）上面效果图可以发现，原先<span style="color: rgb(0, 128, 128); font-weight: bold;"> Spring Boot </span>默认使用 <span style="color: rgb(0, 128, 128); font-weight: bold;">Logback </span>来进行日志输出时，控制台不同参数会输出为不同的颜色。而一旦我们修改了日志格式，彩色也随之消失。如果想让不同类型的数据具有不同的高亮效果，可以改用如下配置：
+<div><div id="highlighter_572611" class="syntaxhighlighter  php"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1 highlighted">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain"># 修改在控制台输出的日志格式</code></div><div class="line number2 index1 alt1 highlighted"><code class="php plain">logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %clr(%5p) [%thread] %clr(%logger){cyan} : %msg%n</code></div><div class="line number3 index2 alt2"><code class="php plain"># 修改输出到文件的日志格式</code></div><div class="line number4 index3 alt1"><code class="php plain">logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger : %msg%n</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030611443225073.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div>
+<br>
+（3）如果觉得类名太长（<span style="color: rgb(0, 128, 128); font-weight: bold;">%logger</span>），我们还可以将其设置个长度限制。比如下面限制长度为 <span style="color: rgb(0, 128, 128); font-weight: bold;">45 </span>个字符，超过得话包名部分会变成缩写：
+<div><div id="highlighter_225980" class="syntaxhighlighter  php"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1 highlighted">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain"># 修改在控制台输出的日志格式</code></div><div class="line number2 index1 alt1 highlighted"><code class="php plain">logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %clr(%5p) [%thread] %clr(%logger{45}){cyan} : %msg%n</code></div><div class="line number3 index2 alt2"><code class="php plain"># 修改输出到文件的日志格式</code></div><div class="line number4 index3 alt1"><code class="php plain">logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger : %msg%n</code></div></div></td></tr></tbody></table></div></div>
+<div style="text-align: center;line-height:0px"><a href="https://www.hangge.com/blog/cache/detail_2826.html#"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/2020030612075464162.png" border="0" alt="原文:SpringBoot - 日志的配置和使用详解（SLF4j、Logback）" style="display: inline;"></a></div>	
+            </div>
+        </article>
+        <!-- article end -->
+        <!-- operate_box -->
+        <div class="operate_box">
+            <div class="pre_next_article">
+				<span>上一篇<a href="https://www.hangge.com/blog/cache/detail_2722.html" class="a_underline">SpringBoot - 使用HSSFWorkbook操作excel教程2（从excel文件导入数据）</a></span>
+				<span>下一篇<a href="https://www.hangge.com/blog/cache/detail_2825.html" class="a_underline">SpringBoot - 整合并操作Oracle数据库教程（手动添加ojdbc驱动）</a></span>
+			</div>  
+			<div class="support-author2">
+				<div class="btn btn-pay">打赏支持</div>
+			</div>
+        </div>
+        <!-- operate_box end -->
+		<!-- bottom_bar -->
+		<div>	
+			<script async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(9).txt"></script>
+<!-- detail_bottom_728_90 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-1033034437703838" data-ad-slot="6903608103" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_1_host" style="border: none; height: 90px; width: 728px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:728px;height:90px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(1).html" data-google-container-id="a!2" data-google-query-id="CO68h7CswfoCFYeWYgodsp4CWg" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<!-- bottom_bar end--> 
+		<section id="comments">
+			<div class="panelTitle" id="panelTitle">评论<span class="greyNum">（<em class="commentNum">0</em>）</span></div>
+			<!-- comment_sendwrap -->
+			<div class="comment_sendwrap noLogin">
+				<div class="comment_avatar">
+					<span class="userPic"><img src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/head_default_small.png" id="comment_avatar" width="60" height="60"></span>
+				</div>
+				<div class="comment_sendPart">
+					<form id="commentform" class="commentform" onsubmit="return false;" method="post" action="https://www.hangge.com/blog/cache/detail_2826.html">
+						<textarea cols="70" rows="3" name="content" class="textarea_comment" id="textareaComment" default_data="在这里留下你想说的话。" style="color: rgb(204, 204, 204);"></textarea>
+               
+						<div class="comment_operate">							
+								<input id="username" name="username" class="email_input" value="" default_data="昵称" style="color: rgb(204, 204, 204);">
+								<input id="email" name="email" class="email_input" value="" default_data="邮箱" style="color: rgb(204, 204, 204);">
+								<button type="submit" class="btn_sub" id="textCommentSubmit">提交</button>     
+								<div id="error" style="display:none;"> </div>		
+						</div>					
+						<input name="id" value="2826" type="hidden">
+						<input name="option" value="addcomment" type="hidden">
+					</form>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<!-- comment_sendwrap end -->
+
+			<!-- comment_wrap -->
+			<div class="comment_wrap" id="comment">
+				<ul class="tab_nav">					
+				</ul>
+				<!-- tab_info new start -->
+				<div class="tab_info" id="commentTabBlockNew">
+					<ul class="comment_listBox">
+																					
+					</ul>
+				</div>
+				<!-- tab_info new end -->
+			</div>
+			<!-- comment_wrap end -->
+		</section>       
+    </div>
+    <!-- leftWrap end-->
+	<script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/shCore.js.下载"></script>
+	<script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/shBrushYu.js.下载"></script>
+	<script type="text/javascript">SyntaxHighlighter.highlight();//SyntaxHighlighter.all();</script>
+    <!-- aside-->
+    <aside style="height: auto !important;">
+		<!-- rightPanel-->
+		<div class="rightPanel">	
+			<h2 class="panelTitle">文章类别</h2>
+			<div class="overseaCommon">
+				<a class="mainMenu" href="https://www.hangge.com/blog/cache/section_25_1.html"><i class="icon-haitao-course"></i>编程社区</a><div class="commodity-nav" style="display: block;"><a href="https://www.hangge.com/blog/cache/category_72_1.html"><span>Swift</span></a><a href="https://www.hangge.com/blog/cache/category_71_1.html"><span>Flex / Flash</span></a><a href="https://www.hangge.com/blog/cache/category_74_1.html"><span>HTML5 / CSS3</span></a><a href="https://www.hangge.com/blog/cache/category_75_1.html"><span>Cordova</span></a><a href="https://www.hangge.com/blog/cache/category_80_1.html"><span>SpringBoot / Cloud</span></a><a href="https://www.hangge.com/blog/cache/category_81_1.html"><span>Docker / K8s</span></a><a href="https://www.hangge.com/blog/cache/category_76_1.html"><span>React / RN</span></a><a href="https://www.hangge.com/blog/cache/category_82_1.html"><span>Python</span></a><a href="https://www.hangge.com/blog/cache/category_70_1.html"><span>其他</span></a></div><a class="mainMenu" href="https://www.hangge.com/blog/cache/section_21_1.html"><i class="icon-haitao-course"></i>奇文共赏</a>				
+			</div>
+		</div>
+		<!-- rightPanel end-->   
+		<!-- rightPanel-->
+		<div class="rightPanel" style="height: 250px;">	
+			<script async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/f(9).txt"></script>
+<!-- detail_300_250 -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-1033034437703838" data-ad-slot="9034756504" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_2_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 250px; width: 300px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:300px;height:250px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(2).html" data-google-container-id="a!3" data-google-query-id="CNnHyKWrwfoCFU-JfwQd2h4MhA" data-load-complete="true"></iframe></div></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<!-- rightPanel end--> 
+		<!-- rightPanel end-->   
+		<div class="rightPanel" style="height: auto !important;">	
+			<h2 class="panelTitle">本类相关</h2>
+			<div class="overseaCommon">
+				<ul class="tab_content seriesExp">
+					<li><a href="https://www.hangge.com/blog/cache/detail_2699.html" title="SpringBoot - 定时任务的实现教程2（通过集成Quartz来实现）">SpringBoot - 定时任务的实现教程2（通过集成Quartz来实现）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2482.html" title="SpringBoot - @ControllerAdvice的使用详解2（添加全局数据 @ModelAttribute）">SpringBoot - @ControllerAdvice的使用详解2（添加全局数据 @ModelAttribute）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2539.html" title="SpringBoot - 使用MyBatis操作数据库2（多数据源的配置与使用）">SpringBoot - 使用MyBatis操作数据库2（多数据源的配置与使用）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2717.html" title="SpringBoot - 安全管理框架Spring Security使用详解11（获取当前用户的用户名、id）">SpringBoot - 安全管理框架Spring Security使用详解11（获取当前用户的用户名、id）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2524.html" title="SpringBoot - 整合Servlet、Filter和Listener（@WebServlet等注解的使用）">SpringBoot - 整合Servlet、Filter和Listener（@WebServlet等注解的使用）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2491.html" title="SpringBoot - Lombok使用详解1（基本介绍、安装配置、var和val）">SpringBoot - Lombok使用详解1（基本介绍、安装配置、var和val）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2463.html" title="SpringBoot - 实现文件上传2（多文件上传、常用上传参数配置）">SpringBoot - 实现文件上传2（多文件上传、常用上传参数配置）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2708.html" title="SpringBoot - Actuator应用监控使用详解5（info端点：应用信息展示）">SpringBoot - Actuator应用监控使用详解5（info端点：应用信息展示）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2922.html" title="SpringBoot - MyBatis-Plus使用详解13（代码生成器）">SpringBoot - MyBatis-Plus使用详解13（代码生成器）</a></li><li><a href="https://www.hangge.com/blog/cache/detail_2697.html" title="SpringBoot - 使用JavaMailSender发送邮件教程3（使用HTML邮件模版）">SpringBoot - 使用JavaMailSender发送邮件教程3（使用HTML邮件模版）</a></li>     
+				</ul>		
+			</div><div class="google-auto-placed" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-1033034437703838" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 600px;" data-ad-status="filled"><div id="aswift_4_host" style="border: none; height: 600px; width: 300px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;border:0;width:300px;height:600px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="300" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(3).html" data-google-container-id="a!5" data-google-query-id="CPCdoqarwfoCFfuJfwQdufcEng" data-load-complete="true"></iframe></div></ins></div>
+		</div>
+		<!-- rightPanel end-->  
+		<!-- rightPanel-->
+		<div class="rightPanel">	
+			<script type="text/javascript">
+        (function() {
+            var s = "_" + Math.random().toString(36).slice(2);
+            document.write('<div style="" id="' + s + '"></div>');
+            (window.slotbydup = window.slotbydup || []).push({
+                id: "u5131386",
+                container: s
+            });
+        })();
+</script><div style="" id="_cpj5kqkmai"><iframe id="iframeu5131386_0" name="iframeu5131386_0" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ucim.html" width="300" height="250" scrolling="no" frameborder="0"></iframe></div>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/c.js.下载" async="async" defer="defer">
+</script>
+		</div>
+		<!-- rightPanel end--> 
+		<!-- rightPanel-->
+		<div class="rightPanel" style="margin-bottom:0px;">	
+			
+		</div>
+		<!-- rightPanel end--> 
+    </aside>
+    <!-- aside end -->
+	<div class="clear"></div>
+</section><div class="google-auto-placed" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-1033034437703838" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 0px;" data-ad-status="unfilled"><div id="aswift_5_host" style="border: none; height: 0px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden; opacity: 0;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_5" name="aswift_5" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 1200px; height: 0px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(4).html" data-google-container-id="a!6" data-google-query-id="CNzdhraswfoCFWGDfwQdh6gO7Q" data-load-complete="true"></iframe></div></ins></div>
+<!-- section end -->
+
+<div class="google-auto-placed" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-1033034437703838" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 90px;" data-ad-status="filled"><div id="aswift_6_host" style="border: none; height: 90px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_6" name="aswift_6" style="left:0;position:absolute;top:0;border:0;width:1200px;height:90px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(5).html" data-google-container-id="a!7" data-google-query-id="COeunLeswfoCFcOGpwodA1UJ6A" data-load-complete="true"></iframe></div></ins></div><footer id="footer">        
+	<div class="footer">
+	<div class="footerTop">
+		<a href="http://m.hangge.com/">移动版</a>
+		<a href="https://www.hangge.com/blog/cache/leaveword_1.html">给我留言</a>
+		<a onclick="showPayPage(1)" class="sitemap">打赏支持</a>
+		<a href="https://www.hangge.com/blog/cache/detail_2826.html#" id="guestInfo">现在有 53 位访客在线</a>
+	</div>
+	<div class="footerLink">
+	<!--
+		<div class="linkTitle">友情链接<span>（<a href="#">申请</a>）</span></div>
+			 <ul>
+				<li><a href="../php/weblinkclick.php?id=18" title="GTmetrix" target="_blank">GTmetrix</a></li>
+			</ul> 
+		</div>	-->	
+		<div class="info">
+			© copyright 2006-2022 航歌. All rights reserved. <a href="http://beian.miit.gov.cn/" target="_blank">苏ICP备14040777号</a>
+		</div>
+	</div>
+</div></footer>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".btn-pay").click(function(){
+		  showPayPage(2);
+		});
+
+		$.ajax({ 
+			type: "get", 
+            url: "../php/click.php?id=2826"
+        });
+		
+		setTimeout('setImgAlt()', 1000); 
+	});
+
+	function setImgAlt(){
+		$("article").find("img").each(function(){
+				if($(this).attr("src").indexOf("zip.gif")<0){
+					$(this).attr("alt","原文:"+document.title);
+					if($(this).css("display")=="block"){
+						$(this).wrap('<div style="text-align: center;line-height:0px"></div>');
+						$(this).css("display","inline");
+					}				
+					$(this).wrap('<a href="#"></a>');
+				}
+			});
+	}
+
+</script>
+<script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/common.js.下载"></script>
+<script type="text/javascript" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/comment.js.下载"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-76711388-1');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?33c508d317f51702144e84c4123f2333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_0_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/ads(6).html" data-google-container-id="a!1" data-load-complete="true"></iframe></div></ins><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" data-anchor-status="dismissed" style="display: none; width: 100% !important; height: 129px !important; bottom: -124px; clear: none !important; float: none !important; left: 0px; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1; overflow: visible !important; padding: 0px !important; position: fixed; right: auto !important; top: auto !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647; background: rgb(250, 250, 250) !important;" data-ad-status="filled" data-anchor-shown="true"><div class="grippy-host"></div><div id="aswift_8_host" style="border: none !important; height: 124px !important; width: 100% !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_8" name="aswift_8" style="width: 1005px !important; height: 124px !important; display: block; margin: 0px auto;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1005" height="124" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/zrt_lookup.html" data-google-container-id="a!9" data-google-query-id="CLXFyKWrwfoCFQn3Ygod5OkPRw" data-load-complete="true"></iframe></div></ins><iframe src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/aframe.html" width="0" height="0" style="display: none;"></iframe></body><div id="cye-workaround-body" style="position: absolute; left: 0px; top: 0px; z-index: -2147483646; background: none 0% 0% / auto repeat scroll padding-box border-box white; height: 5569px; width: 1349px;"></div><div id="cye-workaround-body-image" style="position: absolute; left: 0px; top: 0px; z-index: -2147483645; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0); height: 5569px; width: 1349px;"></div><iframe id="google_esf" name="google_esf" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/zrt_lookup(1).html" style="display: none;"></iframe><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;" aria-hidden="true" data-ad-status="filled" data-vignette-loaded="true"><div id="aswift_7_host" style="border: none !important; height: 100vh !important; width: 100vw !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_7" name="aswift_7" style="width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; position: absolute !important; clear: none !important; display: inline !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; vertical-align: baseline !important; visibility: visible !important; z-index: auto !important;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="" height="" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./SpringBoot - 日志的配置和使用详解（SLF4j、Logback）_files/zrt_lookup(2).html" data-google-container-id="a!8" data-google-query-id="CLTFyKWrwfoCFQn3Ygod5OkPRw" data-load-complete="true"></iframe></div></ins><div id="saladict-saladbowl-root" class="saladict-div saladict-external"><div class="saladict-external"></div></div></html>
